@@ -11365,6 +11365,10 @@ figure.highlight .section {
   background: $light-grey;
   color: $white-invert;
 }
+toc {
+  max-height: calc(100vh - 22px);
+  overflow-y: scroll;
+}
 .level.is-multiline {
   flex-wrap: wrap;
 }
@@ -11627,6 +11631,10 @@ figure.highlight .section {
   background-color: #f5e703;
 }
 @media screen and (min-width: 1280px) {
+  .is-3-column .container {
+    max-width: 1216px;
+    width: 1216px;
+  }
   .is-1-column .container,
   .is-2-column .container {
     max-width: 960px;
@@ -11634,6 +11642,10 @@ figure.highlight .section {
   }
 }
 @media screen and (min-width: 1472px) {
+  .is-3-column .container {
+    max-width: 1344px;
+    width: 1344px;
+  }
   .is-2-column .container {
     max-width: 1152px;
     width: 1152px;
