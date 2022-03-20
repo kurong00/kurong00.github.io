@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Unity Shader 入门（八）：非真实感渲染知识准备 - Chen wenling</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Chen wenling"><meta name="msapplication-TileImage" content="/img/avatar.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Chen wenling"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="前言非真实感渲染（Non-Photorealistic Rendering，NPR）， 亦被称为风格化渲染（Stylistic Rendering），与传统的追求照片真实感的真实感渲染（Photorealistic Rendering）计算机图形学不同，非真实感渲染旨在模拟艺术式的绘制风格，使用一些渲染方法达到和某些绘画风格相似的效果。"><meta property="og:type" content="blog"><meta property="og:title" content="Unity Shader 入门（八）：非真实感渲染知识准备"><meta property="og:url" content="http://chenwenling.cn/2020/05/18/shader-learning8/"><meta property="og:site_name" content="Chen wenling"><meta property="og:description" content="前言非真实感渲染（Non-Photorealistic Rendering，NPR）， 亦被称为风格化渲染（Stylistic Rendering），与传统的追求照片真实感的真实感渲染（Photorealistic Rendering）计算机图形学不同，非真实感渲染旨在模拟艺术式的绘制风格，使用一些渲染方法达到和某些绘画风格相似的效果。"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://chenwenling.cn/2020/05/18/shader-learning8/2.png"><meta property="og:image" content="http://chenwenling.cn/2020/05/18/shader-learning8/1.png"><meta property="og:image" content="http://chenwenling.cn/2020/05/18/shader-learning8/3.jpg"><meta property="og:image" content="http://chenwenling.cn/2020/05/18/shader-learning8/4.png"><meta property="og:image" content="http://chenwenling.cn/2020/05/18/shader-learning8/5.png"><meta property="og:image" content="http://chenwenling.cn/2020/05/18/shader-learning8/6.png"><meta property="og:image" content="http://chenwenling.cn/2020/05/18/shader-learning8/7.png"><meta property="og:image" content="http://chenwenling.cn/2020/05/18/shader-learning8/8.png"><meta property="og:image" content="http://chenwenling.cn/2020/05/18/shader-learning8/9.png"><meta property="og:image" content="http://chenwenling.cn/2020/05/18/shader-learning8/10.png"><meta property="og:image" content="http://chenwenling.cn/2020/05/18/shader-learning8/11.png"><meta property="og:image" content="http://chenwenling.cn/2020/05/18/shader-learning8/12.png"><meta property="og:image" content="http://chenwenling.cn/2020/05/18/shader-learning8/13.png"><meta property="article:published_time" content="2020-05-18T09:37:25.000Z"><meta property="article:modified_time" content="2022-03-19T14:55:03.771Z"><meta property="article:author" content="chenwenling"><meta property="article:tag" content="Shader、图形学"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/2020/05/18/shader-learning8/2.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://chenwenling.cn/2020/05/18/shader-learning8/"},"headline":"Unity Shader 入门（八）：非真实感渲染知识准备","image":["http://chenwenling.cn/2020/05/18/shader-learning8/2.png","http://chenwenling.cn/2020/05/18/shader-learning8/1.png","http://chenwenling.cn/2020/05/18/shader-learning8/3.jpg","http://chenwenling.cn/2020/05/18/shader-learning8/4.png","http://chenwenling.cn/2020/05/18/shader-learning8/5.png","http://chenwenling.cn/2020/05/18/shader-learning8/6.png","http://chenwenling.cn/2020/05/18/shader-learning8/7.png","http://chenwenling.cn/2020/05/18/shader-learning8/8.png","http://chenwenling.cn/2020/05/18/shader-learning8/9.png","http://chenwenling.cn/2020/05/18/shader-learning8/10.png","http://chenwenling.cn/2020/05/18/shader-learning8/11.png","http://chenwenling.cn/2020/05/18/shader-learning8/12.png","http://chenwenling.cn/2020/05/18/shader-learning8/13.png"],"datePublished":"2020-05-18T09:37:25.000Z","dateModified":"2022-03-19T14:55:03.771Z","author":{"@type":"Person","name":"chenwenling"},"publisher":{"@type":"Organization","name":"Chen wenling","logo":{"@type":"ImageObject","url":"http://chenwenling.cn/img/avatar.png"}},"description":"前言非真实感渲染（Non-Photorealistic Rendering，NPR）， 亦被称为风格化渲染（Stylistic Rendering），与传统的追求照片真实感的真实感渲染（Photorealistic Rendering）计算机图形学不同，非真实感渲染旨在模拟艺术式的绘制风格，使用一些渲染方法达到和某些绘画风格相似的效果。"}</script><link rel="canonical" href="http://chenwenling.cn/2020/05/18/shader-learning8/"><link rel="icon" href="/img/avatar.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/rainbow.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+          Array
+              .from(document.querySelectorAll('.tab-content'))
+              .forEach($tab => {
+                  $tab.classList.add('is-hidden');
+              });
+          Array
+              .from(document.querySelectorAll('.tabs li'))
+              .forEach($tab => {
+                  $tab.classList.remove('is-active');
+              });
+          const $activeTab = document.querySelector(location.hash);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+          const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/avatar.png" alt="Chen wenling" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/kurong00"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2020-05-18T09:37:25.000Z" title="2020/5/18 17:37:25">2020-05-18</time></span><span class="level-item"><a class="link-muted" href="/categories/Shader/">Shader</a></span><span class="level-item">22 minutes read (About 3338 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">Unity Shader 入门（八）：非真实感渲染知识准备</h1><div class="content"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>非真实感渲染（Non-Photorealistic Rendering，NPR）， 亦被称为风格化渲染（Stylistic Rendering），与传统的追求照片真实感的真实感渲染（Photorealistic Rendering）计算机图形学不同，非真实感渲染旨在模拟艺术式的绘制风格，使用一些渲染方法达到和某些绘画风格相似的效果。</p>
+<span id="more"></span>
+<p><img src="/2020/05/18/shader-learning8/2.png" alt="Figure 1 真实感渲染和非真实感渲染对比"><br>NPR 的目的之一就是创建类似技术示意图、技术图纸相关的图像，而另一个应用领域便是对绘画风格和自然媒体（如铅笔、钢笔、墨水、木炭、水彩画等）进行模拟。这是一个涉及内容非常之多的应用领域，为了捕捉各种媒体的真实效果，人们已经提出了各种不同的算法。<br><img src="/2020/05/18/shader-learning8/1.png" alt="Figure 2 几种不同的非真实渲染效果"></p>
+<p>非真实感渲染与我们并不遥远，它早以“卡通着色（Toon Shading）”的形式出现在各式动漫和电影中。在游戏制作方面，各种涉及到非真实感渲染的作品数不胜数，《Ōkami(大神)》，《The Legend of Zelda（塞尔达传说）》系列，甚至到现在的《Dota2》、《英雄联盟》、《守望先锋》，都多多少少涉及到了 NPR。<br><img src="/2020/05/18/shader-learning8/3.jpg" alt="Figure 3 OKAMi（大神天照）绝景版"></p>
+<h2 id="卡通渲染"><a href="#卡通渲染" class="headerlink" title="卡通渲染"></a>卡通渲染</h2><p>上文提到，一直以来，有一种特殊形式的 NPR 倍受关注，且和我们的生活息息相关，那就是卡通渲染（Toon Rendering，又称 Cel Rendering）。这种渲染风格能够给人以独特的感染力与童趣。这种风格很受欢迎的原因之一是 McCloud 的经典著作《Understanding Comics》中所讲述到的“通过简化进行增强（Amplification Through Simplification）”。通过简化并剔除所包含的混杂部分，可以突出于主题相关的信息，而大部分观众都会认同那些用简单风格描绘出来的卡通形象。</p>
+<p>在计算机图形学领域，大约在 20 世纪 90 年代就开始使用 toon 渲染风格来实现三维模型和二维的传统动画之间的结合。而且和其他 NPR 风格相比，这种绘制方法比较简单，可以很容易地利用计算机进行自动生成。可以将最卡通着色基本的三个要素概括为：</p>
+<ul>
+<li>锐利的阴影（Sharp shadows）</li>
+<li>少有或没有高亮的点（Little or no highlight）</li>
+<li>对物体轮廓进行描边（Outline around objects）</li>
+</ul>
+<h3 id="渲染方法"><a href="#渲染方法" class="headerlink" title="渲染方法"></a>渲染方法</h3><p>关于 toon 渲染，有很多不同的实现方法。</p>
+<ul>
+<li>对于含有纹理但没有光照的模型来说，可以通过对纹理进行量化来近似具有实心填充颜色的卡通风格。</li>
+<li>对于明暗处理，有两种最为常见的方法，一种是用实心颜色填充多边形区域。但这种方式实用价值不大。另一种是使用 2-tone 方法来表示光照效果和阴影区域。也称为硬着色方法（Hard Shading），可以通过将传统光照方程元素重新映射到不同的调色板上来实现。此外，一般用黑色来绘制图形的轮廓，可以达到增强卡通视觉效果的目的。</li>
+</ul>
+<p><img src="/2020/05/18/shader-learning8/4.png" alt="Figure 4 真实感光照模型和卡通着色模型"></p>
+<p>具体的着色方法，可以理解为在 Fragment shader 中测试每个像素漫反射 diffuse 中的 NdotL 值，让漫反射形成一个阶梯函数，不同的 NdotL 区域对应不同的颜色。下图显示了不同的漫反射强度值的着色部分阶梯指定了不同的像素颜色。</p>
+<p><img src="/2020/05/18/shader-learning8/5.png" alt="Figure 5 不同的漫反射强度值的着色部分阶梯指定不同的像素颜色"></p>
+<p><img src="/2020/05/18/shader-learning8/6.png" alt="Figure 6 不同的卡通着色细节效果"></p>
+<h3 id="轮廓描边"><a href="#轮廓描边" class="headerlink" title="轮廓描边"></a>轮廓描边</h3><p>我们在上一节写的模型描边是卡通渲染中一个非常常用的技术，完成描边的算法可以分为以下五种：</p>
+<ul>
+<li>基于视点方向的描边</li>
+<li>基于过程几何方法的描边</li>
+<li>基于图像处理的描边</li>
+<li>基于轮廓边缘检测的描边</li>
+<li>混和轮廓描边</li>
+</ul>
+<h4 id="基于视点方向的描边"><a href="#基于视点方向的描边" class="headerlink" title="基于视点方向的描边"></a>基于视点方向的描边</h4><p>基于视点方向的描边方法，即表面角描边（Surface Angle Silhouetting），其基本思想是使用视点方向（view point）和表面法线（surface normal）之间的点乘结果得到轮廓线信息。如果此点乘结果接近于零，那么可以断定这个表面极大概率是侧向（Edge-on）的视线方向，而我们就将其视做轮廓边缘，进行描边。</p>
+<h4 id="基于过程几何方法的描边"><a href="#基于过程几何方法的描边" class="headerlink" title="基于过程几何方法的描边"></a>基于过程几何方法的描边</h4><p>基于过程几何方法生成的描边，即过程几何描边（Procedural Geometry Silhouetting），基本思想是先渲染正向表面（frontfaces），再渲染背向表面（backfaces），从而使得轮廓边缘可见，达到描边的目的。有多种方法用来渲染背向表面，且各有优缺点。但它们都是先渲染正向表面，然后打开正向表面裁剪（culling）开关，同时关闭背向裁剪开关。这样这个 pass 中的渲染结果便只会显示出背向表面。一种基于过程几何方法生成的描边的方法是仅仅渲染出背向表面的边界线（而不是面），使用偏置（Biasing）或者其他技术来确保这些线条恰好位于正向表面之前。这样就可以将除轮廓边缘之外的其他所有线条全部隐藏起来。这种方法非常适合单像素宽的线条，但如果线条的宽度超过这个值，那么通常会出现无法连接独立线段的情况，从而造成明显的缝隙。另一种渲染较宽描边线条的方法是直接将背面表面本身渲染成黑色。但没有任何偏置操作，背向表面就会保持不可见，所以需要做的就是通过偏置将这些背向表面沿屏幕 Z 方向向前移动，这样，便只有背向表面的三角形边缘是可见的。如下图，可以使用背向表面的斜率对对多边形进行向前偏置，但是线条宽度依然依赖于正向表面的角度。<br><img src="/2020/05/18/shader-learning8/7.png" alt="Figure 7 描边的 z 偏置方法，可以通过对背向表面进行向前平移来实现。如果正向表面的角度不同，那么背向表面的可见量也不同"></p>
+<h4 id="基于图像处理的描边"><a href="#基于图像处理的描边" class="headerlink" title="基于图像处理的描边"></a>基于图像处理的描边</h4><p>基于图像处理生成轮廓描边（Silhouetting by Image Processing），即通过在各种缓冲区上执行图像处理技术，来实现非真实渲染的方法。可以将其理解为一种后处理操作。通过寻找相邻 Z 缓冲数值的不连续性，就可以确定大多数轮廓线的位置。同样，借助邻接表面法线向量的不连续性，可以确定出分界线（往往也是轮廓线）边缘的位置。此外，利用环境色对场景进行绘制，也可以用来检测前两种方法可能会漏掉的边缘。</p>
+<h4 id="基于轮廓边缘检测的描边"><a href="#基于轮廓边缘检测的描边" class="headerlink" title="基于轮廓边缘检测的描边"></a>基于轮廓边缘检测的描边</h4><p>上文提到的大多数渲染描边的方法都存在一个缺点，那就是他们都需要两个通道才能完成物体轮廓描边的渲染。基于轮廓边缘检测的描边，通过检测出轮廓边缘（Silhouette Edge Detection）），并直接对它们进行绘制，这种形式的描边，可以很好地控制线条绘制的过程。由于边缘独立于模型，因此这种方法还有另外一个优点就是能够生成一些特殊的效果。例如，在网格密集的地方可以突现出轮廓边缘。可以将轮廓边缘理解为朝向相反的相邻三角形的交接。也就是说，其中的一个三角形是朝向视点，另一个三角形背向视点。具体测试方法如下：<br>$$( n_0 · v &gt; 0 ) \ne ( n_1 · v &gt; 0 )$$<br>其中 $n_0$ 和 $n_1$ 分别表示两个三角形的表面法线向量，v 表示从视点到这条边缘（也就是其中任何一个端点）的视线方向向量。而为了确保这种测试的准确性，必须保证表面的取向一致。</p>
+<p><img src="/2020/05/18/shader-learning8/8.png" alt="Figure 8 右图为边缘探检测描边"></p>
+<h4 id="混和轮廓描边"><a href="#混和轮廓描边" class="headerlink" title="混和轮廓描边"></a>混和轮廓描边</h4><p>混和轮廓描边（Hybrid Silhouetting），即结合了图像处理方法和几何要素方法，来渲染轮廓的方法。这种方法的具体思想是：</p>
+<ul>
+<li>找到一系列轮廓边缘的列表。其次，渲染出所有物体的三角形和轮廓边缘，同时为他们指定一个不同的 ID 值（也就是说，赋予不同的颜色）。</li>
+<li>读取该 ID 缓冲器并从中判断出可见的轮廓边缘，随之对这些可见线段进行重叠检测，并将它们连接起来形成平滑的笔划路径。</li>
+<li>最后就可以对这些重建起来的路径进行风格化笔划渲染，其中，这些笔划本身可以用很多方法来进行风格化处理，包括变细、火焰、摆动、淡化等效果，同时还有深度和距离信息。如下图。</li>
+</ul>
+<p><img src="/2020/05/18/shader-learning8/9.png" alt="Figure 9 使用混合轮廓描边方法生成的图像，其中可以将找到的轮廓边缘连接起来作为笔划进行渲染。"></p>
+<h2 id="Palette-of-Textures-纹理调色板"><a href="#Palette-of-Textures-纹理调色板" class="headerlink" title="Palette of Textures 纹理调色板"></a>Palette of Textures 纹理调色板</h2><p>除了 toon 渲染这种比较受欢迎的模拟风格之外，还存在其他各式各样的风格。NPR 效果涵盖<br>的范围非常广泛，例如其中的一种：纹理调色板（palette of textures）由 Lake 等人讨论提出，基本思想是通过反射着色项（diffuse shading term）的不同，来选择应用于物体表面上的不同纹理。随着漫反射项逐渐变暗，可以用相应更暗的纹理，而为了能够产生手绘的效果，可以使用屏幕空间坐标来采样纹理。同时，为了增强绘制效果，可以在屏幕空间上的所有表面上运用纸纹理。随着物体的运动，他们就可以在纹理之间进行穿梭。原因在于这个纹理是在屏幕空间中实现的。此外，也可以在世界空间中运用这个纹理，这样就能够得到一个与屏幕空间完全不同的效果。</p>
+<p><img src="/2020/05/18/shader-learning8/10.png" alt="Figure 10 使用纹理调色板（paletteof textures）、纸纹理，以及轮廓边缘绘制生成的一幅图像。"></p>
+<h2 id="Tonal-Art-Maps-x2F-TAM-色调艺术图"><a href="#Tonal-Art-Maps-x2F-TAM-色调艺术图" class="headerlink" title="Tonal Art Maps&#x2F;TAM 色调艺术图"></a>Tonal Art Maps&#x2F;TAM 色调艺术图</h2><p>通过在纹理之间进行切换形成的硬着色效果和 toon 着色效果之间的一种混合，Praun 等人以实时生成笔划纹理分级细化图的方法，并可以将其以平滑的方式运用到物体表面上。第一步是生成即时使用的纹理，称为色调艺术图（Tonal Art Maps，TAM）,主要思想是将笔划绘制为分级细分图层次，如图。</p>
+<p><img src="/2020/05/18/shader-learning8/11.png" alt="Figure 11 将笔划绘制到细分图层次中，每个分级细化图层次包含图中左边和上边纹理中的所有笔划，这样，在细化图层次之间和相邻纹理之间的插值就比较平滑"><br><img src="/2020/05/18/shader-learning8/12.png" alt="Figure 12 使用 TAM 渲染一副素描图的过程"></p>
+<h2 id="Graftals-嫁接"><a href="#Graftals-嫁接" class="headerlink" title="Graftals 嫁接"></a>Graftals 嫁接</h2><p>嫁接（Graftals）的基本思想，是将几何或者贴花纹理应用到物体表面，从而产生某种特殊效<br>果。可以通过所需要的细节层次，物体表面相对视点的方位或者其他因素，对纹理进行控制。这种方法可以用来模拟钢笔或者画刷的笔刷，如下图。</p>
+<p><img src="/2020/05/18/shader-learning8/13.png" alt="Figure 13 使用两种不同的嫁接（Graftals）风格绘制出来的 Standord 小兔"></p>
+</div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Shader%E3%80%81%E5%9B%BE%E5%BD%A2%E5%AD%A6/">Shader、图形学</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/05/23/shader-learning9/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Unity Shader 入门（九）：卡通高光shader</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/05/05/shader-learning7/"><span class="level-item">Unity Shader 入门（七）：模型描边Shader</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://chenwenling.cn/2020/05/18/shader-learning8/';
+            this.page.identifier = '2020/05/18/shader-learning8/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'kurong00' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen  order-3"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Kurong"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Kurong</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">11</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">2</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">3</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/kurong00" target="_blank" rel="noopener">Follow</a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#前言"><span class="level-left"><span class="level-item">1</span><span class="level-item">前言</span></span></a></li><li><a class="level is-mobile" href="#卡通渲染"><span class="level-left"><span class="level-item">2</span><span class="level-item">卡通渲染</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#渲染方法"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">渲染方法</span></span></a></li><li><a class="level is-mobile" href="#轮廓描边"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">轮廓描边</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#基于视点方向的描边"><span class="level-left"><span class="level-item">2.2.1</span><span class="level-item">基于视点方向的描边</span></span></a></li><li><a class="level is-mobile" href="#基于过程几何方法的描边"><span class="level-left"><span class="level-item">2.2.2</span><span class="level-item">基于过程几何方法的描边</span></span></a></li><li><a class="level is-mobile" href="#基于图像处理的描边"><span class="level-left"><span class="level-item">2.2.3</span><span class="level-item">基于图像处理的描边</span></span></a></li><li><a class="level is-mobile" href="#基于轮廓边缘检测的描边"><span class="level-left"><span class="level-item">2.2.4</span><span class="level-item">基于轮廓边缘检测的描边</span></span></a></li><li><a class="level is-mobile" href="#混和轮廓描边"><span class="level-left"><span class="level-item">2.2.5</span><span class="level-item">混和轮廓描边</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#Palette-of-Textures-纹理调色板"><span class="level-left"><span class="level-item">3</span><span class="level-item">Palette of Textures 纹理调色板</span></span></a></li><li><a class="level is-mobile" href="#Tonal-Art-Maps-x2F-TAM-色调艺术图"><span class="level-left"><span class="level-item">4</span><span class="level-item">Tonal Art Maps/TAM 色调艺术图</span></span></a></li><li><a class="level is-mobile" href="#Graftals-嫁接"><span class="level-left"><span class="level-item">5</span><span class="level-item">Graftals 嫁接</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/avatar.png" alt="Chen wenling" height="28"></a><p class="is-size-7"><span>&copy; 2022 chenwenling</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/kurong00"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
