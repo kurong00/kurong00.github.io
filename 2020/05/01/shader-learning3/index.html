@@ -147,14 +147,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -222,7 +222,7 @@
 <p>首先这里标注了Shader的名字和路径，符号 “/” 表示的是创建子层级，我们可以进行修改，例如这里修改为</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Shader <span class="string">"MyShader/FirstShader"</span></span><br></pre></td></tr></table></figure>
 <p>我们用这个Shader新建一个材质，可以看见Shader的层级就像我们设置的这样<br>
-<img src="/.cn//1.png" alt="Figure 1"><br>
+<img src="//chenwenling.cn/2020/05/01/shader-learning3/1.png" alt="Figure 1"><br>
 这里有一个注意点：如果我们把路径名称放在 Hidden下面的话，比如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Shader <span class="string">"Hidden/MyShader/FirstShader"</span></span><br></pre></td></tr></table></figure>
 <p>则表示在材质面板中隐藏此Shader，你将无法通过材质下拉列表中找到它。这样可以使Shader下拉列表更精简整洁，或者做一些不需暴露的Shader时很有用处。</p>
