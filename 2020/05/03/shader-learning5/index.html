@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Unity Shader 入门（五）：透明效果知识储备 - Kurong
+        
+    </title>
+
+    <link rel="canonical" href="https://chenwenling.cn/2020/05/03/shader-learning5/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('undefined')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Shader、图形学" title="Shader、图形学">Shader、图形学</a>
+                            
+                        </div>
+                        <h1>Unity Shader 入门（五）：透明效果知识储备</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by wenling on
+                            2020-05-03
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">欢 迎</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2><span id="前言">前言</span></h2>
+<p>透明渲染是是图形学里面的常见问题之一，对于渲染算法，可以大致分为基于光和基于视图的效果。基于光的效果是指物体使得灯光衰减或改变方向，从而导致场景中的其他物体以不同方式被照明和渲染的效果。基于视图的效果是指在其中渲染半透明对象本身的效果。</p>
+<a id="more"></a>
+<h2><span id="透明渲染方法">透明渲染方法</span></h2>
+<p>以下两种方法是比较常用的透明渲染方法：</p>
+<h3><span id="screen-door-transparency-方法">Screen-Door Transparency 方法</span></h3>
+<p>基本思想是用棋盘格填充模式来绘制透明多边形；也就是说，以每隔一个像素绘制一点方式的来绘制一个多边形，这样会使在其后面的物体部分可见，通常情况下，屏幕上的像素比较紧凑，所以这种棋盘格的绘制方式并不会露馅。同样的想法也用于剪切纹理的抗锯齿边缘，但是在子像素级别中的，这是一种称为 alpha 覆盖（alpha to coverage）的特征。screen-door transparency 方法的优点就是简单，可以在任何时间任何顺序绘制透明物体，并不需要特殊的硬件支持（只要支持填充模式）。缺点是透明度效果仅在 <strong>50%</strong> 时最好，且屏幕的每个区域中只能绘制一个透明物体。</p>
+<h3><span id="alpha-blending-方法">Alpha Blending 方法</span></h3>
+<p>这个方法比较常见，其实就是按照 Alpha 混合向量的值来混合源像素和目标像素。当在屏幕上绘制某个物体时，与每个像素相关联的值有 RGB 颜色、Z 缓冲深度值，以及另外一个成分 alpha 分量，这个 alpha 值也可以根据需要生成并存储，它描述的是给定像素的对象片段的不透明度的值。alpha 为 1.0 表示对象不透明，完全覆盖像素所在区域；0.0 表示像素完全透明。为了使对象透明，在现有场景的上方，以小于 1 的透明度进行绘制即可。每个像素将从渲染管线接收到一个 RGBA 结果，并将这个值和原始像素颜色相混合。注意透明度混合要关闭深度写入。这是因为：假如一个半透明物体在一个不透明物体的前面，如果开启深度写入的话，距离摄像机更远的不透明物体就会被剔除，但是依照常理我们是可以透过半透明的物体看到不透明的物体。但是这就破坏了深度缓冲的机制，关闭深度写入是非常不好但是不得不做的折中方法，也因此使得渲染顺序变得非常重要。（注意：关闭深度写入，但是没有关闭深度测试）用公式来表明即：<br>
+$$c_0 = \alpha_s c_s + (1 - \alpha_s)c_d$$</p>
+<p>其中 $c_s$ 是透明物体的颜色；$\alpha_s$ 是物体的透明度；$c_d$ 是混合之前的颜色；$c_0$ 是最终的结果颜色。</p>
+<h2><span id="透明排序">透明排序</span></h2>
+<p>我们可以不关心不透明物体的渲染顺序，因为在深度测试中就可以测试出物体离摄像机的距离再判断是否写入颜色缓冲。但是对于不透明物体，就没这么简单了，一个很自然的问题就是：如果场景中有非常多的物体，彼此之间有互相遮挡的情况，要将半透明物体正确地渲染到场景中，通常需要对物体进行排序。下面介绍几种常用的透明排序方法。</p>
+<h3><span id="z-buffer-深度缓存">Z-Buffer 深度缓存</span></h3>
+<p>Z-Buffer 也称深度缓冲。在计算机图形学中，深度缓冲是在三维图形中处理图像深度坐标的过程，这个过程通常在硬件中完成，它也可以在软件中完成，它是可见性问题的一个解决方法（可见性问题是确定渲染场景中哪部分可见、哪部分不可见的问题）。</p>
+<p>Z-buffer 的限制是每像素只存储一个对象，如果一些透明对象与同一个像素重叠，那么单独的 Z-buffer 就不能存储。这个问题可以通过改变加速器架构来解决的，比如用 A-buffer。A-buffer 具有 深度像素（deep pixels），其可以在单个像素中存储一系列呈现在所有对象之后被解析为单个像素颜色的多个片段。但需注意，Z-buffer 是市场的主流选择。</p>
+<h3><span id="painters-algorithm-画家算法">Painter’s Algorithm 画家算法</span></h3>
+<p>画家算法也称优先填充算法，效率虽然较低，但还是可以有效处理透明排序的问题。其基本思想是按照画家在绘制一幅画作时，首先绘制距离较远的场景，然后用绘制距离较近的场景覆盖较远的部分的思想。画家算法首先将场景中的多边形根据深度进行排序，然后按照顺序进行描绘。这种方法通常会将不可见的部分覆盖，这样就可以解决可见性问题。</p>
+<h3><span id="weighted-average-加权平均值算法">Weighted Average 加权平均值算法</span></h3>
+<p>使用简单的透明混合公式来实现无序透明渲染的算法，它通过扩展透明混合公式，来实现无序透明物件的渲染，从而得到一定程度上逼真的结果。</p>
+<h3><span id="depth-peeling-深度剥离算法">Depth Peeling 深度剥离算法</span></h3>
+<p>深度剥离是一种对深度值进行排序的技术。它的原理比较直观，标准的深度检测使场景中的 Z 值最小的点输出到屏幕上，就是离我们最近的顶点。但还有离我们第二近的顶点，第三近的顶点存在。要想显示它们，可以用多遍渲染的方法。第一遍渲染时，按照正常方式处理，这样就得到了离我们最近的表面中的每个顶点的 z 值。在第二遍渲染时，把现在每个顶点深度值和刚才的那个深度值进行比较，凡是小于等于第一遍得到的 z 值，把它们剥离，后面的过程依次类推即可。<br>
+<img src="/.cn//1.png" alt="Figure 1 每个深度剥离通道渲染特定的一层透明通道。左侧是第一个 Pass，直接显示眼睛可见的层，中间的图显示了第二层，显示了每个像素处第二靠近透明表面的像素。右边的图是第三层，每个像素处第三靠近透明表面的像素。"></p>
+<h3><span id="解决方案">解决方案</span></h3>
+<p>我们考虑两种情况：</p>
+<ul>
+<li>既有半透明物体也有不透明物体：我们先渲染所有的不透明物体再渲染半透明物体</li>
+<li>全是半透明物体：开启深度测试，关闭深度写入的情况下将半透明物体按照距离摄像机的远近从后往前渲染。
+<ul>
+<li>这里有一个小问题，深度缓冲中的值是像素级别的，而一个半透明物体很可能有非常多个像素，这么一来每一个像素的深度值都可能不一样，以此会产生<strong>循环遮挡</strong>的情况。</li>
+<li>为了规避上面的问题，常常会把大的模型分割成小的几块，这样即使出现渲染错误，也不会出现太出格的结果。</li>
+</ul>
+</li>
+</ul>
+<h2><span id="unity设置的渲染序列">Unity设置的渲染序列</span></h2>
+<p>之前的查看 shader 我们曾经见过这样的语句</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tags &#123; <span class="string">"RenderType"</span>=<span class="string">"Opaque"</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以用Queue标签来决定我们的模型是怎么渲染的。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">队列名称</th>
+<th style="text-align:center">队列索引</th>
+<th style="text-align:center">索引描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Background</td>
+<td style="text-align:center">1000</td>
+<td style="text-align:center">最早被渲染的队列，一般绘制背景元素</td>
+</tr>
+<tr>
+<td style="text-align:center">Geometry</td>
+<td style="text-align:center">2000</td>
+<td style="text-align:center">默认渲染队列，不透明物体渲染队列</td>
+</tr>
+<tr>
+<td style="text-align:center">AlphaTest</td>
+<td style="text-align:center">2450</td>
+<td style="text-align:center">需要透明度测试的物体在这个队列渲染</td>
+</tr>
+<tr>
+<td style="text-align:center">Transparent</td>
+<td style="text-align:center">3000</td>
+<td style="text-align:center">使用透明度混合的物体在这个队列渲染</td>
+</tr>
+<tr>
+<td style="text-align:center">Overlay</td>
+<td style="text-align:center">4000</td>
+<td style="text-align:center">最后被渲染的物体在这个队列，一般用于叠加效果</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="代码设置">代码设置</span></h3>
+<p>如果我们想要通过透明度混合来实现半透明效果，代码如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SubShader</span><br><span class="line">   &#123;</span><br><span class="line">       Tags &#123; <span class="string">"RenderType"</span>=<span class="string">"Transparent"</span> &#125;  </span><br><span class="line">       Pass &#123;</span><br><span class="line">           ZWrite Off ······</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>ZWrite Off 意味者关闭深度写入，或者可以：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SubShader</span><br><span class="line">   &#123;</span><br><span class="line">       Tags &#123; <span class="string">"RenderType"</span>=<span class="string">"Transparent"</span> &#125;  </span><br><span class="line">       ZWrite Off ······</span><br><span class="line">       Pass &#123; &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>这样表示这个SubShader下的所有Pass都会关闭深度写入</p>
+<h2><span id="结语">结语</span></h2>
+<p>下一篇我们就运用这些理论开始写第一个半透明的shader</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2020/05/04/shader-learning6/" data-toggle="tooltip" data-placement="top" title="Unity Shader 入门（六）：边缘发光透明版">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2020/05/02/shader-learning4/" data-toggle="tooltip" data-placement="top" title="Unity Shader 入门（四）：边缘发光效果">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">透明渲染方法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Screen-Door Transparency 方法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Alpha Blending 方法</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">透明排序</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Z-Buffer 深度缓存</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Painter’s Algorithm 画家算法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Weighted Average 加权平均值算法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">Depth Peeling 深度剥离算法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">解决方案</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Unity设置的渲染序列</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">代码设置</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">结语</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Shader、图形学" title="Shader、图形学">Shader、图形学</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "kurong00";
+    var disqus_identifier = "https://chenwenling.cn/2020/05/03/shader-learning5/";
+    var disqus_url = "https://chenwenling.cn/2020/05/03/shader-learning5/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: '>'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/kurong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/kurong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/kurong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; wenling 2022 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://chenwenling.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://chenwenling.cn/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
