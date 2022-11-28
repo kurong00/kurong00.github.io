@@ -237,7 +237,28 @@
 </ul>
 <h2><span id="批量设置">批量设置</span></h2>
 <p>实际项目中不会每张图片都手动设置，可以用脚本自动化处理每张图片的压缩格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">using UnityEditor;</span><br><span class="line">public class TextureImport : AssetPostprocessor</span><br><span class="line">&#123;</span><br><span class="line">    void OnPreprocessTexture()</span><br><span class="line">    &#123;</span><br><span class="line">        if (assetPath.Contains(&quot;Assets&quot;))</span><br><span class="line">        &#123;</span><br><span class="line">            TextureImporter textureImporter = AssetImporter.GetAtPath(assetPath) as TextureImporter;</span><br><span class="line">            textureImporter.textureType = TextureImporterType.Sprite;/</span><br><span class="line">            textureImporter.mipmapEnabled = false;</span><br><span class="line"></span><br><span class="line">            //设置各平台的压缩格式</span><br><span class="line">            TextureImporterPlatformSettings settings = new TextureImporterPlatformSettings();</span><br><span class="line">            settings.overridden = true;</span><br><span class="line">            settings.name = &quot;iPhone&quot;;</span><br><span class="line">            settings.format = TextureImporterFormat.ASTC_RGBA_4x4;</span><br><span class="line">            textureImporter.SetPlatformTextureSettings(settings);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="language-C#">using UnityEditor;
+public class TextureImport : AssetPostprocessor
+{
+    void OnPreprocessTexture()
+    {
+        if (assetPath.Contains(&quot;Assets&quot;))
+        {
+            TextureImporter textureImporter = AssetImporter.GetAtPath(assetPath) as TextureImporter;
+            textureImporter.textureType = TextureImporterType.Sprite;/
+            textureImporter.mipmapEnabled = false;
+
+            //设置各平台的压缩格式
+            TextureImporterPlatformSettings settings = new TextureImporterPlatformSettings();
+            settings.overridden = true;
+            settings.name = &quot;iPhone&quot;;
+            settings.format = TextureImporterFormat.ASTC_RGBA_4x4;
+            textureImporter.SetPlatformTextureSettings(settings);
+        }
+    }
+}
+</code></pre>
+
                 
 
                 <hr>
