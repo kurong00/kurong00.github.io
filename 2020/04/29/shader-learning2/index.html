@@ -257,22 +257,14 @@
 </table>
 <h2><span id="什么是shaderlab">什么是ShaderLab</span></h2>
 <p>在Unity中，所有的Shader都是使用ShaderLab来编写的，从结构上来说，它定义了显示一个材质所需要的所有东西，而不仅仅是着色器代码，我们先来看一下ShaderLab的结构</p>
-<p><img src="//chenwenling.cn/2020/04/29/shader-learning2/1.png" alt="Figure 1"></p>
+<img src="/2020/04/29/shader-learning2/1.png" title="Figure 1">
 <p>一个shader包含多个属性（Properties)，然后是一个或多个的子着色器（SubShader)，在实际运行中，哪一个子着色器被使用是由运行的平台所决定的。每一个子着色器中包含一个或者多个的Pass。在计算着色时，平台先选择最优先可以使用的着色器，然后依次运行其中的Pass，然后得到输出的结果。最后指定一个FallBack，用来处理所有Subshader都不能运行的情况,一般FallBack的都是平台已经定义好的shader。</p>
 <h3><span id="shaderlab和着色语言的关系">ShaderLab和着色语言的关系</span></h3>
 <p>对于表面着色器和顶点着色器我们可以在 ShaderLab 的 Pass 中的 CGPROGRAM 和 ENDCG 之间嵌套Cg/HLSL。或者在 GLSLPROGRAM 和 ENDGLSL 之间嵌套 GLSL。</p>
-<pre><code class="language-C++">Pass {
-    CGPROGRAM
-    //一些编译指令，例如：
-    #pragma vertex vert
-    #pragma fragment frag
-    //Cg代码
-    ENDCG
- }
-</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Pass &#123;</span><br><span class="line">    CGPROGRAM</span><br><span class="line">    <span class="comment">//一些编译指令，例如：</span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">pragma</span> vertex vert</span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">pragma</span> fragment frag</span></span><br><span class="line">    <span class="comment">//Cg代码</span></span><br><span class="line">    ENDCG</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <h3><span id="shaderlab的模板">ShaderLab的模板</span></h3>
 <p>当我们打开Unity，然后在Project面板点击右键，依次从中选择Create/Shader/…发现会有很多的可选项</p>
-<p><img src="//chenwenling.cn/2020/04/29/shader-learning2/2.png" alt="Figure 1"></p>
+<img src="/2020/04/29/shader-learning2/2.png" title="Figure 1">
 <ul>
 <li>Standard Surface Shader：标准表面着色器，是一种基于物理的着色系统（使用了Physically Based Rendering（简称PBR）技术，即基于物理的渲染技术），以模拟现实真实的方式来模拟材质与灯光之间的关系，可以很轻易的表现出各种金属反光效果，同时此种Shader的书写逻辑也更符合人类的思维模式。</li>
 <li>Unlit Shader：Vertex/Fragment Shader,也就是最基本的顶点片断着色器，不受光照影响的Shader，多用于特效、UI上的效果制作。</li>

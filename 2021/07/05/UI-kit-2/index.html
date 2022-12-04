@@ -238,13 +238,13 @@
 <p>只依赖人力来检查规范不太现实，还需要一些静态的UI界面分析工具，记录一些常用的小工具：</p>
 <h3><span id="是否取消勾选raycast-target">是否取消勾选Raycast Target</span></h3>
 <p>上文提到，只用来显示作用的图片禁止勾选Raycast Target，但实际制作界面的时候常常是复制之前界面的组件，容易遗忘选项，可以使用工具显示勾选Raycast Target的组件，如果勾选了用红框表示<a href="https://github.com/kurong00/UI_Kit/blob/main/Assets/Script/RaycastTargetLine.cs" target="_blank" rel="noopener">【完整代码】</a></p>
-<p><img src="//chenwenling.cn/2021/07/05/UI-kit-2/RaycastTargetLine.png" alt="RaycastTargetLine"></p>
+<img src="/2021/07/05/UI-kit-2/RaycastTargetLine.png" title="RaycastTargetLine">
 <h3><span id="查找图片被哪些prefab引用">查找图片被哪些prefab引用</span></h3>
 <p>项目开始的时候几乎不可能有全部的美术资源，会通过一些临时资源来暂时替代，等到正式资源替换完可以通过查找图片被哪些prefab引用来删除多余的临时资源。<a href="https://github.com/kurong00/UI_Kit/blob/main/Assets/Script/SearchReferences.cs" target="_blank" rel="noopener">【完整代码】</a></p>
-<p><img src="//chenwenling.cn/2021/07/05/UI-kit-2/SearchReferences.png" alt="Search References"></p>
+<img src="/2021/07/05/UI-kit-2/SearchReferences.png" title="Search References">
 <h3><span id="查找prefab引用了那些资源">查找prefab引用了那些资源</span></h3>
 <p>Unity可以通过 Select Dependencies 来查找物体身上引用的所有资源，正式的项目中一个界面所用到的图片、字体、贴图资源可能是几十个，如果希望可以逐个查看具体的资源位置，可以通过工具来罗列：<a href="https://github.com/kurong00/UI_Kit/blob/main/Assets/Script/SearchReferences.cs" target="_blank" rel="noopener">【完整代码】</a></p>
-<p><img src="//chenwenling.cn/2021/07/05/UI-kit-2/Dependencies.png" alt="List Dependencies"></p>
+<img src="/2021/07/05/UI-kit-2/Dependencies.png" title="List Dependencies">
 
                 
 
