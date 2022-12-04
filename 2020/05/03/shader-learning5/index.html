@@ -140,6 +140,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -148,13 +155,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -246,7 +246,7 @@ $$c_0 = \alpha_s c_s + (1 - \alpha_s)c_d$$</p>
 </ul>
 <h2><span id="unity设置的渲染序列">Unity设置的渲染序列</span></h2>
 <p>之前的查看 shader 我们曾经见过这样的语句</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tags &#123; <span class="string">"RenderType"</span>=<span class="string">"Opaque"</span> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Tags &#123; <span class="string">"RenderType"</span>=<span class="string">"Opaque"</span> &#125;</span><br></pre></td></tr></table></figure>
 <p>我们可以用Queue标签来决定我们的模型是怎么渲染的。</p>
 <table>
 <thead>
@@ -286,9 +286,9 @@ $$c_0 = \alpha_s c_s + (1 - \alpha_s)c_d$$</p>
 </table>
 <h3><span id="代码设置">代码设置</span></h3>
 <p>如果我们想要通过透明度混合来实现半透明效果，代码如下</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SubShader</span><br><span class="line">   &#123;</span><br><span class="line">       Tags &#123; <span class="string">"RenderType"</span>=<span class="string">"Transparent"</span> &#125;  </span><br><span class="line">       Pass &#123;</span><br><span class="line">           ZWrite Off ······</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">SubShader</span><br><span class="line">   &#123;</span><br><span class="line">       Tags &#123; <span class="string">"RenderType"</span>=<span class="string">"Transparent"</span> &#125;  </span><br><span class="line">       Pass &#123;</span><br><span class="line">           ZWrite Off ······</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <p>ZWrite Off 意味者关闭深度写入，或者可以：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SubShader</span><br><span class="line">   &#123;</span><br><span class="line">       Tags &#123; <span class="string">"RenderType"</span>=<span class="string">"Transparent"</span> &#125;  </span><br><span class="line">       ZWrite Off ······</span><br><span class="line">       Pass &#123; &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">SubShader</span><br><span class="line">   &#123;</span><br><span class="line">       Tags &#123; <span class="string">"RenderType"</span>=<span class="string">"Transparent"</span> &#125;  </span><br><span class="line">       ZWrite Off ······</span><br><span class="line">       Pass &#123; &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <p>这样表示这个SubShader下的所有Pass都会关闭深度写入</p>
 <h2><span id="结语">结语</span></h2>
 <p>下一篇我们就运用这些理论开始写第一个半透明的shader</p>
