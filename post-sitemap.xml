@@ -7,88 +7,8 @@
     </url>
 
     <url>
-        <loc>https://chenwenling.cn/2020/04/28/shader-learning1/</loc>
-        <lastmod>2022-12-04T15:16:39.389Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://chenwenling.cn/2020/04/29/shader-learning2/</loc>
-        <lastmod>2022-12-04T15:16:36.628Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://chenwenling.cn/2020/05/01/shader-learning3/</loc>
-        <lastmod>2022-12-04T15:16:33.897Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://chenwenling.cn/2020/05/02/shader-learning4/</loc>
-        <lastmod>2022-12-04T15:16:30.964Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://chenwenling.cn/2020/05/03/shader-learning5/</loc>
-        <lastmod>2022-12-04T15:16:24.930Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://chenwenling.cn/2020/05/04/shader-learning6/</loc>
-        <lastmod>2022-12-04T15:16:20.090Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://chenwenling.cn/2020/05/05/shader-learning7/</loc>
-        <lastmod>2022-12-04T15:16:16.878Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://chenwenling.cn/2020/05/18/shader-learning8/</loc>
-        <lastmod>2022-12-04T15:16:13.227Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://chenwenling.cn/2020/05/23/shader-learning9/</loc>
-        <lastmod>2022-12-04T15:16:09.093Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://chenwenling.cn/2020/07/05/shader-learning10/</loc>
-        <lastmod>2022-12-04T13:31:39.032Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://chenwenling.cn/2021/07/05/UI-kit-2/</loc>
-        <lastmod>2022-11-27T15:23:59.322Z</lastmod>
+        <lastmod>2022-12-11T14:43:20.261Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -96,7 +16,87 @@
 
     <url>
         <loc>https://chenwenling.cn/2021/02/19/UI-kit-1/</loc>
-        <lastmod>2022-11-20T12:42:36.944Z</lastmod>
+        <lastmod>2022-12-11T14:43:11.822Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://chenwenling.cn/2020/07/05/shader-learning10/</loc>
+        <lastmod>2022-12-11T14:42:03.938Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://chenwenling.cn/2020/05/23/shader-learning9/</loc>
+        <lastmod>2022-12-11T14:41:56.851Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://chenwenling.cn/2020/05/18/shader-learning8/</loc>
+        <lastmod>2022-12-11T14:41:48.212Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://chenwenling.cn/2020/05/05/shader-learning7/</loc>
+        <lastmod>2022-12-11T14:41:36.416Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://chenwenling.cn/2020/05/04/shader-learning6/</loc>
+        <lastmod>2022-12-11T14:41:32.210Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://chenwenling.cn/2020/05/03/shader-learning5/</loc>
+        <lastmod>2022-12-11T14:41:28.538Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://chenwenling.cn/2020/05/02/shader-learning4/</loc>
+        <lastmod>2022-12-11T14:41:22.286Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://chenwenling.cn/2020/05/01/shader-learning3/</loc>
+        <lastmod>2022-12-11T14:41:18.588Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://chenwenling.cn/2020/04/28/shader-learning1/</loc>
+        <lastmod>2022-12-11T14:41:04.931Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://chenwenling.cn/2020/04/29/shader-learning2/</loc>
+        <lastmod>2022-12-11T14:40:15.362Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
