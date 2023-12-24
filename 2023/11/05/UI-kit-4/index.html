@@ -212,24 +212,24 @@
 
                 <p>接上一篇本地化内容，这一篇记录多语言过程中遇到的字体问题</p>
 <a id="more"></a>
-<h2><span id="字体的分类">字体的分类</span></h2>
+<h2 id="字体的分类">字体的分类</h2>
 <p>字体的分类可分为“衬线体与非衬线体”。通俗来说，衬线又被称为“字脚”，衬线体 (Serif) 就是有边角装饰的字体。由下图可以清楚地发现，同等字号下，棱角分明的非衬线体看上去比衬线体更大、结构更清晰。</p>
 <img src="/2023/11/05/UI-kit-4/data.png" title="Figure 1">
-<h3><span id="衬线体">衬线体</span></h3>
+<h3 id="衬线体">衬线体</h3>
 <p>一般认为衬线体起源于古罗马的石刻碑文，现代大多数人所接受的关于这些装饰性笔画的解释，来自爱德华·卡提池 (Edward Catich) 神父的《衬线的起源》一书。书中认为罗马字母最初被雕刻到石碑上之前，要先用方头笔刷写好样子，由于用方头笔刷书写，导致笔画的起始和结尾会出现参差的笔触，所以在笔画开始、结束和转角处增加了收尾的动作。而雕刻匠人参照写好的字样雕刻，也就自然形成了“serif”的衬线字体。<br>
 而古体汉字，如宋体，在笔画交接、竖笔开始和横笔末端的地方，由于书法运笔时的回锋和顿笔，形成了特有的三角形结构，也可被称为“衬线”。</p>
-<h3><span id="非衬线体">非衬线体</span></h3>
+<h3 id="非衬线体">非衬线体</h3>
 <p>在电子屏幕时代，汉字的显示并不需要“衬线”原本的功能而仅仅保留其装饰性。然而在互联网大量文本信息输入/输出的情况下，衬线体在笔画上过多的点缀容易造成视觉疲劳。非衬线体 (Sans-serif) 与衬线体相反，其字形没有边角的装饰线或类似“小脚丫”的小横线，文字通常是由机械和统一粗细的线条组成。</p>
-<h3><span id="对比">对比</span></h3>
+<h3 id="对比">对比</h3>
 <p>在选用字体时有一些默认的规范。例如，长文阅读或小屏幕信息展示更偏好使用非衬线字体；而标题或者小篇幅文本，更偏爱衬线字体来提升短句美感。</p>
-<h2><span id="游戏字体本地化">游戏字体本地化</span></h2>
+<h2 id="游戏字体本地化">游戏字体本地化</h2>
 <p>对于设计师而言，字体的本地化有两个方面值得思考：<br>
 针对特殊语言符号，需要考虑图片字的制作方式以及不同语言下的替换，并且要关注尺寸和预计距离的可能变化，在不同型号设备上提供一致、以及如何对应不同语言同一内容图片的对应关系。</p>
 <p>在进行tab或者标题等的文本排列时，充分考虑不同语言习惯对于视觉效果的影响。例如，中文或日文可以清晰显示的竖排列布局，但可能并不适用于西语。阿拉伯语的书写方式是从右至左，需要考虑在特殊情况下的排列与对齐方式</p>
-<h2><span id="游戏字体商业成本">游戏字体商业成本</span></h2>
+<h2 id="游戏字体商业成本">游戏字体商业成本</h2>
 <p>游戏字体授权通常分为游戏图片授权和游戏嵌入两种类型。游戏图片授权以字体的图片形式应用到游戏软件或海报产品中，价格相对较低，且使用频率较低。而游戏嵌入则是将字体整体嵌入到游戏系统中作为系统字出现，价格较高。游戏嵌入需要满足更多的使用规范和要求，包括字体在游戏系统的稳定性、兼容性等等。授权价格还会根据字体家族包的齐全度、国标类型而有所差异。</p>
 <p>当借鉴未授权的字体时，需要注意对字体进行变形，以免违反相关的协议规定。在游戏中需要使用与图片字类似的字体时，往往会使用非常大程度变形的字体制作艺术字，以增加美观度的同时降低使用风险。</p>
-<h2><span id="一些字体的qa">一些字体的QA</span></h2>
+<h2 id="一些字体的qa">一些字体的QA</h2>
 <blockquote>
 <p>OTF、TTF、TTC 字体有什么区别？</p>
 </blockquote>
@@ -290,7 +290,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">字体的分类</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">衬线体</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">非衬线体</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">对比</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">游戏字体本地化</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">游戏字体商业成本</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">一些字体的QA</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#字体的分类"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">字体的分类</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#衬线体"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">衬线体</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#非衬线体"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">非衬线体</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对比"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">对比</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#游戏字体本地化"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">游戏字体本地化</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#游戏字体商业成本"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">游戏字体商业成本</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一些字体的qa"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">一些字体的QA</span></a></li></ol>
         
         </div>
       </aside>

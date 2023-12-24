@@ -211,14 +211,14 @@
                 post-container">
 
                 <p>这一年项目有了本地化的需求，记录一下多语言中过程中遇到的语言问题</p>
-<h2><span id="语言选择">语言选择</span></h2>
+<h2 id="语言选择">语言选择</h2>
 <p>根据Newzoo数据，全球游戏收入前十的国家和地区为：中国，美国，日本，韩国，德国，英国，法国，加拿大，意大利和巴西。此排名一直非常稳定，很多游戏公司的本地化会将这些国家所用的语言作为本地化的目标语言。当然越热门的语言和市场则意味着越激烈的市场竞争，对比来说有的地区缺乏其母语内容的游戏且竞争较小，例如：泰国，越南，土耳其，也是值得考虑的出海地区</p>
 <img src="/2023/10/15/UI-kit-3/data.png" title="Figure 1">
-<h2><span id="最常见的ui问题-超框">最常见的UI问题-超框</span></h2>
+<h2 id="最常见的ui问题-超框">最常见的UI问题-超框</h2>
 <p>本地化UI中最常见的问题就是文本的超框，用目标语言字符数/对应中文字符数，可以得到不同语言相对于中文的长度比率，数值越大，超框风险越严重。英语翻译成中文的比例为1:1.6，而日语和韩语翻译成中文的比例则约为1:1。相比之下，欧洲地区一些小语种的文本就显得更长了，德语和法语翻译成中文的比例为1:1.8，俄语、西班牙语、意大利语、葡萄牙语以及阿拉伯语翻译成中文的字数比例则高达1:2。</p>
-<h3><span id="西方语言">西方语言</span></h3>
+<h3 id="西方语言">西方语言</h3>
 <p>德法西葡俄 字符长度分布趋于一致，这和这几门语言同属印欧语系，词源和语法结构存在一定的相似度有关</p>
-<h3><span id="东方语言">东方语言</span></h3>
+<h3 id="东方语言">东方语言</h3>
 <p>韩语和日语字符长度分布较为相似、泰语和越南语分布较为相似，韩语和日语虽然属于不同的语系，但是语法结构相似。两者的相似点：</p>
 <ul>
 <li>语法结构都是主宾谓，都是“黏着语”，通过终结词尾的变化表示语法形式。另外，敬语发达，面对不同辈分，年龄和社会地位的人使用的敬语完全不一样。</li>
@@ -226,17 +226,17 @@
 <li>汉语词在日语和韩语中都占了相当大的一部分，近代韩语中吸纳过部分日本意译的汉字词表达新概念。外来词方面，韩语和日语都大量使用从英语等西方语言借来的音译词。</li>
 </ul>
 <img src="/2023/10/15/UI-kit-3/data2.png" title="Figure 2">
-<h2><span id="解决方案">解决方案</span></h2>
+<h2 id="解决方案">解决方案</h2>
 <p>总而言之，超框的问题会普遍存在：</p>
-<h3><span id="开发初始阶段">开发初始阶段</span></h3>
+<h3 id="开发初始阶段">开发初始阶段</h3>
 <p>如果一开始就决定进行海外发行，UI团队在设计阶段，就可以按照多语种的长度比例适当扩大原本的文本框，提高不同语种的文本容纳阈值。前端人员可在本地化资源配置文件中注明该字段的建议字符长度和允许最大字符长度，确定文本内容是中文2倍以上时，与UI提前预估好自适应文本框长度的问题，界面设计时避开左右都有文本的情况</p>
-<h3><span id="分辨率对于文字长度的影响">分辨率对于文字长度的影响</span></h3>
+<h3 id="分辨率对于文字长度的影响">分辨率对于文字长度的影响</h3>
 <p>本身没有问题的文本，换了个分辨率后就可能出现超框，显示不完全的问题。或者，有些字体已经调整到了最小字号，即使勾选了Text的Best fit，也可能在低分辨率的设备上显示异常。因此UI团队在针对文本框给出文字字符长度的建议时，最好可以结合游戏上线的不同平台，综合考虑游戏所支持的各种分辨率。</p>
-<h3><span id="字体的影响">字体的影响</span></h3>
+<h3 id="字体的影响">字体的影响</h3>
 <p>即使在同一语种内，不同的字体也会对文本显示的长度产生比较明显的影响。因此如果只给出字符限制，如4个字符，本地化译员在用excel或其他翻译软件时使用了与研发人员不同的字体，译文的长度与开发团队给出的标准字符长度就很容易有出入。</p>
 <p>而就算上下游部门统一了字体，单纯给出字符数限制仍然不一定是最为推荐的解决方法。由于不同译员的翻译习惯不同，惯用词也不同，因此同一句话会有多种翻译。有可能两种翻译的字符数都相同，但因为词数不同，导致的空格数不同，文本长度也不同，这种问题在较长的复合句中会更加明显。</p>
 <p>因此UI团队可以以“m、n”为标准，给出字符长短建议。例如某处按键的长度为“mmmmmmn”。此时译员不论是用什么样的字体或表达，只需和“mmmmmmn”进行长度比较即可判断是否存在超框风险</p>
-<h3><span id="本地化翻译阶段">本地化翻译阶段</span></h3>
+<h3 id="本地化翻译阶段">本地化翻译阶段</h3>
 <p>方法一：<br>
 有条件的话译员需要对游戏熟悉，能从文本的内容大致推出是出现在标语（可容纳较长文本）还是出现在按钮上（较短文本）</p>
 <p>方法二：<br>
@@ -296,7 +296,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">语言选择</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">最常见的UI问题-超框</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">西方语言</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">东方语言</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">解决方案</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">开发初始阶段</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">分辨率对于文字长度的影响</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">字体的影响</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">本地化翻译阶段</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#语言选择"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">语言选择</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#最常见的ui问题-超框"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">最常见的UI问题-超框</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#西方语言"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">西方语言</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#东方语言"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">东方语言</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#解决方案"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">解决方案</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#开发初始阶段"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">开发初始阶段</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#分辨率对于文字长度的影响"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">分辨率对于文字长度的影响</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#字体的影响"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">字体的影响</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#本地化翻译阶段"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">本地化翻译阶段</span></a></li></ol></li></ol>
         
         </div>
       </aside>
