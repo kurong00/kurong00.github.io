@@ -1,0 +1,31 @@
+widgets:
+    # Profile widget configurations
+    -
+        # Where should the widget be placed, left sidebar or right sidebar
+        position: right
+        type: profile
+        # Author name
+        author: Kurong
+        # Author title
+        #author_title: Your title
+        # Author's current location
+        #location: Earth, Solar System
+        # URL or path to the avatar image
+        avatar: /img/avatar.png
+        # Whether show the rounded avatar image
+        avatar_rounded: false
+        # Email address for the Gravatar
+        gravatar: 
+        # URL or path for the follow button
+        follow_link: https://github.com/kurong00
+    # Table of contents widget configurations
+    -
+        # Where should the widget be placed, left sidebar or right sidebar
+        position: right
+        type: toc
+        # Whether to show the index of each heading
+        index: true
+        # Whether to collapse sub-headings when they are out-of-view
+        collapsed: true
+        # Maximum level of headings to show (1-6)
+        depth: 6

@@ -60,7 +60,7 @@ body {
   line-height: 1.7;
   font-size: 16px;
   color: #404040;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 p {
   margin: 30px 0;
@@ -95,7 +95,7 @@ a img:focus {
   cursor: zoom-in;
 }
 article {
-  overflow-x: hidden;
+  overflow: hidden;
 }
 blockquote {
   color: #808080;
