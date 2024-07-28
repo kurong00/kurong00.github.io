@@ -14,7 +14,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          UGUI优化：本地化-语言篇 - Kurong
+          UGUI优化：本地化 - Kurong
         
     </title>
 
@@ -89,7 +89,7 @@
                               <a class="tag" href="/tags/#优化" title="优化">优化</a>
                             
                         </div>
-                        <h1>UGUI优化：本地化-语言篇</h1>
+                        <h1>UGUI优化：本地化</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Kurong on
@@ -212,57 +212,70 @@
 
                 <p>这一年项目有了本地化的需求，记录一下多语言中过程中遇到的语言问题</p>
 <h2 id="语言选择">语言选择</h2>
-<p>根据Newzoo数据，全球游戏收入前十的国家和地区为：中国，美国，日本，韩国，德国，英国，法国，加拿大，意大利和巴西。此排名一直非常稳定，很多游戏公司的本地化会将这些国家所用的语言作为本地化的目标语言。当然越热门的语言和市场则意味着越激烈的市场竞争，对比来说有的地区缺乏其母语内容的游戏且竞争较小，例如：泰国，越南，土耳其，也是值得考虑的出海地区</p>
+<p>根据Newzoo数据，全球游戏收入前十的国家和地区为：中国，美国，日本，韩国，德国，英国，法国，加拿大，意大利和巴西。此排名一直非常稳定，很多游戏公司的本地化会将这些国家所用的语言作为本地化的目标语言。</p>
 <img src="/2023/10/15/UI-kit-3/data.png" title="Figure 1">
-<h2 id="最常见的ui问题-超框">最常见的UI问题-超框</h2>
-<p>本地化UI中最常见的问题就是文本的超框，用目标语言字符数/对应中文字符数，可以得到不同语言相对于中文的长度比率，数值越大，超框风险越严重。英语翻译成中文的比例为1:1.6，而日语和韩语翻译成中文的比例则约为1:1。相比之下，欧洲地区一些小语种的文本就显得更长了，德语和法语翻译成中文的比例为1:1.8，俄语、西班牙语、意大利语、葡萄牙语以及阿拉伯语翻译成中文的字数比例则高达1:2。</p>
-<h3 id="西方语言">西方语言</h3>
-<p>德法西葡俄 字符长度分布趋于一致，这和这几门语言同属印欧语系，词源和语法结构存在一定的相似度有关</p>
-<h3 id="东方语言">东方语言</h3>
-<p>韩语和日语字符长度分布较为相似、泰语和越南语分布较为相似，韩语和日语虽然属于不同的语系，但是语法结构相似。两者的相似点：</p>
-<ul>
-<li>语法结构都是主宾谓，都是“黏着语”，通过终结词尾的变化表示语法形式。另外，敬语发达，面对不同辈分，年龄和社会地位的人使用的敬语完全不一样。</li>
-<li>词汇的构成和由来上也有很多相似之处，主要都分为汉语词，固有词，外来词三大类，其中固有词在句子中最为重要，能表达句子最核心的意思。</li>
-<li>汉语词在日语和韩语中都占了相当大的一部分，近代韩语中吸纳过部分日本意译的汉字词表达新概念。外来词方面，韩语和日语都大量使用从英语等西方语言借来的音译词。</li>
-</ul>
+<p>当然越热门的语言和市场则意味着越激烈的市场竞争，对比来说有的地区缺乏其母语内容的游戏且竞争较小，例如：泰国，越南，土耳其，也是值得考虑的出海地区</p>
 <img src="/2023/10/15/UI-kit-3/data2.png" title="Figure 2">
+<h2 id="语言问题">语言问题</h2>
+<p>本地化UI中最常见的问题就是文本的超框，用目标语言字符数/对应中文字符数，可以得到不同语言相对于中文的长度比率，数值越大，超框风险越严重。</p>
+<p>中英的比例为1:1.6，日韩与中文的比例则约为1:1，德法与中文的比例为1:1.8，俄语、西班牙语、意大利语、葡萄牙语以及阿拉伯语翻译成中文的字数比例则高达1:2。</p>
+<p>西方语言：德法西葡俄 字符长度分布趋于一致，这和这几门语言同属印欧语系，词源和语法结构存在一定的相似度有关</p>
+<p>东方语言：韩语和日语字符长度分布较为相似、泰语和越南语分布较为相似，韩语和日语虽然属于不同的语系，但是语法结构相似。两者的相似点：</p>
 <h2 id="解决方案">解决方案</h2>
-<p>总而言之，超框的问题会普遍存在：</p>
-<h3 id="开发初始阶段">开发初始阶段</h3>
-<p>如果一开始就决定进行海外发行，UI团队在设计阶段，就可以按照多语种的长度比例适当扩大原本的文本框，提高不同语种的文本容纳阈值。前端人员可在本地化资源配置文件中注明该字段的建议字符长度和允许最大字符长度，确定文本内容是中文2倍以上时，与UI提前预估好自适应文本框长度的问题，界面设计时避开左右都有文本的情况</p>
-<h3 id="分辨率对于文字长度的影响">分辨率对于文字长度的影响</h3>
-<p>本身没有问题的文本，换了个分辨率后就可能出现超框，显示不完全的问题。或者，有些字体已经调整到了最小字号，即使勾选了Text的Best fit，也可能在低分辨率的设备上显示异常。因此UI团队在针对文本框给出文字字符长度的建议时，最好可以结合游戏上线的不同平台，综合考虑游戏所支持的各种分辨率。</p>
-<h3 id="字体的影响">字体的影响</h3>
+<p>多语言的字段长度不同必然会影响控件表现形式与效果，如果一开始就决定进行海外发行，UI团队在设计阶段，就可以按照多语种的长度比例适当扩大原本的文本框，或者在UI的设计制作时直接使用英文占位。一般英文的长度在多语种内比较适中，采用英文进行空间的合理预留是可以满足大部分情景的。</p>
+<p>客户端可在本地化资源配置文件中注明该字段的建议字符长度和允许最大字符长度，确定文本内容是中文2倍以上时，与UI提前预估好自适应文本框长度的问题，界面设计时避开左右都有文本的情况、注意文字延展的方向。当然，也不建议为了适配一个很长的语言而预留较大空间，导致其他语种的界面排版很丑。所以在多语言的适配中，还有一些别的方法：</p>
+<ol>
+<li>
+<p>玩家有通用认知的地方都转成速写，比如有：伤害-damage-DMG；攻击-attack-ATK；经验值-experience-EXP等。</p>
+</li>
+<li>
+<p>在适用场景下，采用跑马灯式的滚动，注意不可多个文本同时滚动，并且可优化在不选中文本时以…来代替</p>
+</li>
+<li>
+<p>标题装饰类和按钮类的设计最好使用可九宫格拓展的类型，特别是横向延展</p>
+</li>
+<li>
+<p>英文类字号可以降低到14-16，对于欧美人的阅读习惯来说，并不是各个字母都要看的清清楚</p>
+</li>
+<li>
+<p>尽量为叙述类文本多预留1.5倍空间，因为俄罗斯和阿拉伯文字长度很吓人</p>
+</li>
+<li>
+<p>设计时候尽可能避免竖版排版，竖排在日本很常见，但在欧洲地区几乎不会使用</p>
+</li>
+<li>
+<p>有条件的话译员需要对游戏熟悉，能从文本的内容大致推出是出现在标语（可容纳较长文本）还是出现在按钮上（较短文本）</p>
+</li>
+</ol>
+<h2 id="字体的影响">字体的影响</h2>
 <p>即使在同一语种内，不同的字体也会对文本显示的长度产生比较明显的影响。因此如果只给出字符限制，如4个字符，本地化译员在用excel或其他翻译软件时使用了与研发人员不同的字体，译文的长度与开发团队给出的标准字符长度就很容易有出入。</p>
 <p>而就算上下游部门统一了字体，单纯给出字符数限制仍然不一定是最为推荐的解决方法。由于不同译员的翻译习惯不同，惯用词也不同，因此同一句话会有多种翻译。有可能两种翻译的字符数都相同，但因为词数不同，导致的空格数不同，文本长度也不同，这种问题在较长的复合句中会更加明显。</p>
 <p>因此UI团队可以以“m、n”为标准，给出字符长短建议。例如某处按键的长度为“mmmmmmn”。此时译员不论是用什么样的字体或表达，只需和“mmmmmmn”进行长度比较即可判断是否存在超框风险</p>
-<h3 id="本地化翻译阶段">本地化翻译阶段</h3>
-<p>方法一：<br>
-有条件的话译员需要对游戏熟悉，能从文本的内容大致推出是出现在标语（可容纳较长文本）还是出现在按钮上（较短文本）</p>
-<p>方法二：<br>
-玩家有通用认知的地方都转成速写，比如有：伤害-damage-DMG；攻击-attack-ATK；经验值-experience-EXP等。</p>
-<p>方法三：<br>
-分割句子，在本地化过程中减少连词、介词的使用。  例如下面这句话的翻译：</p>
-<p>奥义状态下再造成100点伤害提升至第3级。</p>
-<ul>
-<li>
-<p>Dealing 100 damage by Hero’s Ultimate state and then raising to level 3.</p>
-</li>
-<li>
-<p>Upgrade to Lv.3: Deal 100 more damage by Hero’s Ultimate</p>
-</li>
-</ul>
-<p>这个翻译就将本身复杂的表达分割为两句话，避免使用冗长难懂的复合句</p>
+<h3 id="字体的分类">字体的分类</h3>
+<p>字体的分类可分为“衬线体与非衬线体”。通俗来说，衬线又被称为“字脚”，衬线体 (Serif) 就是有边角装饰的字体。由下图可以清楚地发现，同等字号下，棱角分明的非衬线体看上去比衬线体更大、结构更清晰。</p>
+<img src="/2023/10/15/UI-kit-3/font.png" title="Figure 1">
+<p>在选用字体时有一些默认的规范。例如，长文阅读或小屏幕信息展示更偏好使用非衬线字体；而标题或者小篇幅文本，更偏爱衬线字体来提升短句美感。</p>
+<h3 id="一些字体的qa">一些字体的QA</h3>
+<blockquote>
+<p>OTF、TTF、TTC 字体有什么区别？</p>
+</blockquote>
+<ol>
+<li>TTC 字体就是多个字体（可以是 TTF 或 OTF）的集合。</li>
+<li>OTF 字体具有理论上更好的曲线和一些高级特性，但是目前已知完整支持 OTF 高级特性的软件就只有 Adobe 系列和 C4D、Maya 等专业设计软件。我们常用的字幕渲染器 libass 和 VSFilter 不支持 OTF 字体的加粗，就算你在字幕中设置了加粗，如果你装的是 OTF 字体，显示效果也是不加粗的，只有少数字体（如思源黑体、思源宋体、方正雅士黑等）在字幕中设置加粗时会自动调用 Bold 字重的字体，这些字体的特点是 Regular 字重和 Bold 字重在字体下拉列表中同名，</li>
+<li>同一个字号的 OTF 字体会比 TTF 字体小。所以我们推荐在一个字体同时具有 OTF 和 TTF 两个版本时，优先安装和使用 TTF 版本。</li>
+</ol>
+<blockquote>
+<p>CJK 版和地区版有什么区别？</p>
+</blockquote>
+<p>同一个汉字，大陆、台湾、香港、日本、韩国等不同地区的写法可能是不一样的。</p>
+<p>CJK 版本就是包含了简、繁、日、韩全部字符，但是碰到不同地区写法不同的汉字的时候会优先显示其中一个地区的字形的版本，地区版就是只包含这个地区的字符的版本。</p>
+<p>另外，香港繁体的字形标准是有过修订的，所以在字体包中还分了新字形和旧字形。</p>
 
                 
 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2023/11/05/UI-kit-4/" data-toggle="tooltip" data-placement="top" title="UGUI优化：本地化-字体篇">&larr; Previous Post</a>
-                        </li>
                     
                     
                         <li class="next">
@@ -296,7 +309,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#语言选择"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">语言选择</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#最常见的ui问题-超框"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">最常见的UI问题-超框</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#西方语言"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">西方语言</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#东方语言"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">东方语言</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#解决方案"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">解决方案</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#开发初始阶段"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">开发初始阶段</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#分辨率对于文字长度的影响"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">分辨率对于文字长度的影响</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#字体的影响"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">字体的影响</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#本地化翻译阶段"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">本地化翻译阶段</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#语言选择"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">语言选择</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#语言问题"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">语言问题</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#解决方案"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">解决方案</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#字体的影响"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">字体的影响</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#字体的分类"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">字体的分类</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#一些字体的qa"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">一些字体的QA</span></a></li></ol></li></ol>
         
         </div>
       </aside>
