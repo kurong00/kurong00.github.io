@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/header.jpg">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          小潮食记 - Kurong
+        
+    </title><meta name="robots" content="noindex">
+
+    <link rel="canonical" href="https://chenwenling.cn/2024/12/22/dairy-06/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
+<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('header.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#大固其其" title="大固其其">大固其其</a>
+                            
+                        </div>
+                        <h1>小潮食记</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Kurong on
+                            2024-12-22
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Kurong</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+        <div id="aplayer-wKKiXyLH" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content">[00:09.960]네모난 화면 헤치며
+[00:09.960]走出四方的屏幕
+[00:14.520]살며시 다가와
+[00:14.520]悄悄靠近
+[00:18.790]은빛의 환상 심어준 그녀는
+[00:18.790]银色幻想般的她是
+[00:22.920]나만의 작은요정
+[00:22.920]只属于我的小精灵
+[00:27.550]이른아침 안개처럼
+[00:27.550]如同清晨的雾气一般
+[00:31.690]내게로 다가와
+[00:31.690]向我走来
+[00:35.870]너울거리는 긴머리
+[00:35.870]翩翩的长发
+[00:39.700]부드런 미소로 속삭이네
+[00:39.700]带着温柔笑意的细语
+[00:46.040]그녀만 보면 외롭지 않아
+[00:46.040]只要看着她便不寂寞
+[00:54.470]슬픈 마음도 멀리 사라져
+[00:54.470]悲伤的心也远去
+[01:03.030]그녀는 나의 샴푸의 요정
+[01:03.030]她是我的香波精灵
+[01:11.750]이제는 너를 사랑할꺼야
+[01:11.750]我现在 要爱你了
+[01:38.540]이른아침 안개처럼
+[01:38.540]如同清晨的雾气一般
+[01:43.170]내게로 다가와
+[01:43.170]向我走来
+[01:47.590]너울거리는 긴머리
+[01:47.590]翩翩的长发
+[01:50.900]부드런 미소로 속삭이네
+[01:50.900]带着温柔笑意的细语
+[01:57.440]그녀만 보면 외롭지 않아
+[01:57.440]只要看着她便不寂寞
+[02:05.940]슬픈 마음도 멀리 사라져
+[02:05.940]悲伤的心也远去
+[02:14.400]그녀는 나의 샴푸의 요정
+[02:14.400]她是我的香波精灵
+[02:23.080]이제는 너를 사랑할꺼야
+[02:23.080]我现在 要爱你了
+[02:33.090]멀리서 나홀로 바라보던
+[02:33.090]远处我独自守望的
+[02:41.520]그녀는 언제나 나의 꿈
+[02:41.520]她永远是我的梦
+[03:06.610]그녀만 보면 외롭지 않아
+[03:06.610]只要看着她便不寂寞
+[03:15.170]슬픈 마음도 멀리 사라져
+[03:15.170]悲伤的心也远去
+[03:23.620]그녀는 나의 샴푸의 요정
+[03:23.620]她是我的香波精灵
+[03:32.330]이제는 너를 사랑할꺼야
+[03:32.330]我现在 要爱你了</pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-wKKiXyLH"),
+            narrow: false,
+            autoplay: false,
+            showlrc: 2,
+            music: {
+              title: "샴푸의 요정（香波精灵）",
+              author: "빛과소금",
+              url: "샴푸의-요정.mp3",
+              pic: "/2024/12/22/dairy-06/샴푸의-요정.jpg",
+              lrc: "샴푸의-요정.lrc"
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+<p>下半年错峰出游目的地选在了潮汕，计划出行实在是一项劳心费神的工作，好在我们的主要目的是吃，</p>
+<p>潮汕是潮州和汕头两个城市的总称，两个地方离得很近（大约1小时的车程），我们先到的汕头，下飞机后打了个起步价到本地人推荐的牛肉火锅大排档，店面奇小，只能放下三张四人桌，但是我们深知中华美食大隐隐于市，拎着行李箱就赶紧进店落座。老板梳着潮流的大背头外加挑染，在案台背后片牛肉，老板娘热情开朗招呼我们点单，我一看桌上也没有二维码</p>
+<p>四处张望问：「在哪扫码点餐？」</p>
+<p>老板娘从案台上拿来一张战损级别的菜单和纸笔，给我们介绍，价格都很便宜，我和姐姐准备每份都来一样：牛肉丸/匙仁/吊龙/胸口油/五花趾/嫩肉…</p>
+<p>老板娘自信的阻止：「你们吃不完的」</p>
+<p>我挺直了腰杆：「我们能行！」，然后马上老实：都上小份即可（😌）</p>
+<p>老板娘写完菜单就给我们上锅底，看样子是一个朴实无华的铁盆，里面飘着点提鲜的肉片、萝卜和一些配菜，卖相朴素到有点潦草了，这能好吃吗？我舀上一碗汤，喝一口就要为我刚刚的傲慢刚到羞愧，高端的食材只需要最普通的烹饪方式（播音腔），老板片好一盘牛肉麻溜的放桌上让我们慢用，牛肉好咬又够嚼劲，正畸牙齿也能轻松吃完，胸口油更是一绝，平常点单我是不会点这个品类，只是本着来都来了就多点不同类型的牛部位，这里的胸口油既弹牙又有油脂的香气，比吊龙嫩肉这些纯肉多了油香但又不至于腻味，是我从前错怪了胸口油（九十度鞠躬道歉）。吃完不敢多留恋，结完账打个顺风车直奔酒店去了，在车上姐姐叮嘱————</p>
+<p>姐姐：「留点肚子，接下来都是一天吃八顿的日子。」</p>
+<p>我：「好的！」（小手敬礼）</p>
+<p>入住酒店，轻装上阵就出发汕头旅社</p>
+<img src="/2024/12/22/dairy-06/01.jpg">
+<img src="/2024/12/22/dairy-06/02.jpg">
+<p>评价是十分一般，也没什么好吃的，在步行街上选了一家生腌店，以防有诈只点了份白虾生腌，后来证明实在是明智之举，比起节省花销更重要的是保存金贵的肚子存量，和姐姐拍照留念后赶往下一站。</p>
+<img src="/2024/12/22/dairy-06/03.jpg">
+<p>前面的汕头旅社属于地标，但我对这类本来期待值也不大，重点当然是去知名的龙眼南路嗨吃</p>
+<img src="/2024/12/22/dairy-06/04.jpg">
+<p>我在师傅摊位旁边眼巴巴的等，新鲜的蚝酪都是一口爆浆，街头小吃的美味就在于新鲜出炉就能马上送入口</p>
+<img src="/2024/12/22/dairy-06/05.jpg">
+<p>各种形式的蚝酪，食材新鲜很难做的难吃</p>
+<img src="/2024/12/22/dairy-06/06.jpg">
+<p>第二日转战潮州</p>
+<p>去了潮人码头<s>当潮人</s>，天气极好人还少，静静地晒了会太阳，前一天特种兵行程还是给我这样的老年人累着了，忙里偷闲休息会。</p>
+<img src="/2024/12/22/dairy-06/07.jpg">
+<p>搜索了一家评分高的鱼生，打车出发去店里，本次旅行除牛肉火锅大排档之外最好吃的一顿出现了，除了鱼生我们还点了虾生蟹生，有点像本土版本的日料，店家搭配的鱼粥味道非常鲜美，又能中和其他生食的寒气。</p>
+<img src="/2024/12/22/dairy-06/08.jpg">
+<img src="/2024/12/22/dairy-06/09.jpg">
+<p>其余的生腌、海鲜粥、烧鹅、鲜牛肉、果捞、肠粉属于是忙吃不踩雷水平，但是两天吃的太多已经开始麻木…</p>
+<img src="/2024/12/22/dairy-06/10.jpg">
+<p>临要去机场的路上，抓紧时间又吃了碗鸭母捻和无米馃当早餐，等到飞机上，表面风平浪静的看kindle，实则已经撑到嗓子眼，当时以为只是多吃了，哪里想到命运的馈赠早已标好了价码 <s>比如隔天就去消化科报到</s></p>
+<!-- flag of hidden posts -->
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#大固其其" title="大固其其">大固其其</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "kurong00";
+    var disqus_identifier = "https://chenwenling.cn/2024/12/22/dairy-06/";
+    var disqus_url = "https://chenwenling.cn/2024/12/22/dairy-06/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: '>'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/kurong00">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Kurong 2024 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://chenwenling.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://chenwenling.cn/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
