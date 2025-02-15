@@ -1,0 +1,34 @@
+/* 移动端头图样式优化 */
+@media only screen and (max-width: 767px) {
+    .intro-header {
+        background-position: center center;
+        background-size: cover;
+        height: auto;
+        min-height: 200px;
+        margin-bottom: 10px;
+    }
+
+    .intro-header .site-heading,
+    .intro-header .post-heading,
+    .intro-header .page-heading {
+        padding: 40px 0 20px;
+    }
+
+    .intro-header .site-heading h1,
+    .intro-header .page-heading h1 {
+        font-size: 30px;
+        margin-top: 0;
+    }
+
+    .intro-header .site-heading .subheading,
+    .intro-header .page-heading .subheading {
+        font-size: 16px;
+        margin-top: 5px;
+    }
+
+    /* 确保图片适当缩放 */
+    .intro-header {
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+    }
+}

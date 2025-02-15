@@ -1,18 +1,11 @@
 ---
 title: 亚运游逛记录
-catalog: true
 date: 2023-10-29 16:32:52
+categories: 大固其其
 tags: 大固其其
-hidden: true
+catalog: false
 header-img: header.jpg
 ---
-
-<link rel="stylesheet" href="/dist/APlayer.min.css">
-<script src="/dist/APlayer.min.js"></script>
-
-<div class="aplayer" data-id="376648" data-server="netease" data-type="song" loop='all' mini=true> </div>
-
-<script src="/dist/Meting.min.js"></script>
 
 亚运会结束有一段时间，作为大赛型观众，如果不是恰巧在杭州举办，大概也不会千里迢迢奔赴一个陌生的城市看比赛。年中的时候，虽然街道两旁都已经贴上了亚运会标语，冷不丁也会发现红绿灯的小人变成莲莲魔性的微笑；但作为普通市民，大概还是居委会的阿姨拿着喇叭排查人口信息更有亚运就要开始的意味。
 
