@@ -15,7 +15,14 @@
 
     <url>
         <loc>https://chenwenling.cn/categories/UGUI/</loc>
-        <lastmod>2022-12-11T15:09:50.228Z</lastmod>
+        <lastmod>2022-12-11T14:45:13.253Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://chenwenling.cn/categories/%E5%A4%A7%E5%9B%BA%E5%85%B6%E5%85%B6/</loc>
+        <lastmod>2025-02-15T04:09:50.173Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
