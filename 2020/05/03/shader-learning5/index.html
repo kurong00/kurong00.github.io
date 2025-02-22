@@ -140,13 +140,6 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -155,6 +148,13 @@
                         
                         <li>
                             <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -210,30 +210,30 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="前言">前言</h2>
+                <h2><span id="前言">前言</span></h2>
 <p>透明渲染是是图形学里面的常见问题之一，对于渲染算法，可以大致分为基于光和基于视图的效果。基于光的效果是指物体使得灯光衰减或改变方向，从而导致场景中的其他物体以不同方式被照明和渲染的效果。基于视图的效果是指在其中渲染半透明对象本身的效果。</p>
 <a id="more"></a>
-<h2 id="透明渲染方法">透明渲染方法</h2>
+<h2><span id="透明渲染方法">透明渲染方法</span></h2>
 <p>以下两种方法是比较常用的透明渲染方法：</p>
-<h3 id="screen-door-transparency-方法">Screen-Door Transparency 方法</h3>
+<h3><span id="screen-door-transparency-方法">Screen-Door Transparency 方法</span></h3>
 <p>基本思想是用棋盘格填充模式来绘制透明多边形；也就是说，以每隔一个像素绘制一点方式的来绘制一个多边形，这样会使在其后面的物体部分可见，通常情况下，屏幕上的像素比较紧凑，所以这种棋盘格的绘制方式并不会露馅。同样的想法也用于剪切纹理的抗锯齿边缘，但是在子像素级别中的，这是一种称为 alpha 覆盖（alpha to coverage）的特征。screen-door transparency 方法的优点就是简单，可以在任何时间任何顺序绘制透明物体，并不需要特殊的硬件支持（只要支持填充模式）。缺点是透明度效果仅在 <strong>50%</strong> 时最好，且屏幕的每个区域中只能绘制一个透明物体。</p>
-<h3 id="alpha-blending-方法">Alpha Blending 方法</h3>
+<h3><span id="alpha-blending-方法">Alpha Blending 方法</span></h3>
 <p>这个方法比较常见，其实就是按照 Alpha 混合向量的值来混合源像素和目标像素。当在屏幕上绘制某个物体时，与每个像素相关联的值有 RGB 颜色、Z 缓冲深度值，以及另外一个成分 alpha 分量，这个 alpha 值也可以根据需要生成并存储，它描述的是给定像素的对象片段的不透明度的值。alpha 为 1.0 表示对象不透明，完全覆盖像素所在区域；0.0 表示像素完全透明。为了使对象透明，在现有场景的上方，以小于 1 的透明度进行绘制即可。每个像素将从渲染管线接收到一个 RGBA 结果，并将这个值和原始像素颜色相混合。注意透明度混合要关闭深度写入。这是因为：假如一个半透明物体在一个不透明物体的前面，如果开启深度写入的话，距离摄像机更远的不透明物体就会被剔除，但是依照常理我们是可以透过半透明的物体看到不透明的物体。但是这就破坏了深度缓冲的机制，关闭深度写入是非常不好但是不得不做的折中方法，也因此使得渲染顺序变得非常重要。（注意：关闭深度写入，但是没有关闭深度测试）用公式来表明即：<br>
 $$c_0 = \alpha_s c_s + (1 - \alpha_s)c_d$$</p>
 <p>其中 $c_s$ 是透明物体的颜色；$\alpha_s$ 是物体的透明度；$c_d$ 是混合之前的颜色；$c_0$ 是最终的结果颜色。</p>
-<h2 id="透明排序">透明排序</h2>
+<h2><span id="透明排序">透明排序</span></h2>
 <p>我们可以不关心不透明物体的渲染顺序，因为在深度测试中就可以测试出物体离摄像机的距离再判断是否写入颜色缓冲。但是对于不透明物体，就没这么简单了，一个很自然的问题就是：如果场景中有非常多的物体，彼此之间有互相遮挡的情况，要将半透明物体正确地渲染到场景中，通常需要对物体进行排序。下面介绍几种常用的透明排序方法。</p>
-<h3 id="z-buffer-深度缓存">Z-Buffer 深度缓存</h3>
+<h3><span id="z-buffer-深度缓存">Z-Buffer 深度缓存</span></h3>
 <p>Z-Buffer 也称深度缓冲。在计算机图形学中，深度缓冲是在三维图形中处理图像深度坐标的过程，这个过程通常在硬件中完成，它也可以在软件中完成，它是可见性问题的一个解决方法（可见性问题是确定渲染场景中哪部分可见、哪部分不可见的问题）。</p>
 <p>Z-buffer 的限制是每像素只存储一个对象，如果一些透明对象与同一个像素重叠，那么单独的 Z-buffer 就不能存储。这个问题可以通过改变加速器架构来解决的，比如用 A-buffer。A-buffer 具有 深度像素（deep pixels），其可以在单个像素中存储一系列呈现在所有对象之后被解析为单个像素颜色的多个片段。但需注意，Z-buffer 是市场的主流选择。</p>
-<h3 id="painters-algorithm-画家算法">Painter’s Algorithm 画家算法</h3>
+<h3><span id="painters-algorithm-画家算法">Painter’s Algorithm 画家算法</span></h3>
 <p>画家算法也称优先填充算法，效率虽然较低，但还是可以有效处理透明排序的问题。其基本思想是按照画家在绘制一幅画作时，首先绘制距离较远的场景，然后用绘制距离较近的场景覆盖较远的部分的思想。画家算法首先将场景中的多边形根据深度进行排序，然后按照顺序进行描绘。这种方法通常会将不可见的部分覆盖，这样就可以解决可见性问题。</p>
-<h3 id="weighted-average-加权平均值算法">Weighted Average 加权平均值算法</h3>
+<h3><span id="weighted-average-加权平均值算法">Weighted Average 加权平均值算法</span></h3>
 <p>使用简单的透明混合公式来实现无序透明渲染的算法，它通过扩展透明混合公式，来实现无序透明物件的渲染，从而得到一定程度上逼真的结果。</p>
-<h3 id="depth-peeling-深度剥离算法">Depth Peeling 深度剥离算法</h3>
+<h3><span id="depth-peeling-深度剥离算法">Depth Peeling 深度剥离算法</span></h3>
 <p>深度剥离是一种对深度值进行排序的技术。它的原理比较直观，标准的深度检测使场景中的 Z 值最小的点输出到屏幕上，就是离我们最近的顶点。但还有离我们第二近的顶点，第三近的顶点存在。要想显示它们，可以用多遍渲染的方法。第一遍渲染时，按照正常方式处理，这样就得到了离我们最近的表面中的每个顶点的 z 值。在第二遍渲染时，把现在每个顶点深度值和刚才的那个深度值进行比较，凡是小于等于第一遍得到的 z 值，把它们剥离，后面的过程依次类推即可。<br>
-<img src="//chenwenling.cn/2020/05/03/shader-learning5/1.png" alt="Figure 1 每个深度剥离通道渲染特定的一层透明通道。左侧是第一个 Pass，直接显示眼睛可见的层，中间的图显示了第二层，显示了每个像素处第二靠近透明表面的像素。右边的图是第三层，每个像素处第三靠近透明表面的像素。"></p>
-<h3 id="解决方案">解决方案</h3>
+<img src="/.cn//1.png" alt="Figure 1 每个深度剥离通道渲染特定的一层透明通道。左侧是第一个 Pass，直接显示眼睛可见的层，中间的图显示了第二层，显示了每个像素处第二靠近透明表面的像素。右边的图是第三层，每个像素处第三靠近透明表面的像素。"></p>
+<h3><span id="解决方案">解决方案</span></h3>
 <p>我们考虑两种情况：</p>
 <ul>
 <li>既有半透明物体也有不透明物体：我们先渲染所有的不透明物体再渲染半透明物体</li>
@@ -244,7 +244,7 @@ $$c_0 = \alpha_s c_s + (1 - \alpha_s)c_d$$</p>
 </ul>
 </li>
 </ul>
-<h2 id="unity设置的渲染序列">Unity设置的渲染序列</h2>
+<h2><span id="unity设置的渲染序列">Unity设置的渲染序列</span></h2>
 <p>之前的查看 shader 我们曾经见过这样的语句</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Tags &#123; <span class="string">"RenderType"</span>=<span class="string">"Opaque"</span> &#125;</span><br></pre></td></tr></table></figure>
 <p>我们可以用Queue标签来决定我们的模型是怎么渲染的。</p>
@@ -284,13 +284,13 @@ $$c_0 = \alpha_s c_s + (1 - \alpha_s)c_d$$</p>
 </tr>
 </tbody>
 </table>
-<h3 id="代码设置">代码设置</h3>
+<h3><span id="代码设置">代码设置</span></h3>
 <p>如果我们想要通过透明度混合来实现半透明效果，代码如下</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">SubShader</span><br><span class="line">   &#123;</span><br><span class="line">       Tags &#123; <span class="string">"RenderType"</span>=<span class="string">"Transparent"</span> &#125;  </span><br><span class="line">       Pass &#123;</span><br><span class="line">           ZWrite Off ······</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <p>ZWrite Off 意味者关闭深度写入，或者可以：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">SubShader</span><br><span class="line">   &#123;</span><br><span class="line">       Tags &#123; <span class="string">"RenderType"</span>=<span class="string">"Transparent"</span> &#125;  </span><br><span class="line">       ZWrite Off ······</span><br><span class="line">       Pass &#123; &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <p>这样表示这个SubShader下的所有Pass都会关闭深度写入</p>
-<h2 id="结语">结语</h2>
+<h2><span id="结语">结语</span></h2>
 <p>下一篇我们就运用这些理论开始写第一个半透明的shader</p>
 
                 
@@ -335,7 +335,7 @@ $$c_0 = \alpha_s c_s + (1 - \alpha_s)c_d$$</p>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#透明渲染方法"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">透明渲染方法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#screen-door-transparency-方法"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Screen-Door Transparency 方法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#alpha-blending-方法"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Alpha Blending 方法</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#透明排序"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">透明排序</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#z-buffer-深度缓存"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Z-Buffer 深度缓存</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#painters-algorithm-画家算法"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Painter’s Algorithm 画家算法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#weighted-average-加权平均值算法"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Weighted Average 加权平均值算法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#depth-peeling-深度剥离算法"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">Depth Peeling 深度剥离算法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#解决方案"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">解决方案</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#unity设置的渲染序列"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Unity设置的渲染序列</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#代码设置"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">代码设置</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#结语"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">结语</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">透明渲染方法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Screen-Door Transparency 方法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Alpha Blending 方法</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">透明排序</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Z-Buffer 深度缓存</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Painter’s Algorithm 画家算法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Weighted Average 加权平均值算法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">Depth Peeling 深度剥离算法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">解决方案</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Unity设置的渲染序列</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">代码设置</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">结语</span></a></li></ol>
         
         </div>
       </aside>

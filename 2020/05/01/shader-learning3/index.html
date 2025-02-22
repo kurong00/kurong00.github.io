@@ -140,13 +140,6 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -155,6 +148,13 @@
                         
                         <li>
                             <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -210,23 +210,23 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="新建shader">新建Shader</h2>
+                <h2><span id="新建shader">新建Shader</span></h2>
 <p>首先我们新建一个Shader，这里以 Standard Surface Shader 为例，新建之后我们打开Shader文件应该会出现如下代码：</p>
 <a id="more"></a>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Shader <span class="string">"Custom/NewSurfaceShader"</span></span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _Color (<span class="string">"Color"</span>, Color) = (<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">        _MainTex (<span class="string">"Albedo (RGB)"</span>, <span class="number">2</span>D) = <span class="string">"white"</span> &#123;&#125;</span><br><span class="line">        _Glossiness (<span class="string">"Smoothness"</span>, Range(<span class="number">0</span>,<span class="number">1</span>)) = <span class="number">0.5</span></span><br><span class="line">        _Metallic (<span class="string">"Metallic"</span>, Range(<span class="number">0</span>,<span class="number">1</span>)) = <span class="number">0.0</span></span><br><span class="line">    &#125;</span><br><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        Tags &#123; <span class="string">"RenderType"</span>=<span class="string">"Opaque"</span> &#125;</span><br><span class="line">        LOD <span class="number">200</span></span><br><span class="line"></span><br><span class="line">        CGPROGRAM</span><br><span class="line">        <span class="comment">// Physically based Standard lighting model, and enable shadows on all light types</span></span><br><span class="line">        #pragma surface surf Standard fullforwardshadows</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Use shader model 3.0 target, to get nicer looking lighting</span></span><br><span class="line">        #pragma target <span class="number">3.0</span></span><br><span class="line"></span><br><span class="line">        sampler2D _MainTex;</span><br><span class="line"></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Input</span></span></span><br><span class="line"><span class="class">        &#123;</span></span><br><span class="line">            float2 uv_MainTex;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        half _Glossiness;</span><br><span class="line">        half _Metallic;</span><br><span class="line">        fixed4 _Color;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.</span></span><br><span class="line">        <span class="comment">// See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.</span></span><br><span class="line">        <span class="comment">// #pragma instancing_options assumeuniformscaling</span></span><br><span class="line">        UNITY_INSTANCING_BUFFER_START(Props)</span><br><span class="line">            <span class="comment">// put more per-instance properties here</span></span><br><span class="line">        UNITY_INSTANCING_BUFFER_END(Props)</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">surf</span> <span class="params">(Input IN, inout SurfaceOutputStandard o)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="comment">// Albedo comes from a texture tinted by color</span></span><br><span class="line">            fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;</span><br><span class="line">            o.Albedo = c.rgb;</span><br><span class="line">            <span class="comment">// Metallic and smoothness come from slider variables</span></span><br><span class="line">            o.Metallic = _Metallic;</span><br><span class="line">            o.Smoothness = _Glossiness;</span><br><span class="line">            o.Alpha = c.a;</span><br><span class="line">        &#125;</span><br><span class="line">        ENDCG</span><br><span class="line">    &#125;</span><br><span class="line">    FallBack <span class="string">"Diffuse"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>emmm…即使你有编程的基础也可能看的一头雾水，现在就来逐行查看代码。</p>
-<h2 id="逐行查看">逐行查看</h2>
+<h2><span id="逐行查看">逐行查看</span></h2>
 <p>接下来我们讲逐句讲解这个Shader，弄懂每一个语句的意义。</p>
-<h3 id="shader名称路径">Shader名称路径</h3>
+<h3><span id="shader名称路径">Shader名称路径</span></h3>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Shader <span class="string">"Custom/NewSurfaceShader"</span></span><br></pre></td></tr></table></figure>
 <p>首先这里标注了Shader的名字和路径，符号 “/” 表示的是创建子层级，我们可以进行修改，例如这里修改为</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Shader <span class="string">"MyShader/FirstShader"</span></span><br></pre></td></tr></table></figure>
-<p>我们用这个Shader新建一个材质，可以看见Shader的层级就像我们设置的这样</p>
-<img src="/2020/05/01/shader-learning3/1.png" title="Figure 1">
-<p>这里有一个注意点：如果我们把路径名称放在 Hidden下面的话，比如：</p>
+<p>我们用这个Shader新建一个材质，可以看见Shader的层级就像我们设置的这样<br>
+<img src="/.cn//1.png" alt="Figure 1"><br>
+这里有一个注意点：如果我们把路径名称放在 Hidden下面的话，比如：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Shader <span class="string">"Hidden/MyShader/FirstShader"</span></span><br></pre></td></tr></table></figure>
 <p>则表示在材质面板中隐藏此Shader，你将无法通过材质下拉列表中找到它。这样可以使Shader下拉列表更精简整洁，或者做一些不需暴露的Shader时很有用处。</p>
-<h3 id="shader属性">Shader属性</h3>
+<h3><span id="shader属性">Shader属性</span></h3>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Properties</span><br><span class="line">&#123;</span><br><span class="line">    _Color (<span class="string">"Color"</span>, Color) = (<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">    _MainTex (<span class="string">"Albedo (RGB)"</span>, <span class="number">2</span>D) = <span class="string">"white"</span> &#123;&#125;</span><br><span class="line">    _Glossiness (<span class="string">"Smoothness"</span>, Range(<span class="number">0</span>,<span class="number">1</span>)) = <span class="number">0.5</span></span><br><span class="line">    _Metallic (<span class="string">"Metallic"</span>, Range(<span class="number">0</span>,<span class="number">1</span>)) = <span class="number">0.0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里是shader的属性部分：属性的格式写作如下</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">[Attribute]_Name (<span class="string">"Display Name"</span>,Type) = Default Value</span><br></pre></td></tr></table></figure>
@@ -237,7 +237,7 @@
 <li>Type：类型，可能的type所表示的内容有以下几种：</li>
 <li>Default Value：上面类型的默认值</li>
 </ul>
-<h4 id="属性分类">属性分类</h4>
+<h4><span id="属性分类">属性分类</span></h4>
 <table>
 <thead>
 <tr>
@@ -298,7 +298,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="类型分类">类型分类</h4>
+<h4><span id="类型分类">类型分类</span></h4>
 <table>
 <thead>
 <tr>
@@ -345,7 +345,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="shader-tags">Shader Tags</h3>
+<h3><span id="shader-tags">Shader Tags</span></h3>
 <p>Tags用来告诉渲染器：何时以及怎样渲染这个对象。详细内容可以查看<a href="https://docs.unity3d.com/Manual/SL-PassTags.html" target="_blank" rel="noopener">官方文档</a></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Tags &#123; <span class="string">"RenderType"</span>=<span class="string">"Opaque"</span> &#125;</span><br></pre></td></tr></table></figure>
 <table>
@@ -403,7 +403,7 @@
 <li>Overlay - 用来渲染叠加的效果，是渲染的最后阶段（比如镜头光晕等特效）</li>
 </ul>
 <p>这些预定义的值本质上是一组定义整数，Background = 1000， Geometry = 2000, AlphaTest = 2450， Transparent = 3000，最后Overlay = 4000。在我们实际设置Queue值时，不仅能使用上面的几个预定义值，我们也可以指定自己的Queue值，写成类似这样：“Queue” = “Transparent+100”，表示一个在Transparent之后100的Queue上进行调用。通过调整Queue值，我们可以确保某些物体一定在另一些物体之前或者之后渲染，这个技巧有时候很有用处。</p>
-<h3 id="lodlevel-of-detail">LOD：Level of Detail</h3>
+<h3><span id="lodlevel-of-detail">LOD：Level of Detail</span></h3>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">LOD <span class="number">200</span></span><br></pre></td></tr></table></figure>
 <p>这个数值决定了我们能用什么样的Shader。当设定的LOD小于SubShader所指定的LOD时，这个SubShader就不可以用了。Unity自定义了一组LOD的数值，我们在实现自己的Shader的时候可以参考来设定自己的LOD数值，以便控制渲染。</p>
 <table>
@@ -444,7 +444,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="shader主体代码">Shader主体代码</h3>
+<h3><span id="shader主体代码">Shader主体代码</span></h3>
 <p>终于到了最重要的部分，首先<code>CGPROGRAM</code>和<code>ENDCG</code>成对出现，表示中间包裹的是一段Cg程序，接着是一个编译指令：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> surface surf Standard fullforwardshadows</span></span><br></pre></td></tr></table></figure>
 <p>意味着我们要写一个表面Shader，并指定了光照模型，具体语法是</p>
@@ -467,7 +467,7 @@
 <p>都是同样的道理。回到原来的地方，下一句是:</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Input</span> &#123;</span></span><br><span class="line">    float2 uv_MainTex;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>如果你有编程的经历，那么结构体应该很熟悉了，这一段我们结合下面的surf一起来说</p>
-<h4 id="表面着色器">表面着色器</h4>
+<h4><span id="表面着色器">表面着色器</span></h4>
 <p>先来看 surf 的代码：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">surf</span> <span class="params">(Input IN, inout SurfaceOutputStandard o)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="comment">// Albedo comes from a texture tinted by color</span></span><br><span class="line">            fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;</span><br><span class="line">            o.Albedo = c.rgb;</span><br><span class="line">            <span class="comment">// Metallic and smoothness come from slider variables</span></span><br><span class="line">            o.Metallic = _Metallic;</span><br><span class="line">            o.Smoothness = _Glossiness;</span><br><span class="line">            o.Alpha = c.a;</span><br><span class="line">        &#125;</span><br><span class="line">        ENDCG</span><br></pre></td></tr></table></figure>
 <p>上文提到的 surf 函数就是对应这一段。我们看函数头输入的参数有Input IN，这个Input就对应上面的结构体。我们可以把所需要参与计算的数据都放到这个Input结构中，再传入surf函数使用；<strong>SurfaceOutputStandard</strong> 是已经定义好了里面类型输出结构。作为输入的结构体<strong>必须命名为Input</strong>，这个结构体中定义了一个float2的变量，你可能会感到奇怪float后面跟着数字，这是什么意思呢？其实float和vec都可以在之后加入一个2到4的数字，来表示被打包在一起的2到4个同类型数。比如：</p>
@@ -481,10 +481,10 @@
 <p>都是用到上头Properties中我们定义的变量来赋值材质中的 Metallic 和 smoothness</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">o.Alpha = c.a;</span><br></pre></td></tr></table></figure>
 <p>将a值赋予透明度。至此surf介绍完毕，这个例子中shader最重要的部分就是以上这些啦！</p>
-<h4 id="fallback">FallBack</h4>
+<h4><span id="fallback">FallBack</span></h4>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">FallBack <span class="string">"Diffuse"</span></span><br></pre></td></tr></table></figure>
 <p>当所有上面的SubShader都不可以在目标平台上运行时，Unity就会调用这个shader，当然你也可以关闭这个选项，那就意味着如果没有显卡可以运行上面的shader，我们也不管它。</p>
-<h2 id="结语">结语</h2>
+<h2><span id="结语">结语</span></h2>
 <p>这是最简单最简单的模板shader，看到这里的你应该可以查看一些简单的shader了，可以去Unity的<a href="https://docs.unity3d.com/Manual/SL-SurfaceShaderExamples.html" target="_blank" rel="noopener">Surface Shader Exampless</a>上查看一些基础shader的编写内容，下一篇我们会开始第一个shader的编写。</p>
 
                 
@@ -529,7 +529,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#新建shader"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">新建Shader</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#逐行查看"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">逐行查看</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#shader名称路径"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Shader名称路径</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#shader属性"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Shader属性</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#属性分类"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">属性分类</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#类型分类"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">类型分类</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#shader-tags"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Shader Tags</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#lodlevel-of-detail"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">LOD：Level of Detail</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#shader主体代码"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">Shader主体代码</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#表面着色器"><span class="toc-nav-number">2.5.1.</span> <span class="toc-nav-text">表面着色器</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#fallback"><span class="toc-nav-number">2.5.2.</span> <span class="toc-nav-text">FallBack</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#结语"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">结语</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">新建Shader</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">逐行查看</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Shader名称路径</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Shader属性</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">属性分类</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">类型分类</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Shader Tags</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">LOD：Level of Detail</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">Shader主体代码</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.5.1.</span> <span class="toc-nav-text">表面着色器</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.5.2.</span> <span class="toc-nav-text">FallBack</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">结语</span></a></li></ol>
         
         </div>
       </aside>
