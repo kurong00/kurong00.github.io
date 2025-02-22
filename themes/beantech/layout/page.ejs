@@ -4,14 +4,7 @@ layout: layout
 <!-- Main Content -->
 <div class="container">
     <div class="row">
-        <% if(config.sidebar == false) { %>
-<!-- NO SIDEBAR -->
-    <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-                <%- page.content || body %>
-            </div>
-        <%} else { %>
-
+        <% if(config.sidebar && is_home()) { %>
 <!-- USE SIDEBAR -->
     <!-- Sidebar Container -->
     <div class="col-lg-3 col-md-3 hidden-sm hidden-xs sidebar-container">
@@ -48,46 +41,51 @@ layout: layout
             </div>
             <!-- disqus 评论框 end -->
             <% } %>
-
-
-            <% if(config['duoshuo_username']) { %>
-            <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-            <script type="text/javascript">
-                // dynamic User by Hux
-                var _user = '<%= config['duoshuo_username'] %>';
-
-                // duoshuo comment query.
-                var duoshuoQuery = {short_name: _user };
-                (function() {
-                    var ds = document.createElement('script');
-                    ds.type = 'text/javascript';ds.async = true;
-                    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                    ds.charset = 'UTF-8';
-                    (document.getElementsByTagName('head')[0]
-                     || document.getElementsByTagName('body')[0]).appendChild(ds);
-                })();
-            </script>
-            <!-- 多说公共JS代码 end -->
-            <% } %>
-
-            <% if(config['disqus_username']) { %>
-            <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-            <script type="text/javascript">
-                /* * * CONFIGURATION VARIABLES * * */
-                var disqus_shortname = "<%= config['disqus_username'] %>";
-                var disqus_identifier = "<%= page.permalink %>";
-                var disqus_url = "<%= page.permalink %>";
-
-                (function() {
-                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-            </script>
-            <!-- disqus 公共JS代码 end -->
-            <% } %>
         <% } %>
     </div>
+        <%} else { %>
+<!-- NO SIDEBAR -->
+    <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+                <%- page.content || body %>
+            </div>
         <%} %>
     </div>
 </div>
+
+<% if(config['duoshuo_username']) { %>
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by Hux
+    var _user = '<%= config['duoshuo_username'] %>';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+<% } %>
+
+<% if(config['disqus_username']) { %>
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "<%= config['disqus_username'] %>";
+    var disqus_identifier = "<%= page.path %>";
+    var disqus_url = "<%= page.permalink %>";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+<% } %>
