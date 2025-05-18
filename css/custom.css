@@ -32,3 +32,9 @@
         background-repeat: no-repeat;
     }
 }
+
+/* 添加运动图标悬浮效果 */
+.about-content li:hover::before {
+    transform: scale(1.2);
+    transition: all 0.3s ease;
+}
