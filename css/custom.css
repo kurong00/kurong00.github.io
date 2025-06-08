@@ -28,7 +28,7 @@
 
     /* 确保图片适当缩放 */
     .intro-header {
-        background-size: 100% auto;
+        background-size: cover;  /* 修改为 cover */
         background-repeat: no-repeat;
     }
 }
