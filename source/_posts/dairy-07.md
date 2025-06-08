@@ -7,7 +7,7 @@ published: false
 header-img: header.jpg
 ---
 
-{% aplayer "粉雪" "レミオロメン" "粉雪.mp3" "粉雪.jpg" lrc:粉雪.lrc "autoplay" %}
+{% aplayer "粉雪" "レミオロメン" "粉雪.mp3" "粉雪.jpg" "autoplay" "lrc:粉雪.lrc" %}
 
 ## 哈圈大战乙游
 

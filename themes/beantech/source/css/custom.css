@@ -28,7 +28,123 @@
 
     /* 确保图片适当缩放 */
     .intro-header {
-        background-size: 100% auto;
+        background-size: cover;  /* 修改为 cover */
         background-repeat: no-repeat;
+    }
+}
+
+/* 全局字体设置 */
+body {
+    /* 更改主字体 */
+    font-family:  "apple-system",  "Segoe UI", Roboto, sans-serif;
+    /* 调整基本字号 */
+    font-size: 16px;
+    /* 调整行高 */
+    line-height: 2.0;
+    /* 调整字体颜色，稍微深一点 */
+    color: #414141;
+}
+
+/* 标题字体设置 */
+h1, h2, h3, h4, h5, h6 {
+    /* 标题可以使用不同的字体 */
+    font-family: apple-system;
+    font-weight: 700;
+    line-height: 2.0;
+    margin-top: 35px;
+    margin-bottom: 20px;
+}
+
+/* 各级标题大小调整 */
+h1 {
+    font-size: 32px;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+h5 {
+    font-size: 18px;
+}
+
+h6 {
+    font-size: 16px;
+}
+
+/* 段落间距调整 */
+p {
+    margin: 40px 0; /* 增加段落间距 */
+}
+
+/* 引用块样式优化 */
+blockquote {
+    border-left: 4px solid #0085a1;
+    background-color: rgba(0, 133, 161, 0.05);
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 3px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* 列表样式优化 */
+.post-container ul, 
+.post-container ol {
+    padding-left: 25px;
+    margin-bottom: 25px;
+}
+
+.post-container li {
+    margin-bottom: 8px;
+}
+
+/* 链接样式优化 */
+.post-container a {
+    color: #464646;
+    text-decoration: none;
+    border-bottom: 1px dotted #0085a1;
+    transition: all 0.3s ease;
+}
+
+.post-container a:hover {
+    color: #005f73;
+    border-bottom: 1px solid #005f73;
+}
+
+/* About 页面特别优化 */
+.about-page h2 {
+    font-size: 26px;
+    color: #0085a1;
+    margin-top: 40px;
+}
+
+.about-page p {
+    font-size: 17px;
+    line-height: 1.8;
+}
+/* 音乐播放器样式调整 */
+.post-container .aplayer,
+body .aplayer,
+.aplayer {  
+    margin: 15px 20px 100px 20px !important; /* 上右下左 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 4px !important;
+}
+
+/* 如果需要在移动设备上使用不同的间距 */
+@media only screen and (max-width: 767px) {
+    .post-container .aplayer,
+    body .aplayer,
+    .aplayer {
+        margin: 10px 10px 50px 10px !important; /* 移动设备上使用更小的间距 */
     }
 }

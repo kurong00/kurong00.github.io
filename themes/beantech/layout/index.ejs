@@ -14,7 +14,25 @@ layout: page
             <%- post.subtitle || "" %>
         </h3>
         <div class="post-content-preview">
-            <%- truncate(strip_html(post.content), {length: 800, omission: '...'}) %>...
+            <% 
+            // 在strip_html之前移除APlayer相关标签和生成的HTML内容
+            var content = post.content;
+            // 移除aplayer标签（单行格式）
+            content = content.replace(/{%\s*aplayer[^%}]*%}/g, '');
+            // 移除meting标签
+            content = content.replace(/{%\s*meting[^%}]*%}/g, '');
+            // 移除aplayerlrc标签对
+            content = content.replace(/{%\s*aplayerlrc[\s\S]*?{%\s*endaplayerlrc\s*%}/g, '');
+            // 移除aplayerlist标签对
+            content = content.replace(/{%\s*aplayerlist[\s\S]*?{%\s*endaplayerlist\s*%}/g, '');
+            // 移除APlayer生成的HTML结构
+            content = content.replace(/<div[^>]*aplayer[^>]*>[\s\S]*?<\/div>/g, '');
+            // 移除APlayer相关的script标签
+            content = content.replace(/<script[\s\S]*?APlayer[\s\S]*?<\/script>/g, '');
+            // 移除歌词内容（pre标签内的aplayer-lrc-content）
+            content = content.replace(/<pre[^>]*aplayer-lrc-content[^>]*>[\s\S]*?<\/pre>/g, '');
+            %>
+            <%- truncate(strip_html(content), {length: 800, omission: '...'}) %>...
         </div>
     </a>
     <% if (config.home_posts_tag){%>

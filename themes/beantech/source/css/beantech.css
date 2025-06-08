@@ -795,6 +795,7 @@ body {
 .listing-seperator {
   color: #0085a1;
   font-size: 21px !important;
+  font-family: "Courier New", monospace;  /* 等宽字体 */
 }
 .listing-seperator::before {
   margin-right: 5px;
@@ -805,9 +806,9 @@ body {
     line-height: 2 !important;
   }
 }
-.one-tag-list .tag-text {
-  font-weight: 200;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans SC", "Microsoft YaHei", sans-serif;
+.one-tag-list .listing-seperator .tag-text {
+  font-weight: 600;
+  font-family: "Arial", "Microsoft YaHei", sans-serif;
   line-height: 1.7;
 }
 .one-tag-list .post-preview {

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="<%= config.description %>">
     <meta name="keyword"  content="<%= config.keyword %>">
-    <link rel="shortcut icon" href="<%= config.root %>img/ironman-draw.png">
+    <link rel="shortcut icon" href="<%= config.root %>img/header.jpg">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
@@ -33,7 +33,11 @@
 
     <%- css('css/signature')%>
 
+    <!-- 在其他CSS引用之后添加 -->
     <%- css('css/toc')%>
+    
+    <!-- 添加custom.css引用 -->
+    <%- css('css/custom')%>
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->

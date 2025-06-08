@@ -4,7 +4,7 @@
 
 # Site
 title: [Kurong]
-subtitle: [眼泪是体积最小的海]
+subtitle: []
 author: Kurong
 language: en
 timezone:
@@ -38,7 +38,7 @@ github_username:    kurong00
 #linkedin_username:  kurong
 
 # Build settings
-anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+anchorjs: false                          # if you want to customize anchor. check out line:181 of `post.html`
 
 
 # Disqus settings
