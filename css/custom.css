@@ -152,27 +152,26 @@ body .aplayer,
 /* 移动端导航栏背景优化 */
 @media only screen and (max-width: 767px) {
     .navbar-custom {
-        background: rgba(255, 255, 255, 0.95); /* 改为白色半透明背景 */
-        /* 移除模糊效果 */
-        /* backdrop-filter: blur(10px); */
-        /* -webkit-backdrop-filter: blur(10px); */
+        background: rgba(18, 18, 18, 0.85); 
+        backdrop-filter: blur(10px); 
+        webkit-backdrop-filter: blur(10px); 
     }
     
     .navbar-custom .navbar-brand {
-        color: #333; /* 改为深色文字 */
-        text-shadow: none; /* 移除文字阴影 */
+        color: #ffffff; 
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
     
     .navbar-custom .nav li a {
-        color: #333; /* 改为深色文字 */
-        text-shadow: none; /* 移除文字阴影 */
+        color: #ffffff; 
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
     
     /* 下拉菜单样式优化 */
     .navbar-nav .open .dropdown-menu {
         background-color: rgba(255, 255, 255, 0.95) !important; /* 白色背景 */
         border: 1px solid #ddd; /* 添加边框 */
-        border-radius: 4px; /* 圆角 */
+        border-radius: 10px; /* 圆角 */
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
         margin-top: 5px;
     }
@@ -184,13 +183,13 @@ body .aplayer,
     .navbar-nav .open .dropdown-menu > li > a:hover,
     .navbar-nav .open .dropdown-menu > li > a:focus {
         color: #000 !important; /* 悬停时更深的黑色 */
-        background-color: #f5f5f5 !important; /* 浅灰色悬停背景 */
+        /*background-color: #f5f5f5 !important;  浅灰色悬停背景 */
     }
     
     .navbar-nav .open .dropdown-menu > .active > a,
     .navbar-nav .open .dropdown-menu > .active > a:hover,
     .navbar-nav .open .dropdown-menu > .active > a:focus {
         color: #000 !important; /* 激活状态黑色文字 */
-        background-color: #e7e7e7 !important; /* 激活状态背景 */
+        background-color: #e7e7e7 !important;  /* 激活状态背景 */
     }
 }
