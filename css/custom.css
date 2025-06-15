@@ -4,7 +4,7 @@
         background-position: center center;
         background-size: cover;
         height: auto;
-        min-height: 350px;
+        min-height: 250px;
         margin-bottom: 10px;
     }
 
@@ -272,30 +272,51 @@ body .aplayer,
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
     
-    /* 下拉菜单样式优化 - 移除半透明背景 */
-    .navbar-nav .open .dropdown-menu {
-        background-color: #ffffff !important; /* 纯白色背景，移除半透明 */
-        border: 1px solid #ddd; /* 添加边框 */
-        border-radius: 10px; /* 圆角 */
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
-        margin-top: 5px;
+    /* 移动端导航栏折叠容器 - 移除多余背景 */
+    .navbar-default .navbar-collapse,
+    #huxblog_navbar .navbar-collapse {
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        width: auto !important;
+        float: none !important;
+        margin: 0 !important;
     }
     
+    /* 下拉菜单容器 - 只保留一层背景 */
+    .navbar-nav .open .dropdown-menu {
+        background-color: #ffffff !important;
+        border: 1px solid #e7e7e7 !important;
+        border-radius: 4px !important;
+        box-shadow: 0 6px 12px rgba(0,0,0,.175) !important;
+        margin-top: 5px !important;
+    }
+    
+    /* 下拉菜单项样式 */
     .navbar-nav .open .dropdown-menu > li > a {
-        color: #333 !important; /* 黑色文字 */
+        color: #333333 !important;
         background-color: transparent !important;
+        padding: 8px 20px !important;
+        line-height: 1.42857143 !important;
+        display: block !important;
+        clear: both !important;
+        font-weight: normal !important;
+        white-space: nowrap !important;
     }
     
     .navbar-nav .open .dropdown-menu > li > a:hover,
     .navbar-nav .open .dropdown-menu > li > a:focus {
-        color: #0085a1 !important; /* 悬停时主题色 */
-        background-color: #f8f9fa !important; /* 浅灰色悬停背景 */
+        color: #0085a1 !important;
+        background-color: #f8f9fa !important;
+        text-decoration: none !important;
     }
     
     .navbar-nav .open .dropdown-menu > .active > a,
     .navbar-nav .open .dropdown-menu > .active > a:hover,
     .navbar-nav .open .dropdown-menu > .active > a:focus {
-        color: #0085a1 !important; /* 激活状态主题色文字 */
-        background-color: #e9ecef !important; /* 激活状态背景 */
+        color: #0085a1 !important;
+        background-color: #e9ecef !important;
+        text-decoration: none !important;
     }
 }
