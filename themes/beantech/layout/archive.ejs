@@ -19,6 +19,13 @@ layout: layout
                         }
                         years[year].push(post);
                     });
+                    
+                    // 对每个年份内的文章按日期排序（最新的在前）
+                    Object.keys(years).forEach(function(year) {
+                        years[year].sort(function(a, b) {
+                            return b.date - a.date;
+                        });
+                    });
                 %>
 
                 <!-- 归档列表 -->
