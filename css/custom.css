@@ -4,7 +4,7 @@
         background-position: center center;
         background-size: cover;
         height: auto;
-        min-height: 200px;
+        min-height: 300px;
         margin-bottom: 10px;
     }
 
@@ -142,14 +142,14 @@ body .aplayer,
 
 /* Archives 页面样式 */
 .listing-seperator .tag-text {
-    color: #333 !important;
+    color: #535353 !important;
     font-size: 22px !important;
 }
 
 .listing-seperator {
     margin-bottom: 40px !important;
     margin-top: 30px !important;
-    font-size: 22px !important;
+    font-size: 20px !important;
 }
 
 /* 确保第一个年份标题没有上边距 */
@@ -176,12 +176,12 @@ body .aplayer,
 /* Archives 页面文章列表样式 */
 .one-tag-list ul li {
     font-size: 16px !important;
-    color: #666 !important;
+    color: #646464 !important; /* 时间颜色 - 浅灰色 */
     margin-bottom: 8px !important;
 }
 
 .one-tag-list ul li a {
-    color: #666 !important;
+    color: #646464 !important; /* 文章标题颜色 - 深灰色 */
     font-size: 16px !important;
     text-decoration: none;
 }
@@ -192,7 +192,7 @@ body .aplayer,
 
 /* Tags页面样式自定义 */
 .one-tag-list .listing-seperator .tag-text {
-    color: #333 !important; /* Tags页面标签标题颜色 - 深蓝灰色 */
+    color: #535353 !important; /* Tags页面标签标题颜色 - 深蓝灰色 */
     font-weight: 800;
     font-size: 22px !important; /* 标签标题字号 */
 }
@@ -232,11 +232,16 @@ body .aplayer,
 
 /* 移动端导航栏背景优化 */
 @media only screen and (max-width: 767px) {
-    /* 方案一：半透明背景 */
-    .navbar-custom {
-        background: rgba(0, 0, 0, 0.3) !important;
+    /* 方案一：半透明背景 - 只在未展开时生效 */
+    .navbar-custom:not(.in) {
+        background: rgba(0, 0, 0, 0.1) !important;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
+    }
+    
+    /* 展开时保持透明背景 */
+    .navbar-custom.in {
+        background: transparent !important;
     }
     
     /* 方案二：文字阴影优化 */
@@ -263,6 +268,7 @@ body .aplayer,
         border-radius: 10px; /* 圆角 */
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
         margin-top: 5px;
+        color: #000 !important; /* 激活状态黑色文字 */
     }
     
     .navbar-nav .open .dropdown-menu > li > a {
