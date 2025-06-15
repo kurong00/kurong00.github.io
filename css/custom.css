@@ -232,20 +232,28 @@ body .aplayer,
 
 /* 移动端导航栏背景优化 */
 @media only screen and (max-width: 767px) {
+    /* 方案一：半透明背景 */
     .navbar-custom {
-        background: rgba(255, 255, 255, 0.85); 
-        backdrop-filter: blur(10px); 
-        webkit-backdrop-filter: blur(10px); 
+        background: rgba(0, 0, 0, 0.3) !important;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
     
+    /* 方案二：文字阴影优化 */
     .navbar-custom .navbar-brand {
-        color: #2c2c2c; 
-        
+        color: #fff !important;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     }
     
     .navbar-custom .nav li a {
-        color: #ffffff; 
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        color: #ffffff !important;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* 汉堡菜单按钮阴影 */
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #fff;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
     
     /* 下拉菜单样式优化 */
