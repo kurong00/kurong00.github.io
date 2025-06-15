@@ -4,7 +4,7 @@
         background-position: center center;
         background-size: cover;
         height: auto;
-        min-height: 400px;
+        min-height: 350px;
         margin-bottom: 10px;
     }
 
@@ -28,7 +28,7 @@
 
     /* 确保图片适当缩放 */
     .intro-header {
-        background-size: contain;  /* 修改为 cover */
+        background-size: cover;  /* 修改为 cover */
         background-repeat: no-repeat;
     }
 }
@@ -239,9 +239,14 @@ body .aplayer,
         -webkit-backdrop-filter: blur(10px);
     }
     
-    /* 展开时保持透明背景 */
-    .navbar-custom.in {
+    /* 展开时保持透明背景，但不影响滚动时的背景变化 */
+    .navbar-custom.in:not(.is-fixed) {
         background: transparent !important;
+    }
+    
+    /* 滚动时的背景保持原有效果 */
+    .navbar-custom.is-fixed {
+        background-color: rgba(255, 255, 255, 0.9) !important;
     }
     
     /* 方案二：文字阴影优化 */
@@ -255,7 +260,7 @@ body .aplayer,
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     }
     
-    /* 移动端下拉菜单文字颜色覆盖 */
+    /* 移动端下拉菜单文字颜色覆盖 - 修复白色文字问题 */
     .navbar-custom.in .nav li a {
         color: #333 !important;
         text-shadow: none;
@@ -267,29 +272,30 @@ body .aplayer,
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
     
-    /* 下拉菜单样式优化 */
+    /* 下拉菜单样式优化 - 移除半透明背景 */
     .navbar-nav .open .dropdown-menu {
-        background-color: rgba(255, 255, 255, 0.95) !important; /* 白色背景 */
+        background-color: #ffffff !important; /* 纯白色背景，移除半透明 */
         border: 1px solid #ddd; /* 添加边框 */
         border-radius: 10px; /* 圆角 */
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
         margin-top: 5px;
-        color: #000 !important; /* 激活状态黑色文字 */
     }
     
     .navbar-nav .open .dropdown-menu > li > a {
         color: #333 !important; /* 黑色文字 */
+        background-color: transparent !important;
     }
     
     .navbar-nav .open .dropdown-menu > li > a:hover,
     .navbar-nav .open .dropdown-menu > li > a:focus {
-        color: #000 !important; /* 悬停时更深的黑色 */
-        /*background-color: #f5f5f5 !important;  浅灰色悬停背景 */
+        color: #0085a1 !important; /* 悬停时主题色 */
+        background-color: #f8f9fa !important; /* 浅灰色悬停背景 */
     }
     
     .navbar-nav .open .dropdown-menu > .active > a,
     .navbar-nav .open .dropdown-menu > .active > a:hover,
     .navbar-nav .open .dropdown-menu > .active > a:focus {
-        color: #000 !important; /* 激活状态黑色文字 */
+        color: #0085a1 !important; /* 激活状态主题色文字 */
+        background-color: #e9ecef !important; /* 激活状态背景 */
     }
 }
