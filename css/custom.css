@@ -140,6 +140,87 @@ body .aplayer,
     border-radius: 4px !important;
 }
 
+/* Archives 页面样式 */
+.listing-seperator .tag-text {
+    color: #333 !important;
+    font-size: 22px !important;
+}
+
+.listing-seperator {
+    margin-bottom: 40px !important;
+    margin-top: 30px !important;
+    font-size: 22px !important;
+}
+
+/* 确保第一个年份标题没有上边距 */
+.listing-seperator:first-child {
+    margin-top: 0px !important;
+}
+
+/* 针对不同屏幕尺寸的响应式设计 */
+@media only screen and (min-width: 768px) {
+    .listing-seperator {
+        margin-bottom: 50px !important;
+        margin-top: 40px !important;
+        font-size: 24px !important;
+    }
+    .listing-seperator:first-child {
+        margin-top: 0px !important;
+    }
+}
+
+.listing-seperator:first-child {
+    margin-top: 0 !important;
+}
+
+/* Archives 页面文章列表样式 */
+.one-tag-list ul li {
+    font-size: 16px !important;
+    color: #666 !important;
+    margin-bottom: 8px !important;
+}
+
+.one-tag-list ul li a {
+    color: #666 !important;
+    font-size: 16px !important;
+    text-decoration: none;
+}
+
+.one-tag-list ul li a:hover {
+    color: #0085a1 !important;
+}
+
+/* Tags页面样式自定义 */
+.one-tag-list .listing-seperator .tag-text {
+    color: #333 !important; /* Tags页面标签标题颜色 - 深蓝灰色 */
+    font-weight: 800;
+    font-size: 22px !important; /* 标签标题字号 */
+}
+
+.one-tag-list .post-preview .post-title {
+    color: #7f8c8d !important; /* Tags页面文章标题颜色 - 中等灰色 */
+    font-size: 16px !important; /* 文章标题字号 */
+}
+
+.one-tag-list .post-preview .post-title:hover {
+    color: #0085a1 !important; /* Tags页面文章标题悬停颜色 */
+}
+
+.one-tag-list .post-preview .post-subtitle {
+    color: #95a5a6 !important; /* Tags页面副标题颜色 - 浅灰色 */
+    font-size: 16px !important; /* 副标题字号 */
+}
+
+/* Tags页面标签云样式优化 */
+#tag_cloud a {
+    color: #ffffff !important; /* 标签云标签颜色 - 白色 */
+    font-size: 14px !important; /* 标签云字号 */
+}
+
+#tag_cloud a:hover {
+    color: #ffffff !important; /* 标签云悬停时文字颜色保持白色 */
+}
+
 /* 如果需要在移动设备上使用不同的间距 */
 @media only screen and (max-width: 767px) {
     .post-container .aplayer,
@@ -152,14 +233,14 @@ body .aplayer,
 /* 移动端导航栏背景优化 */
 @media only screen and (max-width: 767px) {
     .navbar-custom {
-        background: rgba(18, 18, 18, 0.85); 
+        background: rgba(255, 255, 255, 0.85); 
         backdrop-filter: blur(10px); 
         webkit-backdrop-filter: blur(10px); 
     }
     
     .navbar-custom .navbar-brand {
-        color: #ffffff; 
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        color: #2c2c2c; 
+        
     }
     
     .navbar-custom .nav li a {
@@ -190,6 +271,5 @@ body .aplayer,
     .navbar-nav .open .dropdown-menu > .active > a:hover,
     .navbar-nav .open .dropdown-menu > .active > a:focus {
         color: #000 !important; /* 激活状态黑色文字 */
-        background-color: #e7e7e7 !important;  /* 激活状态背景 */
     }
 }
