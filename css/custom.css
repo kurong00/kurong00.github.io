@@ -4,7 +4,7 @@
         background-position: center center;
         background-size: cover;
         height: auto;
-        min-height: 300px;
+        min-height: 400px;
         margin-bottom: 10px;
     }
 
@@ -28,7 +28,7 @@
 
     /* 确保图片适当缩放 */
     .intro-header {
-        background-size: cover;  /* 修改为 cover */
+        background-size: contain;  /* 修改为 cover */
         background-repeat: no-repeat;
     }
 }
@@ -36,7 +36,7 @@
 /* 全局字体设置 */
 body {
     /* 更改主字体 */
-    font-family:  "apple-system","Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft YaHei", sans-serif;font-family:  -apple-system,"Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
     /* 调整基本字号 */
     font-size: 16px;
     /* 调整行高 */
@@ -253,6 +253,12 @@ body .aplayer,
     .navbar-custom .nav li a {
         color: #ffffff !important;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* 移动端下拉菜单文字颜色覆盖 */
+    .navbar-custom.in .nav li a {
+        color: #333 !important;
+        text-shadow: none;
     }
     
     /* 汉堡菜单按钮阴影 */
