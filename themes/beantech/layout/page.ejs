@@ -8,7 +8,7 @@ layout: layout
 <!-- USE SIDEBAR -->
     <!-- Sidebar Container -->
     <div class="col-lg-3 col-md-3 hidden-sm hidden-xs sidebar-container">
-        <% theme.widgets.forEach(function(widget){ %>
+        <% config.widgets.forEach(function(widget){ %>
             <%- partial('_widget/' + widget) %>
             <hr>
         <% }) %>
