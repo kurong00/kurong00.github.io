@@ -320,3 +320,16 @@ body .aplayer,
         text-decoration: none !important;
     }
 }
+
+/* 自定义“下一页”和“上一页”按钮样式 */
+.pager li > a,
+.pager li > span {
+  border-radius: 999em; /* 应用圆角矩形样式，参考标签样式 */
+}
+
+.pager li > a:hover,
+.pager li > a:focus {
+  background-color: rgb(244, 244, 244); /* 悬停时的背景颜色 */
+  border-color: rgb(154, 154, 154);     /* 悬停时的边框颜色 */
+  color: rgb(41, 41, 41);          /* 悬停时的文字颜色 */
+}
