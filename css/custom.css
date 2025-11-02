@@ -333,3 +333,34 @@ body .aplayer,
   border-color: rgb(154, 154, 154);     /* 悬停时的边框颜色 */
   color: rgb(41, 41, 41);          /* 悬停时的文字颜色 */
 }
+
+/* Live Photo 容器样式 */
+.livephoto-container {
+    max-width: 100%;
+    width: 100%;
+    min-height: 600px;
+}
+
+/* Live Photo 移动端优化 */
+@media (max-width: 768px) {
+    .livephoto-container {
+        min-height: 300px;
+        margin: 1em auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .livephoto-container {
+        min-height: 250px;
+        margin: 0.8em auto;
+    }
+}
+
+/* 确保 Live Photo 内部元素在移动端正确显示 */
+.livephoto-container[data-live-photo] img,
+.livephoto-container[data-live-photo] video {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+}
