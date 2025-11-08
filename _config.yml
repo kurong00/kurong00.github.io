@@ -180,7 +180,7 @@ markdown:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: beantech
+theme: sunset
 
 #sitemap
 sitemap:

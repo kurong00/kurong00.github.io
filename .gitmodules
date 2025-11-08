@@ -1,0 +1,3 @@
+[submodule "themes/sunset"]
+	path = themes/sunset
+	url = git@github.com:kurong00/hexo-theme-sunset.git
