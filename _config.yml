@@ -2,6 +2,12 @@
 ## Docs: https://hexo.io/docs/configuration.html
 ## Source: https://github.com/hexojs/hexo/
 
+# Lazyload Image
+lazyload:
+  enable: true
+  onlypost: false
+  loadingImg: # eg ./images/loading.gif
+
 # Site
 title: [Kurong]
 subtitle: []
@@ -23,7 +29,7 @@ SEOTitle: Kurong
 email: kurong00@gmail.com
 description: ""
 keyword: ""
-header-img: img/header_img/title.jpg
+header-img: img/header_img/title.gif
 signature: false #show signature
 signature-img: img/signature/BeanTechSign-white.png 
 
