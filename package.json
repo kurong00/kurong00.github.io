@@ -19,7 +19,7 @@
     "hexo-renderer-markdown-it": "^3.4.1",
     "hexo-renderer-stylus": "^0.3.3",
     "hexo-renderer-swig": "^2.0.0",
-    "hexo-server": "^0.2.2",
+    "hexo-server": "^3.0.0",
     "hexo-tag-aplayer": "^3.0.4",
     "hexo-toc": "^1.1.0",
     "nvm": "^0.0.4"
