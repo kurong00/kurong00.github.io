@@ -1,0 +1,366 @@
+/* 移动端头图样式优化 */
+@media only screen and (max-width: 767px) {
+    .intro-header {
+        background-position: center center;
+        background-size: cover;
+        height: auto;
+        min-height: 250px;
+        margin-bottom: 10px;
+    }
+
+    .intro-header .site-heading,
+    .intro-header .post-heading,
+    .intro-header .page-heading {
+        padding: 40px 0 20px;
+    }
+
+    .intro-header .site-heading h1,
+    .intro-header .page-heading h1 {
+        font-size: 30px;
+        margin-top: 0;
+    }
+
+    .intro-header .site-heading .subheading,
+    .intro-header .page-heading .subheading {
+        font-size: 16px;
+        margin-top: 5px;
+    }
+
+    /* 确保图片适当缩放 */
+    .intro-header {
+        background-size: cover;  /* 修改为 cover */
+        background-repeat: no-repeat;
+    }
+}
+
+/* 全局字体设置 */
+body {
+    /* 更改主字体 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft YaHei", sans-serif;font-family:  -apple-system,"Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+    /* 调整基本字号 */
+    font-size: 16px;
+    /* 调整行高 */
+    line-height: 2.0;
+    /* 调整字体颜色，稍微深一点 */
+    color: #414141;
+}
+
+/* 标题字体设置 */
+h1, h2, h3, h4, h5, h6 {
+    /* 标题可以使用不同的字体 */
+    font-family: apple-system;
+    font-weight: 700;
+    line-height: 2.0;
+    margin-top: 35px;
+    margin-bottom: 20px;
+}
+
+/* 各级标题大小调整 */
+h1 {
+    font-size: 32px;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+h5 {
+    font-size: 18px;
+}
+
+h6 {
+    font-size: 16px;
+}
+
+/* 段落间距调整 */
+p {
+    margin: 40px 0; /* 增加段落间距 */
+}
+
+/* 引用块样式优化 */
+blockquote {
+    border-left: 4px solid #0085a1;
+    background-color: rgba(0, 133, 161, 0.05);
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 3px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* 列表样式优化 */
+.post-container ul, 
+.post-container ol {
+    padding-left: 25px;
+    margin-bottom: 25px;
+}
+
+.post-container li {
+    margin-bottom: 8px;
+}
+
+/* 链接样式优化 */
+.post-container a {
+    color: #464646;
+    text-decoration: none;
+    border-bottom: 1px dotted #0085a1;
+    transition: all 0.3s ease;
+}
+
+.post-container a:hover {
+    color: #005f73;
+    border-bottom: 1px solid #005f73;
+}
+
+/* About 页面特别优化 */
+.about-page h2 {
+    font-size: 26px;
+    color: #0085a1;
+    margin-top: 40px;
+}
+
+.about-page p {
+    font-size: 17px;
+    line-height: 1.8;
+}
+/* 音乐播放器样式调整 */
+.post-container .aplayer,
+body .aplayer,
+.aplayer {  
+    margin: 15px 20px 100px 20px !important; /* 上右下左 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 4px !important;
+}
+
+/* Archives 页面样式 */
+.listing-seperator .tag-text {
+    color: #535353 !important;
+    font-size: 22px !important;
+}
+
+.listing-seperator {
+    margin-bottom: 40px !important;
+    margin-top: 30px !important;
+    font-size: 20px !important;
+}
+
+/* 确保第一个年份标题没有上边距 */
+.listing-seperator:first-child {
+    margin-top: 0px !important;
+}
+
+/* 针对不同屏幕尺寸的响应式设计 */
+@media only screen and (min-width: 768px) {
+    .listing-seperator {
+        margin-bottom: 50px !important;
+        margin-top: 40px !important;
+        font-size: 24px !important;
+    }
+    .listing-seperator:first-child {
+        margin-top: 0px !important;
+    }
+}
+
+.listing-seperator:first-child {
+    margin-top: 0 !important;
+}
+
+/* Archives 页面文章列表样式 */
+.one-tag-list ul li {
+    font-size: 16px !important;
+    color: #646464 !important; /* 时间颜色 - 浅灰色 */
+    margin-bottom: 8px !important;
+}
+
+.one-tag-list ul li a {
+    color: #646464 !important; /* 文章标题颜色 - 深灰色 */
+    font-size: 16px !important;
+    text-decoration: none;
+}
+
+.one-tag-list ul li a:hover {
+    color: #0085a1 !important;
+}
+
+/* Tags页面样式自定义 */
+.one-tag-list .listing-seperator .tag-text {
+    color: #535353 !important; /* Tags页面标签标题颜色 - 深蓝灰色 */
+    font-weight: 800;
+    font-size: 22px !important; /* 标签标题字号 */
+}
+
+.one-tag-list .post-preview .post-title {
+    color: #7f8c8d !important; /* Tags页面文章标题颜色 - 中等灰色 */
+    font-size: 16px !important; /* 文章标题字号 */
+}
+
+.one-tag-list .post-preview .post-title:hover {
+    color: #0085a1 !important; /* Tags页面文章标题悬停颜色 */
+}
+
+.one-tag-list .post-preview .post-subtitle {
+    color: #95a5a6 !important; /* Tags页面副标题颜色 - 浅灰色 */
+    font-size: 16px !important; /* 副标题字号 */
+}
+
+/* Tags页面标签云样式优化 */
+#tag_cloud a {
+    color: #ffffff !important; /* 标签云标签颜色 - 白色 */
+    font-size: 14px !important; /* 标签云字号 */
+}
+
+#tag_cloud a:hover {
+    color: #ffffff !important; /* 标签云悬停时文字颜色保持白色 */
+}
+
+/* 如果需要在移动设备上使用不同的间距 */
+@media only screen and (max-width: 767px) {
+    .post-container .aplayer,
+    body .aplayer,
+    .aplayer {
+        margin: 10px 10px 50px 10px !important; /* 移动设备上使用更小的间距 */
+    }
+}
+
+/* 移动端导航栏背景优化 */
+@media only screen and (max-width: 767px) {
+    /* 方案一：半透明背景 - 只在未展开时生效 */
+    .navbar-custom:not(.in) {
+        background: rgba(0, 0, 0, 0.1) !important;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    
+    /* 展开时保持透明背景，但不影响滚动时的背景变化 */
+    .navbar-custom.in:not(.is-fixed) {
+        background: transparent !important;
+    }
+    
+    /* 滚动时的背景保持原有效果 */
+    .navbar-custom.is-fixed {
+        background-color: rgba(255, 255, 255, 0.9) !important;
+    }
+    
+    /* 方案二：文字阴影优化 */
+    .navbar-custom .navbar-brand {
+        color: #fff !important;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    
+    .navbar-custom .nav li a {
+        color: #ffffff !important;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* 移动端下拉菜单文字颜色覆盖 - 修复白色文字问题 */
+    .navbar-custom.in .nav li a {
+        color: #333 !important;
+        text-shadow: none;
+    }
+    
+    /* 汉堡菜单按钮阴影 */
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #fff;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* 移动端导航栏折叠容器 - 移除多余背景 */
+    .navbar-default .navbar-collapse,
+    #huxblog_navbar .navbar-collapse {
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        width: auto !important;
+        float: none !important;
+        margin: 0 !important;
+    }
+    
+    /* 下拉菜单容器 - 只保留一层背景 */
+    .navbar-nav .open .dropdown-menu {
+        background-color: #ffffff !important;
+        border: 1px solid #e7e7e7 !important;
+        border-radius: 4px !important;
+        box-shadow: 0 6px 12px rgba(0,0,0,.175) !important;
+        margin-top: 5px !important;
+    }
+    
+    /* 下拉菜单项样式 */
+    .navbar-nav .open .dropdown-menu > li > a {
+        color: #333333 !important;
+        background-color: transparent !important;
+        padding: 8px 20px !important;
+        line-height: 1.42857143 !important;
+        display: block !important;
+        clear: both !important;
+        font-weight: normal !important;
+        white-space: nowrap !important;
+    }
+    
+    .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #0085a1 !important;
+        background-color: #f8f9fa !important;
+        text-decoration: none !important;
+    }
+    
+    .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #0085a1 !important;
+        background-color: #e9ecef !important;
+        text-decoration: none !important;
+    }
+}
+
+/* 自定义“下一页”和“上一页”按钮样式 */
+.pager li > a,
+.pager li > span {
+  border-radius: 999em; /* 应用圆角矩形样式，参考标签样式 */
+}
+
+.pager li > a:hover,
+.pager li > a:focus {
+  background-color: rgb(244, 244, 244); /* 悬停时的背景颜色 */
+  border-color: rgb(154, 154, 154);     /* 悬停时的边框颜色 */
+  color: rgb(41, 41, 41);          /* 悬停时的文字颜色 */
+}
+
+/* Live Photo 容器样式 */
+.livephoto-container {
+    max-width: 100%;
+    width: 100%;
+    min-height: 600px;
+}
+
+/* Live Photo 移动端优化 */
+@media (max-width: 768px) {
+    .livephoto-container {
+        min-height: 300px;
+        margin: 1em auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .livephoto-container {
+        min-height: 250px;
+        margin: 0.8em auto;
+    }
+}
+
+/* 确保 Live Photo 内部元素在移动端正确显示 */
+.livephoto-container[data-live-photo] img,
+.livephoto-container[data-live-photo] video {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+}
