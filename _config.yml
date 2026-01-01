@@ -191,7 +191,7 @@ sitemap:
 deploy:
   type: git
   repo: git@github.com:kurong00/kurong00.github.io.git
-  branch: master
+  branch: gh-pages
 
 # hexo-hide-posts
 hide_posts:
