@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/header.jpg">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Kurong
+        
+    </title>
+
+    <link rel="canonical" href="https://chenwenling.cn/archives/2/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+<link rel="stylesheet" href="/css/beantech.min.css">
+
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    <!-- 在其他CSS引用之后添加 -->
+    
+<link rel="stylesheet" href="/css/toc.css">
+
+    
+    <!-- 添加custom.css引用 -->
+    
+<link rel="stylesheet" href="/css/custom.css">
+
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/title.jpg') 
+            /*config*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="site-heading">
+                        <h1>Kurong</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading"></span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Kurong</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
+<!-- USE SIDEBAR -->
+    <!-- Sidebar Container -->
+    <div class="col-lg-3 col-md-3 hidden-sm hidden-xs sidebar-container">
+        
+            <!-- Featured Tags -->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+            
+            <a href="/tags/#优化" title="优化" rel="2">优化</a>
+            
+        
+            
+            <a href="/tags/#大固其其" title="大固其其" rel="8">大固其其</a>
+            
+        
+            
+            <a href="/tags/#Shader" title="Shader" rel="10">Shader</a>
+            
+        
+    </div>
+</section>
+
+            <hr>
+        
+            <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
+
+        
+            <img id = "avatar_pic" src="/img/avatar.jpg" />
+        
+
+        
+            <p>人的脆弱和坚强都超乎自己的想象。有时，我可能脆弱得一句话就泪流满面，有时，也发现自己咬着牙走了很长的路</p>
+        
+
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+            
+
+            
+
+            
+
+            
+                <li>
+                    <a target="_blank"  href="https://github.com/kurong00">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+            
+            
+        </ul>
+    </div>
+</section>
+            <hr>
+        
+            
+  <h5>RECENT POSTS</h3>
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/2025/08/23/dairy-09/">当年星</a>
+        </li>
+      
+        <li>
+          <a href="/2025/06/08/dairy-07/">未寄出的信</a>
+        </li>
+      
+        <li>
+          <a href="/2025/03/16/dairy-08/">2024年度歌曲盘点</a>
+        </li>
+      
+        <li>
+          <a href="/2024/12/22/dairy-06/">小潮食记</a>
+        </li>
+      
+        <li>
+          <a href="/2024/04/06/dairy-05/">老派少女回乡记</a>
+        </li>
+      
+    </ul>
+  </div>
+
+            <hr>
+        
+            
+    <h5>ARCHIVES</h5>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">August 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">June 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+
+            <hr>
+        
+    </div>
+
+    <!-- Post Container -->
+    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 post-container">
+        <!-- Main Content -->
+
+
+<div class="post-preview">
+
+    <a href="/2020/07/05/shader-learning10/">
+        <h2 class="post-title">
+            Unity Shader 入门（十）：卡通素描Shader
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            &#x524D;&#x8A00;
+&#x4E4B;&#x524D;&#x4ECB;&#x7ECD;&#x4E86;&#x975E;&#x771F;&#x5B9E;&#x611F;&#x7684;&#x5361;&#x901A;&#x6E32;&#x67D3;&#xFF0C;&#x63D0;&#x5230;&#x4E86;Tonal Art Maps/TAM &#x8272;&#x8C03;&#x827A;&#x672F;&#x56FE;
+
+
+&#x8FD9;&#x6B21;&#x6211;&#x4EEC;&#x6765;&#x5B9E;&#x73B0;&#x7D20;&#x63CF;&#x753B;&#x7684;&#x6548;&#x679C;&#x5427;
+
+&#x7167;&#x4F8B;&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x5148;&#x653E;&#x4E0A;&#x5B8C;&#x6574;&#x7684;&#x4EE3;&#x7801;
+Shader &quot;Kurong/NPR/Sketch&quot;{    Properties    {        _Color (&quot;Color&quot;, Color) = (1,1,1,1)        _TileFactor (&quot;Tile Factor&quot;, Float) = 5        _Hatch0 (&quot;_Hatch0&quot;, 2D) = &quot;white&quot; {}        _Hatch1 (&quot;_Hatch1&quot;, 2D) = &quot;white&quot; {}        _Hatch2 (&quot;_Hatch2&quot;, 2D) = &quot;whit......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2020-07-05
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Shader" title="Shader">Shader</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2020/05/23/shader-learning9/">
+        <h2 class="post-title">
+            Unity Shader 入门（九）：卡通高光shader
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            &#x524D;&#x8A00;
+&#x524D;&#x4E00;&#x7BC7;&#x4ECB;&#x7ECD;&#x4E86;&#x975E;&#x771F;&#x5B9E;&#x6E32;&#x67D3;&#x7684;&#x7406;&#x8BBA;&#x77E5;&#x8BC6;&#xFF0C;&#x73B0;&#x5728;&#x6765;&#x5199;&#x4E00;&#x4E2A;&#x5361;&#x901A;&#x9AD8;&#x5149;&#x6548;&#x679C;&#xFF0C;&#x6548;&#x679C;&#x56FE;&#x5982;&#x4E0B;&#xFF1A;
+
+
+&#x7167;&#x4F8B;&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x5148;&#x653E;&#x4E0A;&#x5B8C;&#x6574;&#x7684;&#x4EE3;&#x7801;
+Shader &quot;Kurong/NPR/SpecularToonShader&quot;{    Properties    {        _Color (&quot;Color&quot;, Color) = (1,1,1,1)        _MainTex (&quot;Albedo (RGB)&quot;, 2D) = &quot;white&quot; {}        [HDR]_AmbientColor(&quot;Ambient Color&quot;, Color) = (1,1,1,1)        [HDR]_SpecularColor(&quot;Specular Color&quot;, Color) = (1,1,1,1)        _Glossiness(&quot;Glossiness&qu......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2020-05-23
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Shader" title="Shader">Shader</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2020/05/18/shader-learning8/">
+        <h2 class="post-title">
+            Unity Shader 入门（八）：非真实感渲染知识准备
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            &#x524D;&#x8A00;
+&#x975E;&#x771F;&#x5B9E;&#x611F;&#x6E32;&#x67D3;&#xFF08;Non-Photorealistic Rendering&#xFF0C;NPR&#xFF09;&#xFF0C; &#x4EA6;&#x88AB;&#x79F0;&#x4E3A;&#x98CE;&#x683C;&#x5316;&#x6E32;&#x67D3;&#xFF08;Stylistic Rendering&#xFF09;&#xFF0C;&#x4E0E;&#x4F20;&#x7EDF;&#x7684;&#x8FFD;&#x6C42;&#x7167;&#x7247;&#x771F;&#x5B9E;&#x611F;&#x7684;&#x771F;&#x5B9E;&#x611F;&#x6E32;&#x67D3;&#xFF08;Photorealistic Rendering&#xFF09;&#x8BA1;&#x7B97;&#x673A;&#x56FE;&#x5F62;&#x5B66;&#x4E0D;&#x540C;&#xFF0C;&#x975E;&#x771F;&#x5B9E;&#x611F;&#x6E32;&#x67D3;&#x65E8;&#x5728;&#x6A21;&#x62DF;&#x827A;&#x672F;&#x5F0F;&#x7684;&#x7ED8;&#x5236;&#x98CE;&#x683C;&#xFF0C;&#x4F7F;&#x7528;&#x4E00;&#x4E9B;&#x6E32;&#x67D3;&#x65B9;&#x6CD5;&#x8FBE;&#x5230;&#x548C;&#x67D0;&#x4E9B;&#x7ED8;&#x753B;&#x98CE;&#x683C;&#x76F8;&#x4F3C;&......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2020-05-18
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Shader" title="Shader">Shader</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2020/05/05/shader-learning7/">
+        <h2 class="post-title">
+            Unity Shader 入门（七）：模型描边Shader
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            &#x524D;&#x8A00;
+&#x524D;&#x9762;&#x51E0;&#x7BC7;&#x6211;&#x4EEC;&#x5199;&#x4E86;&#x51E0;&#x4E2A;&#x8FB9;&#x7F18;&#x53D1;&#x5149;&#x7684;shader&#xFF0C;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x7C7B;&#x4F3C;&#x529F;&#x80FD;&#x7684;&#x5C31;&#x662F;&#x6A21;&#x578B;&#x63CF;&#x8FB9;&#xFF0C;&#x548C;&#x8FB9;&#x7F18;&#x53D1;&#x5149;&#x4E0D;&#x540C;&#x7684;&#x5730;&#x65B9;&#x5728;&#x4E8E;&#xFF0C;&#x63CF;&#x8FB9;&#x662F;&#x5728;&#x539F;&#x6709;&#x6A21;&#x578B;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x6DFB;&#x52A0;&#x4E00;&#x5708;&#x7684;&#x5916;&#x6846;&#x3002;
+&#x8001;&#x89C4;&#x77E9;&#x8FD8;&#x662F;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x6548;&#x679C;&#x56FE;&#xFF1A;
+
+
+&#x5B9E;&#x73B0;&#x539F;&#x7406;
+&#x5229;&#x7528;&#x4E24;&#x4E2A;Pass&#x6765;&#x7ED8;&#x5236;&#xFF1A;
+
+&#x7B2C;&#x4E00;&#x4E2A;Pass&#x5C06......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2020-05-05
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Shader" title="Shader">Shader</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2020/05/04/shader-learning6/">
+        <h2 class="post-title">
+            Unity Shader 入门（六）：边缘发光透明版
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            &#x524D;&#x8A00;
+&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x5199;&#x8FC7;&#x4E00;&#x4E2A;&#x8FB9;&#x7F18;&#x53D1;&#x5149;&#x7684;Shader&#xFF0C;&#x8FD9;&#x4E00;&#x6B21;&#x6211;&#x4EEC;&#x6765;&#x5199;&#x8FD9;&#x4E2A;&#x7684;&#x5347;&#x7EA7;&#x7248;&#xFF1A;&#x900F;&#x660E;&#x7269;&#x4F53;&#x7684;&#x8FB9;&#x7F18;&#x53D1;&#x5149;&#x3002;
+&#x6548;&#x679C;&#x56FE;
+&#x9996;&#x5148;&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x6548;&#x679C;&#x56FE;&#xFF1A;
+
+
+Shader&#x4EE3;&#x7801;
+Shader &quot;Kurong/Rim/RimLightingTranslucent&quot;{    Properties    {        _Color (&quot;Color&quot;, Color) = (1,1,1,1)        _AlphaRange(&quot;Alpha Range&quot;,Range(0,1)) = 0        _RimColor(&quot;Rim Color&quot;,Color) = (1,1,1,1)    }    SubShader    {        Pass        {            Tags { &......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2020-05-04
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Shader" title="Shader">Shader</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2020/05/03/shader-learning5/">
+        <h2 class="post-title">
+            Unity Shader 入门（五）：透明效果知识储备
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            &#x524D;&#x8A00;
+&#x900F;&#x660E;&#x6E32;&#x67D3;&#x662F;&#x662F;&#x56FE;&#x5F62;&#x5B66;&#x91CC;&#x9762;&#x7684;&#x5E38;&#x89C1;&#x95EE;&#x9898;&#x4E4B;&#x4E00;&#xFF0C;&#x5BF9;&#x4E8E;&#x6E32;&#x67D3;&#x7B97;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x5927;&#x81F4;&#x5206;&#x4E3A;&#x57FA;&#x4E8E;&#x5149;&#x548C;&#x57FA;&#x4E8E;&#x89C6;&#x56FE;&#x7684;&#x6548;&#x679C;&#x3002;&#x57FA;&#x4E8E;&#x5149;&#x7684;&#x6548;&#x679C;&#x662F;&#x6307;&#x7269;&#x4F53;&#x4F7F;&#x5F97;&#x706F;&#x5149;&#x8870;&#x51CF;&#x6216;&#x6539;&#x53D8;&#x65B9;&#x5411;&#xFF0C;&#x4ECE;&#x800C;&#x5BFC;&#x81F4;&#x573A;&#x666F;&#x4E2D;&#x7684;&#x5176;&#x4ED6;&#x7269;&#x4F53;&#x4EE5;&#x4E0D;&#x540C;&#x65B9;&#x5F0F;&#x88AB;&#x7167;&#x660E;&#x548C;&#x6E32;&#x67D3;&#x7684;&#x6548;&#x679C;&#x3002;&#x57FA;&#x4E8E;&#x89C6;&#x56FE;&#x7......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2020-05-03
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Shader" title="Shader">Shader</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2020/05/02/shader-learning4/">
+        <h2 class="post-title">
+            Unity Shader 入门（四）：边缘发光效果
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            &#x524D;&#x8A00;
+&#x4E0A;&#x4E00;&#x8282;&#x6211;&#x4EEC;&#x5B66;&#x4E60;&#x67E5;&#x770B;&#x4E86;&#x7B2C;&#x4E00;&#x4E2A;&#x6A21;&#x677F;Shader&#xFF0C;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5F00;&#x59CB;&#x5199;&#x7B2C;&#x4E00;&#x4E2A;Shader&#x7EC3;&#x7EC3;&#x624B;&#x3002;&#x9996;&#x5148;&#x6211;&#x4EEC;&#x6311;&#x4E00;&#x4E2A;&#xFF1A;&#x8FB9;&#x7F18;&#x53D1;&#x5149;&#x6548;&#x679C; &#x7684;shader&#x6765;&#x5199;&#xFF0C;&#x5148;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x6548;&#x679C;&#x56FE;&#xFF1A;
+
+
+&#x5B9E;&#x73B0;&#x539F;&#x7406;
+&#x6839;&#x636E;&#x7269;&#x4F53;&#x8868;&#x9762;&#x6CD5;&#x5411;&#x91CF;&#x548C;&#x89C6;&#x7EBF;&#x5411;&#x91CF;&#x7684;&#x5939;&#x89D2;&#x6765;&#x5224;&#x65AD;&#x662F;&#x5426;&#x662F;&#x7269;&#x4F53;&#x7684;&#x8FB9;&#x7F18;&#x90E8;&#x4F4D;&#x3002;&#x5939;&#x89D2;&#x8D......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2020-05-02
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Shader" title="Shader">Shader</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2020/05/01/shader-learning3/">
+        <h2 class="post-title">
+            Unity Shader 入门（三）：查看Shader
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            &#x65B0;&#x5EFA;Shader
+&#x9996;&#x5148;&#x6211;&#x4EEC;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;Shader&#xFF0C;&#x8FD9;&#x91CC;&#x4EE5; Standard Surface Shader &#x4E3A;&#x4F8B;&#xFF0C;&#x65B0;&#x5EFA;&#x4E4B;&#x540E;&#x6211;&#x4EEC;&#x6253;&#x5F00;Shader&#x6587;&#x4EF6;&#x5E94;&#x8BE5;&#x4F1A;&#x51FA;&#x73B0;&#x5982;&#x4E0B;&#x4EE3;&#x7801;&#xFF1A;
+
+Shader &quot;Custom/NewSurfaceShader&quot;{    Properties    {        _Color (&quot;Color&quot;, Color) = (1,1,1,1)        _MainTex (&quot;Albedo (RGB)&quot;, 2D) = &quot;white&quot; {}        _Glossiness (&quot;Smoothness&quot;, Range(0,1)) = 0.5        _Metallic (&quot;Metallic&quot;, Range(0,1)) = 0.0    }    SubShader    {        Tags { &quot;RenderType&quot;=&quot;Opaque&quot; }        LOD 200        CGPROGRAM        // Physically based Standard ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2020-05-01
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Shader" title="Shader">Shader</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2020/04/29/shader-learning2/">
+        <h2 class="post-title">
+            Unity Shader 入门（二）：Shader介绍
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            &#x4EC0;&#x4E48;&#x662F;Shader
+Shader&#xFF08;&#x7740;&#x8272;&#x5668;&#xFF09;&#xFF1A;&#x662F;&#x6E32;&#x67D3;&#x7BA1;&#x7EBF;&#x4E0A;&#x7684;&#x4E00;&#x5C0F;&#x6BB5;&#x7A0B;&#x5E8F;&#xFF0C;&#x5B83;&#x8D1F;&#x8D23;&#x5C06;&#x8F93;&#x5165;&#x7684;Mesh&#xFF08;&#x7F51;&#x683C;&#xFF09;&#x4EE5;&#x6307;&#x5B9A;&#x7684;&#x65B9;&#x5F0F;&#x548C;&#x8F93;&#x5165;&#x7684;&#x8D34;&#x56FE;&#x3001;&#x989C;&#x8272;&#x7B49;&#x7EC4;&#x5408;&#x4F5C;&#x7528;&#x7136;&#x540E;&#x8F93;&#x51FA;&#x3002;Shader&#x5F00;&#x53D1;&#x8005;&#x8981;&#x505A;&#x7684;&#x5C31;&#x662F;&#x6839;&#x636E;&#x8F93;&#x5165;&#xFF0C;&#x8FDB;&#x884C;&#x8BA1;&#x7B97;&#x53D8;&#x6362;&#xFF0C;&#x4EA7;&#x751F;&#x8F93;&#x51FA;&#x3002;shader&#x5927;&#x4F53;&#x4E0A;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#x4E24;&#x7C7B;&#xFF1A;
+
+
+&#x9876;&#x70B9;&#x77......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2020-04-29
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Shader" title="Shader">Shader</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2020/04/28/shader-learning1/">
+        <h2 class="post-title">
+            Unity Shader 入门（一）：渲染管线
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            &#x4EC0;&#x4E48;&#x662F;&#x6E32;&#x67D3;&#x7BA1;&#x7EBF;&#xFF1F;
+Shader&#xFF08;&#x7740;&#x8272;&#x5668;&#xFF09;&#xFF1A;&#x662F;&#x6E32;&#x67D3;&#x7BA1;&#x7EBF;&#x4E0A;&#x7684;&#x4E00;&#x5C0F;&#x6BB5;&#x7A0B;&#x5E8F;&#xFF0C;&#x8981;&#x4E86;&#x89E3;Shader&#x9996;&#x5148;&#x8981;&#x660E;&#x767D;&#x6E32;&#x67D3;&#x7BA1;&#x7EBF;&#x662F;&#x4EC0;&#x4E48;&#x5462;&#xFF1F;
+&#x6E32;&#x67D3;&#x7BA1;&#x7EBF;&#x7684;&#x4E3B;&#x8981;&#x529F;&#x80FD;&#x662F;&#x5728;&#x7ED9;&#x5B9A;&#x865A;&#x62DF;&#x76F8;&#x673A;&#x3001;&#x4E09;&#x7EF4;&#x7269;&#x4F53;&#x3001;&#x5149;&#x6E90;&#x3001;&#x7167;&#x660E;&#x6A21;&#x5F0F;&#xFF0C;&#x4EE5;&#x53CA;&#x7EB9;&#x7406;&#x7B49;&#x8BF8;&#x591A;
+&#x6761;&#x4EF6;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x751F;&#x6210;&#x6216;&#x7ED8;&#x5236;&#x4E00;&#x5E45;&#x4E8C;&#x7EF......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2020-04-28
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Shader" title="Shader">Shader</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+        <li class="previous">
+            <a href="/">&larr; Newer Posts</a>
+        </li>
+    
+    
+</ul>
+
+
+
+        <!-- 如果开启评论功能 -->
+        
+    </div>
+        
+    </div>
+</div>
+
+
+
+<!-- 在文件末尾，</body>标签之前添加 -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Kurong 2026 
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://chenwenling.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Live Photo Script: only load when page contains a live photo -->
+
+
+
+
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://chenwenling.cn/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

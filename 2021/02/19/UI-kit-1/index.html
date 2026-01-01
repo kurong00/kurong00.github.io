@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/header.jpg">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          UGUI优化：图片格式 - Kurong
+        
+    </title>
+
+    <link rel="canonical" href="https://chenwenling.cn/2021/02/19/UI-kit-1/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+<link rel="stylesheet" href="/css/beantech.min.css">
+
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    <!-- 在其他CSS引用之后添加 -->
+    
+<link rel="stylesheet" href="/css/toc.css">
+
+    
+    <!-- 添加custom.css引用 -->
+    
+<link rel="stylesheet" href="/css/custom.css">
+
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('header.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#优化" title="优化">优化</a>
+                            
+                        </div>
+                        <h1>UGUI优化：图片格式</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Kurong on
+                            2021-02-19
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Kurong</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2><span id="x56fex7247x538bx7f29">&#x56FE;&#x7247;&#x538B;&#x7F29;</span></h2>
+<p>Android&#x5E73;&#x53F0;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>&#x4E0D;&#x5E26;&#x900F;&#x660E;&#x901A;&#x9053;&#x4F18;&#x5148;&#x9009;&#x62E9;&#xFF1A;ETC1</li>
+<li>&#x5E26;&#x900F;&#x660E;&#x901A;&#x9053;&#x4F18;&#x5148;&#x9009;&#x62E9;&#xFF1A;ETC2</li>
+<li>&#x4E0A;&#x9762;&#x4E24;&#x79CD;&#x5448;&#x73B0;&#x7684;&#x8D28;&#x91CF;&#x4E0D;&#x591F;&#x7684;&#x8BDD;&#xFF1A;RGBA16</li>
+<li>&#x4F18;&#x5148;&#x987A;&#x5E8F;&#x662F;ETC1 &gt; ETC2 &gt; RGBA16 &gt; RGBA32</li>
+</ul>
+<span id="more"></span>
+<p>IOS&#x5E73;&#x53F0;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>&#x4F18;&#x5148;&#x9009;&#x62E9;&#xFF1A;PVRTC</li>
+<li>&#x5176;&#x6B21;&#x9009;&#x62E9;&#xFF1A;ASTC</li>
+<li>&#x4E0D;&#x5E26;&#x900F;&#x660E;&#x901A;&#x9053;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;ASTC 5X5</li>
+<li>&#x5E26;&#x900F;&#x660E;&#x901A;&#x9053;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;ASTC 4X4</li>
+</ul>
+<p>&#x5360;&#x7528;&#x5185;&#x5B58;&#x8D8A;&#x5C0F;&#x7684;&#x8D34;&#x56FE;&#xFF0C;&#x4EE5;1024X1024&#x7684;&#x8D34;&#x56FE;&#x4E3A;&#x4F8B;&#xFF1A;</p>
+<ul>
+<li>RGBA32 Bit&#xFF1A;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x5360;&#x7528;32&#x4F4D;4&#x5B57;&#x8282;&#xFF0C;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x662F;1024 x 1024 x 4 = 4M</li>
+<li>RGBA16 Bit&#xFF1A;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x5360;&#x7528;16&#x4F4D;2&#x5B57;&#x8282;&#xFF0C;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x662F;1024 x 1024 x 2 = 2M</li>
+<li>RGB ETC1 4Bit&#xFF1A;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x5360;&#x7528;4&#x4F4D;0.5&#x5B57;&#x8282;&#xFF0C;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x662F;1024 x 1024 x 0.5 = 0.5M</li>
+<li>RGB ETC2 8Bit&#xFF1A;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x5360;&#x7528;8&#x4F4D;1&#x5B57;&#x8282;&#xFF0C;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x662F;1024 x 1024 x 1 = 1M</li>
+<li>RGBA PVRTC 4Bit&#xFF1A;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x5360;&#x7528;4&#x4F4D;0.5&#x5B57;&#x8282;&#xFF0C;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x662F;1024 x 1024 x 0.5 = 0.5M</li>
+<li>RGBA ASTC 4X4&#xFF1A;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x5360;&#x7528;8&#x4F4D;1&#x5B57;&#x8282;&#xFF0C;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x662F;1024 x 1024 x 1 = 1M</li>
+</ul>
+<h2><span id="x6279x91cfx8bbex7f6e">&#x6279;&#x91CF;&#x8BBE;&#x7F6E;</span></h2>
+<p>&#x5B9E;&#x9645;&#x9879;&#x76EE;&#x4E2D;&#x4E0D;&#x4F1A;&#x6BCF;&#x5F20;&#x56FE;&#x7247;&#x90FD;&#x624B;&#x52A8;&#x8BBE;&#x7F6E;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x811A;&#x672C;&#x81EA;&#x52A8;&#x5316;&#x5904;&#x7406;&#x6BCF;&#x5F20;&#x56FE;&#x7247;&#x7684;&#x538B;&#x7F29;&#x683C;&#x5F0F;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEditor;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TextureImport</span> : AssetPostprocessor</span><br><span class="line">{</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">OnPreprocessTexture</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">if</span> (assetPath.<span class="built_in">Contains</span>(<span class="string">&quot;Assets&quot;</span>))</span><br><span class="line">        {</span><br><span class="line">            TextureImporter textureImporter = AssetImporter.<span class="built_in">GetAtPath</span>(assetPath) as TextureImporter;</span><br><span class="line">            textureImporter.textureType = TextureImporterType.Sprite;/</span><br><span class="line">            textureImporter.mipmapEnabled = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//&#x8BBE;&#x7F6E;&#x5404;&#x5E73;&#x53F0;&#x7684;&#x538B;&#x7F29;&#x683C;&#x5F0F;</span></span><br><span class="line">            TextureImporterPlatformSettings settings = <span class="keyword">new</span> <span class="built_in">TextureImporterPlatformSettings</span>();</span><br><span class="line">            settings.overridden = <span class="literal">true</span>;</span><br><span class="line">            settings.name = <span class="string">&quot;iPhone&quot;</span>;</span><br><span class="line">            settings.format = TextureImporterFormat.ASTC_RGBA_4x4;</span><br><span class="line">            textureImporter.<span class="built_in">SetPlatformTextureSettings</span>(settings);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2023/10/15/UI-kit-3/" data-toggle="tooltip" data-placement="top" title="UGUI优化：本地化">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2020/07/05/shader-learning10/" data-toggle="tooltip" data-placement="top" title="Unity Shader 入门（十）：卡通素描Shader">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">图片压缩</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">批量设置</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#优化" title="优化">优化</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "kurong00";
+    var disqus_identifier = "https://chenwenling.cn/2021/02/19/UI-kit-1/";
+    var disqus_url = "https://chenwenling.cn/2021/02/19/UI-kit-1/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Kurong 2026 
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://chenwenling.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Live Photo Script: only load when page contains a live photo -->
+
+
+
+
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://chenwenling.cn/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

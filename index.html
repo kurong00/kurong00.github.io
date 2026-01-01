@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/header.jpg">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Kurong
+        
+    </title>
+
+    <link rel="canonical" href="https://chenwenling.cn/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+<link rel="stylesheet" href="/css/beantech.min.css">
+
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    <!-- 在其他CSS引用之后添加 -->
+    
+<link rel="stylesheet" href="/css/toc.css">
+
+    
+    <!-- 添加custom.css引用 -->
+    
+<link rel="stylesheet" href="/css/custom.css">
+
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/title.jpg') 
+            /*config*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="site-heading">
+                        <h1>Kurong</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading"></span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Kurong</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
+<!-- USE SIDEBAR -->
+    <!-- Sidebar Container -->
+    <div class="col-lg-3 col-md-3 hidden-sm hidden-xs sidebar-container">
+        
+            <!-- Featured Tags -->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+            
+            <a href="/tags/#优化" title="优化" rel="2">优化</a>
+            
+        
+            
+            <a href="/tags/#大固其其" title="大固其其" rel="8">大固其其</a>
+            
+        
+            
+            <a href="/tags/#Shader" title="Shader" rel="10">Shader</a>
+            
+        
+    </div>
+</section>
+
+            <hr>
+        
+            <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
+
+        
+            <img id = "avatar_pic" src="/img/avatar.jpg" />
+        
+
+        
+            <p>人的脆弱和坚强都超乎自己的想象。有时，我可能脆弱得一句话就泪流满面，有时，也发现自己咬着牙走了很长的路</p>
+        
+
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+            
+
+            
+
+            
+
+            
+                <li>
+                    <a target="_blank"  href="https://github.com/kurong00">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+            
+            
+        </ul>
+    </div>
+</section>
+            <hr>
+        
+            
+  <h5>RECENT POSTS</h3>
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/2025/08/23/dairy-09/">当年星</a>
+        </li>
+      
+        <li>
+          <a href="/2025/06/08/dairy-07/">未寄出的信</a>
+        </li>
+      
+        <li>
+          <a href="/2025/03/16/dairy-08/">2024年度歌曲盘点</a>
+        </li>
+      
+        <li>
+          <a href="/2024/12/22/dairy-06/">小潮食记</a>
+        </li>
+      
+        <li>
+          <a href="/2024/04/06/dairy-05/">老派少女回乡记</a>
+        </li>
+      
+    </ul>
+  </div>
+
+            <hr>
+        
+            
+    <h5>ARCHIVES</h5>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">August 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">June 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+
+            <hr>
+        
+    </div>
+
+    <!-- Post Container -->
+    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 post-container">
+        <!-- Main Content -->
+
+
+<div class="post-preview">
+
+    <a href="/2025/08/23/dairy-09/">
+        <h2 class="post-title">
+            当年星
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            
+        
+        
+&#x524D;&#x4E00;&#x9635;&#x4E50;&#x961F;&#x5DE1;&#x6F14;&#x5230;&#x676D;&#x5DDE;&#xFF08;&#x5F53;&#x7136;&#x6211;&#x5DF2;&#x63D0;&#x524D;&#x4E70;&#x4E86;&#x65E9;&#x9E1F;&#x7968;&#xFF09;&#xFF0C;&#x4E70;&#x7968;&#x7684;&#x65F6;&#x5019;&#x6CA1;&#x6709;&#x5173;&#x6CE8;&#x5730;&#x70B9;&#x5728;&#x6D59;&#x5927;&#x68EE;&#x6797;&#xFF0C;&#x4E34;&#x5230;&#x6F14;&#x51FA;&#x5F53;&#x5929;&#x6211;&#x4E00;&#x67E5;&#x53D1;&#x73B0;&#x8DEF;&#x7A0B;&#x8981;&#x4E00;&#x4E2A;&#x591A;&#x5C0F;&#x65F6;&#x1F972;&#xFF0C;&#x53D1;&#x73B0;&#x8FD9;&#x4E00;&#x70B9;&#x7684;&#x65F6;&#x5019;&#x5DF2;&#x7ECF;&#x6709;&#x70B9;&#x665A;&#x4E86;&#xFF0C;&#x53FC;&#x4E86;&#x7247;&#x9762;&#x5305;&#x8D76;&#x7D27;&#x51FA;&#x95E8;&#x3002;&#x665A;&#x4E0A;&#x516B;&#x70B9;&#x5929;&#x5DF2;&#x7ECF;&#x5B8C;&#x5168;&#x53D8;&......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2025-08-23
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#大固其其" title="大固其其">大固其其</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2025/06/08/dairy-07/">
+        <h2 class="post-title">
+            未寄出的信
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            
+        
+        
+&#x4E00;&#x4E2A;&#x62D6;&#x6B20;&#x592A;&#x4E45;&#x7684;&#x66F4;&#x65B0;&#xFF0C;&#x804A;&#x4E00;&#x804A;&#x53BB;&#x5E74;&#x53D1;&#x751F;&#x7684;&#x4E00;&#x4E9B;&#x4E8B;&#x3002;
+&#x54C8;&#x5708;&#x5927;&#x6218;&#x4E59;&#x6E38;
+&#x5148;&#x7ED9;&#x4E0D;&#x4E86;&#x89E3;&#x8FD9;&#x4EF6;&#x4E8B;&#x7684;&#x670B;&#x53CB;&#x7701;&#x6D41;&#x4E00;&#x4E0B;&#x524D;&#x56E0;&#x540E;&#x679C;&#xFF1A;&#x8D77;&#x56E0;&#x662F;&#x4E00;&#x4F4D;rapper&#xFF08;&#x4E43;&#x4E07;&#xFF09;&#x5728;&#x6296;&#x97F3;&#x4E0A;&#x53D1;&#x5E03;&#x52A8;&#x6001;&#xFF0C;&#x6587;&#x6848;&#x662F;&#x7528;&#x81EA;&#x6211;&#x4EE3;&#x5165;&#x7684;&#x53E3;&#x543B;&#x548C;&#x300A;&#x604B;&#x4E0E;&#x6DF1;&#x7A7A;&#x300B;&#xFF08;&#x4E00;&#x4E2A;&#x4E59;&#x6E38;&#xFF09;&#x4E2D;&#x7684;&#x5176;&#x4E2D;&#x4E00;&#x4F4D;&#......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2025-06-08
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#大固其其" title="大固其其">大固其其</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2025/03/16/dairy-08/">
+        <h2 class="post-title">
+            2024年度歌曲盘点
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            &#x6536;&#x5F55;10&#x9996;2024&#x5E74;&#x65B0;&#x53D1;&#x884C;&#x7684;&#x4E13;&#x8F91;&#x5355;&#x66F2;
+01&#xFF1A;&#x5F53;&#x4E00;&#x4E2A;&#x4EBA; To B - &#x5730;&#x78C1;&#x5361;
+&#x4E2D;&#x6587;&#x8BED;&#x5883;&#x4E0B;&#x53C8;&#x80FD;&#x5F88;&#x597D;&#x7684;&#x878D;&#x5408;Soul&#x97F3;&#x4E50;&#x7684;&#x9EC4;&#x91D1;70&#x5E74;&#x4EE3;&#x98CE;&#x5473;&#xFF0C;&#x6D6A;&#x6F2B;&#x67D4;&#x60C5;&#xFF0C;&#x590D;&#x53E4;&#x4E0D;&#x662F;&#x7EC8;&#x70B9;&#x662F;&#x73B0;&#x5728;&#x7684;&#x4E00;&#x79CD;&#x62BC;&#x97F5;&#xFF0C;&#x540C;&#x4E13;&#x7684;&#x300A;&#x7231;&#x603B;&#x65F6;&#x523B;&#x76DB;&#x5F00;&#x300B;&#x4E5F;&#x975E;&#x5E38;&#x63A8;&#x8350;
+
+        
+        
+02&#xFF1A;&#x6CA1;&#x5565;&#x597D;&#x8BF4; - &#x65B9;&#x5927;&#x540C;
+&#x6211;&#x4EEC;&#x8BF4;&#x4E00;&#x5F20;&#x96BD;&#x6C38;&#x......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2025-03-16
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#大固其其" title="大固其其">大固其其</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2024/12/22/dairy-06/">
+        <h2 class="post-title">
+            小潮食记
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            
+        
+        
+&#x4E0B;&#x534A;&#x5E74;&#x9519;&#x5CF0;&#x51FA;&#x6E38;&#x7684;&#x76EE;&#x7684;&#x5730;&#x9009;&#x5728;&#x4E86;&#x6F6E;&#x6C55;&#xFF0C;&#x8BA1;&#x5212;&#x65C5;&#x884C;&#x5B9E;&#x5728;&#x662F;&#x4E00;&#x9879;&#x52B3;&#x5FC3;&#x8D39;&#x795E;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x6240;&#x5E78;&#x6211;&#x4EEC;&#x7684;&#x76EE;&#x7684;&#x5C31;&#x662F;&#x5403;&#xFF0C;&#x6F6E;&#x6C55;&#x662F;&#x6F6E;&#x5DDE;&#x548C;&#x6C55;&#x5934;&#x4E24;&#x4E2A;&#x57CE;&#x5E02;&#x7684;&#x603B;&#x79F0;&#xFF0C;&#x4E24;&#x4E2A;&#x5730;&#x65B9;&#x79BB;&#x5F97;&#x5F88;&#x8FD1;&#xFF08;&#x5927;&#x7EA6;1&#x5C0F;&#x65F6;&#x7684;&#x8F66;&#x7A0B;&#xFF09;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x5230;&#x7684;&#x6C55;&#x5934;&#xFF0C;&#x4E0B;&#x98DE;&#x673A;&#x540E;&#x6253;&#x4E86;&#x4E2A;&#x8D77;&#x6B65;&#x4EF7;&......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2024-12-22
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#大固其其" title="大固其其">大固其其</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2024/04/06/dairy-05/">
+        <h2 class="post-title">
+            老派少女回乡记
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            
+        
+        
+&#x9664;&#x5915;&#x591C;
+&#x540E;&#x75AB;&#x60C5;&#x65F6;&#x4EE3;&#x7B2C;&#x4E00;&#x6B21;&#x56DE;&#x5BB6;&#x8FC7;&#x5E74;&#xFF0C;&#x6CA1;&#x60F3;&#x5230;&#x77ED;&#x77ED;&#x4E24;&#x5E74;&#x5DF2;&#x7ECF;&#x8BA9;&#x6211;&#x4F4E;&#x4F30;&#x4E86;&#x6625;&#x8FD0;&#x7684;&#x8270;&#x96BE;&#x7A0B;&#x5EA6;&#xFF0C;&#x597D;&#x5728;&#x70ED;&#x5FC3;&#x7684;&#x540C;&#x4E8B;&#x5E2E;&#x5FD9;&#x62A2;&#x5230;&#x4E86;&#x8F66;&#x7968;&#xFF0C;&#x9664;&#x5915;&#x5F53;&#x5929;&#x98CE;&#x98CE;&#x706B;&#x706B;&#x7684;&#x8E0F;&#x4E0A;&#x8FD4;&#x4E61;&#x65C5;&#x7A0B;&#x3002;
+&#x6B63;&#x6708;&#x5929;&#x9ED1;&#x7684;&#x65E9;&#xFF0C;&#x665A;&#x996D;&#x70B9;&#x62B5;&#x8FBE;&#x8F66;&#x7AD9;&#xFF0C;&#x62D6;&#x7740;&#x884C;&#x674E;&#x51FA;&#x7AD9;&#x540E;&#x5DF2;&#x7ECF;&#x662F;&#x534E;&#x706F;&#x521D;......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2024-04-06
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#大固其其" title="大固其其">大固其其</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2023/12/24/dairy-04/">
+        <h2 class="post-title">
+            2023年度歌曲盘点
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            2023&#x5E74;&#x53EA;&#x5269;&#x4E0B;&#x51E0;&#x5929;&#x4E86;&#xFF0C;&#x4E0D;&#x77E5;&#x9053;&#x4ECE;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x5F00;&#x59CB;&#xFF0C;&#x6BCF;&#x5230;&#x5E74;&#x672B;&#x603B;&#x6709;&#x5404;&#x79CD;&#x5404;&#x6837;&#x7684;app&#x8FDB;&#x884C;&#x5E74;&#x7EC8;&#x603B;&#x7ED3;&#xFF08;&#x6700;&#x79BB;&#x8C31;&#x7684;&#x662F;&#x6536;&#x5230;&#x8FC7;&#x770B;&#x623F;&#x5C0F;&#x7A0B;&#x5E8F;&#x7684;&#x5E74;&#x7EC8;&#x62A5;&#x544A;&#xFF09;&#x3002;&#x4E0D;&#x8FC7;&#x90FD;&#x505A;&#x5F97;&#x5DEE;&#x5F3A;&#x4EBA;&#x610F;&#xFF0C;&#x4E0D;&#x5982;&#x6211;&#x81EA;&#x5DF1;&#x6765;&#x505A;&#x4E00;&#x4E2A;&#x5E74;&#x7EC8;&#x97F3;&#x4E50;&#x76D8;&#x70B9;&#xFF08;&#x6413;&#x6413;&#x624B;&#xFF09;&#x3002;
+&#x65B0;&#x6B4C;&#x901F;&#x9012;
+&#x6536;&#x5F55;10&#x9996;2023&#x5E74;&#x65B0;&#x53D......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2023-12-24
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#大固其其" title="大固其其">大固其其</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2023/11/18/dairy-03/">
+        <h2 class="post-title">
+            问诊
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            
+        
+        
+&#x5468;&#x4E09;&#x5348;&#x996D;&#x7684;&#x65F6;&#x5019;&#x53D1;&#x73B0;&#x624B;&#x81C2;&#x80BF;&#x4E86;&#x4E00;&#x5757;&#xFF0C;&#x4E0A;&#x9762;&#x8FD8;&#x6D6E;&#x7740;&#x661F;&#x661F;&#x70B9;&#x70B9;&#x7684;&#x7EA2;&#x6591;&#xFF0C;&#x6211;&#x60F3;&#x53EF;&#x80FD;&#x662F;&#x88AB;&#x5947;&#x602A;&#x7684;&#x866B;&#x5B50;&#x54AC;&#x4E86;&#xFF0C;&#x53C8;&#x6216;&#x8005;&#x662F;&#x8001;&#x6BDB;&#x75C5;&#x8368;&#x9EBB;&#x75B9;&#xFF0C;&#x6CA1;&#x5F53;&#x56DE;&#x4E8B;&#xFF1B;&#x6CA1;&#x6210;&#x60F3;&#x4E0B;&#x5348;&#x7684;&#x65F6;&#x5019;&#x624B;&#x81C2;&#x75D2;&#x7684;&#x8D8A;&#x6F14;&#x6108;&#x70C8;&#xFF0C;&#x75BC;&#x5927;&#x6982;&#x8FD8;&#x80FD;&#x5FCD;&#x53D7;&#xFF0C;&#x75D2;&#x662F;&#x4E07;&#x4E07;&#x4E0D;&#x884C;&#x7684;&#x3002;&#x4F46;&#x6211;&#x62C5;&#x5FC3;&#x662F;&#......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2023-11-18
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#大固其其" title="大固其其">大固其其</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2023/10/29/dairy-02/">
+        <h2 class="post-title">
+            亚运游逛记录
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            &#x4E9A;&#x8FD0;&#x4F1A;&#x7ED3;&#x675F;&#x6709;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#xFF0C;&#x4F5C;&#x4E3A;&#x5927;&#x8D5B;&#x578B;&#x89C2;&#x4F17;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x662F;&#x6070;&#x5DE7;&#x5728;&#x676D;&#x5DDE;&#x4E3E;&#x529E;&#xFF0C;&#x5927;&#x6982;&#x4E5F;&#x4E0D;&#x4F1A;&#x5343;&#x91CC;&#x8FE2;&#x8FE2;&#x5954;&#x8D74;&#x4E00;&#x4E2A;&#x964C;&#x751F;&#x7684;&#x57CE;&#x5E02;&#x770B;&#x6BD4;&#x8D5B;&#x3002;&#x5E74;&#x4E2D;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x867D;&#x7136;&#x8857;&#x9053;&#x4E24;&#x65C1;&#x90FD;&#x5DF2;&#x7ECF;&#x8D34;&#x4E0A;&#x4E86;&#x4E9A;&#x8FD0;&#x4F1A;&#x6807;&#x8BED;&#xFF0C;&#x51B7;&#x4E0D;&#x4E01;&#x4E5F;&#x4F1A;&#x53D1;&#x73B0;&#x7EA2;&#x7EFF;&#x706F;&#x7684;&#x5C0F;&#x4EBA;&#x53D8;&#x6210;&#x83B2;&#x83B2;&#x9B54;&#x6027;&#x7684;&#x5FAE;&#x7B11;&#xFF......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2023-10-29
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#大固其其" title="大固其其">大固其其</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2023/10/15/UI-kit-3/">
+        <h2 class="post-title">
+            UGUI优化：本地化
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            &#x8FD9;&#x4E00;&#x5E74;&#x9879;&#x76EE;&#x6709;&#x4E86;&#x672C;&#x5730;&#x5316;&#x7684;&#x9700;&#x6C42;&#xFF0C;&#x8BB0;&#x5F55;&#x4E00;&#x4E0B;&#x591A;&#x8BED;&#x8A00;&#x4E2D;&#x8FC7;&#x7A0B;&#x4E2D;&#x9047;&#x5230;&#x7684;&#x8BED;&#x8A00;&#x95EE;&#x9898;
+&#x8BED;&#x8A00;&#x9009;&#x62E9;
+&#x6839;&#x636E;Newzoo&#x6570;&#x636E;&#xFF0C;&#x5168;&#x7403;&#x6E38;&#x620F;&#x6536;&#x5165;&#x524D;&#x5341;&#x7684;&#x56FD;&#x5BB6;&#x548C;&#x5730;&#x533A;&#x4E3A;&#xFF1A;&#x4E2D;&#x56FD;&#xFF0C;&#x7F8E;&#x56FD;&#xFF0C;&#x65E5;&#x672C;&#xFF0C;&#x97E9;&#x56FD;&#xFF0C;&#x5FB7;&#x56FD;&#xFF0C;&#x82F1;&#x56FD;&#xFF0C;&#x6CD5;&#x56FD;&#xFF0C;&#x52A0;&#x62FF;&#x5927;&#xFF0C;&#x610F;&#x5927;&#x5229;&#x548C;&#x5DF4;&#x897F;&#x3002;&#x6B64;&#x6392;&#x540D;&#x4E00;&#x76F4;&#x975E;&#x5E38;&#x7A33;&#x5B9A;&#xFF......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2023-10-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#优化" title="优化">优化</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2021/02/19/UI-kit-1/">
+        <h2 class="post-title">
+            UGUI优化：图片格式
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+            &#x56FE;&#x7247;&#x538B;&#x7F29;
+Android&#x5E73;&#x53F0;&#x4E0B;&#xFF1A;
+
+&#x4E0D;&#x5E26;&#x900F;&#x660E;&#x901A;&#x9053;&#x4F18;&#x5148;&#x9009;&#x62E9;&#xFF1A;ETC1
+&#x5E26;&#x900F;&#x660E;&#x901A;&#x9053;&#x4F18;&#x5148;&#x9009;&#x62E9;&#xFF1A;ETC2
+&#x4E0A;&#x9762;&#x4E24;&#x79CD;&#x5448;&#x73B0;&#x7684;&#x8D28;&#x91CF;&#x4E0D;&#x591F;&#x7684;&#x8BDD;&#xFF1A;RGBA16
+&#x4F18;&#x5148;&#x987A;&#x5E8F;&#x662F;ETC1 &gt; ETC2 &gt; RGBA16 &gt; RGBA32
+
+
+IOS&#x5E73;&#x53F0;&#x4E0B;&#xFF1A;
+
+&#x4F18;&#x5148;&#x9009;&#x62E9;&#xFF1A;PVRTC
+&#x5176;&#x6B21;&#x9009;&#x62E9;&#xFF1A;ASTC
+&#x4E0D;&#x5E26;&#x900F;&#x660E;&#x901A;&#x9053;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;ASTC 5X5
+&#x5E26;&#x900F;&#x660E;&#x901A;&#x9053;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;ASTC 4X4
+
+&#x5360;&#x7528;&#x5185;&#x5B58;&#x8D8A;&#x5C0......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Kurong on
+            2021-02-19
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#优化" title="优化">优化</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    
+        <li class="next">
+            <a href="/archives/2/">Older Posts &rarr;</a>
+        </li>
+    
+</ul>
+
+
+
+        <!-- 如果开启评论功能 -->
+        
+    </div>
+        
+    </div>
+</div>
+
+
+
+<!-- 在文件末尾，</body>标签之前添加 -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Kurong 2026 
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://chenwenling.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Live Photo Script: only load when page contains a live photo -->
+
+
+
+
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://chenwenling.cn/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

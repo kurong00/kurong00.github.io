@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/header.jpg">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Unity Shader 入门（六）：边缘发光透明版 - Kurong
+        
+    </title>
+
+    <link rel="canonical" href="https://chenwenling.cn/2020/05/04/shader-learning6/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+<link rel="stylesheet" href="/css/beantech.min.css">
+
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    <!-- 在其他CSS引用之后添加 -->
+    
+<link rel="stylesheet" href="/css/toc.css">
+
+    
+    <!-- 添加custom.css引用 -->
+    
+<link rel="stylesheet" href="/css/custom.css">
+
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('header.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Shader" title="Shader">Shader</a>
+                            
+                        </div>
+                        <h1>Unity Shader 入门（六）：边缘发光透明版</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Kurong on
+                            2020-05-04
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Kurong</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2><span id="x524dx8a00">&#x524D;&#x8A00;</span></h2>
+<p>&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x5199;&#x8FC7;&#x4E00;&#x4E2A;<a href="https://chenwenling.cn/2019/05/02/shader-learning4/#more">&#x8FB9;&#x7F18;&#x53D1;&#x5149;</a>&#x7684;Shader&#xFF0C;&#x8FD9;&#x4E00;&#x6B21;&#x6211;&#x4EEC;&#x6765;&#x5199;&#x8FD9;&#x4E2A;&#x7684;&#x5347;&#x7EA7;&#x7248;&#xFF1A;&#x900F;&#x660E;&#x7269;&#x4F53;&#x7684;&#x8FB9;&#x7F18;&#x53D1;&#x5149;&#x3002;</p>
+<h2><span id="x6548x679cx56fe">&#x6548;&#x679C;&#x56FE;</span></h2>
+<p>&#x9996;&#x5148;&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x6548;&#x679C;&#x56FE;&#xFF1A;<br>
+<img src="/2020/05/04/shader-learning6/1.png" alt="&#x8FB9;&#x7F18;&#x53D1;&#x5149;&#x900F;&#x660E;&#x7248;"></p>
+<span id="more"></span>
+<h2><span id="shaderx4ee3x7801">Shader&#x4EE3;&#x7801;</span></h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Shader <span class="string">&quot;Kurong/Rim/RimLightingTranslucent&quot;</span></span><br><span class="line">{</span><br><span class="line">    Properties</span><br><span class="line">    {</span><br><span class="line">        _Color (<span class="string">&quot;Color&quot;</span>, Color) = (<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">        _AlphaRange(<span class="string">&quot;Alpha Range&quot;</span>,<span class="built_in">Range</span>(<span class="number">0</span>,<span class="number">1</span>)) = <span class="number">0</span></span><br><span class="line">        _RimColor(<span class="string">&quot;Rim Color&quot;</span>,Color) = (<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">    }</span><br><span class="line">    SubShader</span><br><span class="line">    {</span><br><span class="line">        Pass</span><br><span class="line">        {</span><br><span class="line">            Tags { <span class="string">&quot;Queue&quot;</span> = <span class="string">&quot;Transparent&quot;</span> <span class="string">&quot;RenderType&quot;</span> = <span class="string">&quot;Transparent&quot;</span> <span class="string">&quot;IngoreProject&quot;</span> = <span class="string">&quot;True&quot;</span>}</span><br><span class="line">            LOD <span class="number">200</span></span><br><span class="line">            ZWrite Off</span><br><span class="line">            Blend SrcAlpha OneMinusSrcAlpha</span><br><span class="line"></span><br><span class="line">            CGPROGRAM</span><br><span class="line"></span><br><span class="line">            <span class="meta">#<span class="keyword">pragma</span> vertex vert</span></span><br><span class="line">            <span class="meta">#<span class="keyword">pragma</span> fragment frag</span></span><br><span class="line">            <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;UnityCG.cginc&quot;</span></span></span><br><span class="line"></span><br><span class="line">            sampler2D _NormalMap;</span><br><span class="line">            <span class="type">float</span> _AlphaRange;</span><br><span class="line">            float4 _RimColor;</span><br><span class="line">            fixed4 _Color;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">struct</span> <span class="title class_">a2v</span></span><br><span class="line">            {</span><br><span class="line">                float4 vertex : POSITION;</span><br><span class="line">                float3 normal : NORMAL;</span><br><span class="line">            };</span><br><span class="line"></span><br><span class="line">            <span class="keyword">struct</span> <span class="title class_">v2f</span></span><br><span class="line">            {</span><br><span class="line">                float4 pos : SV_POSITION;</span><br><span class="line">                float3 normalDir : TEXCOORD0;</span><br><span class="line">                float3 worldPos : TEXCOORD1;</span><br><span class="line">            };</span><br><span class="line"></span><br><span class="line">            <span class="function">v2f <span class="title">vert</span> <span class="params">(a2v v)</span></span></span><br><span class="line"><span class="function">            </span>{</span><br><span class="line">                v2f o;</span><br><span class="line">                o.pos = <span class="built_in">UnityObjectToClipPos</span>(v.vertex);</span><br><span class="line">                o.normalDir = <span class="built_in">UnityObjectToWorldNormal</span>(v.normal);</span><br><span class="line">                o.worldPos = <span class="built_in">mul</span>(unity_ObjectToWorld,v.vertex).xyz;</span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            <span class="function">fixed4 <span class="title">frag</span> <span class="params">(v2f v)</span> : COLOR</span></span><br><span class="line"><span class="function">            {</span></span><br><span class="line">                float3 viewDir = <span class="built_in">normalize</span>(_WorldSpaceCameraPos - v.worldPos);</span><br><span class="line">                <span class="type">float</span> normalDotViewDir = <span class="built_in">saturate</span>(<span class="built_in">dot</span>(<span class="built_in">normalize</span>(v.normalDir),viewDir));</span><br><span class="line">                fixed3 diffuse = normalDotViewDir *_Color;</span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">fixed4</span>(diffuse + _RimColor ,(<span class="number">1</span> - normalDotViewDir) * (<span class="number">1</span> - _AlphaRange) + _AlphaRange);</span><br><span class="line">            }</span><br><span class="line">            ENDCG</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    FallBack <span class="string">&quot;Diffuse&quot;</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h2><span id="x900fx660ex5ea6x6df7x5408">&#x900F;&#x660E;&#x5EA6;&#x6DF7;&#x5408;</span></h2>
+<p>&#x4E0A;&#x4E00;&#x7BC7;&#x6211;&#x4EEC;&#x4E86;&#x89E3;&#x4E86;&#x900F;&#x660E;&#x5EA6;&#x6DF7;&#x5408;&#x7684;&#x539F;&#x7406;&#x4EE5;&#x53CA;&#x4E00;&#x4E9B;<a href="https://chenwenling.cn/2019/05/03/shader-learning5/#more">&#x900F;&#x660E;&#x6548;&#x679C;&#x77E5;&#x8BC6;&#x50A8;&#x5907;</a>&#xFF0C;&#x800C;Unity&#x4E2D;&#xFF0C;&#x4E3A;&#x4E86;&#x8FDB;&#x884C;&#x900F;&#x660E;&#x5EA6;&#x6DF7;&#x5408;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7528;&#x5230; <code>Blend</code> &#x547D;&#x4EE4;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">&#x8BED;&#x6CD5;</th>
+<th style="text-align:center">&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Blend Off</td>
+<td style="text-align:center">&#x5173;&#x95ED;&#x6DF7;&#x5408;&#xFF08;&#x8FD9;&#x662F;&#x9ED8;&#x8BA4;&#x7684;&#x72B6;&#x6001;&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:center">Blend SrcFactor DstFactor</td>
+<td style="text-align:center">&#x5F00;&#x542F;&#x6DF7;&#x5408;&#xFF0C;&#x8BE5;&#x7247;&#x5143;&#x4EA7;&#x751F;&#x7684;&#x989C;&#x8272; <code>SrcFactor</code>. &#x5DF2;&#x5B58;&#x5728;&#x4E8E;&#x5C4F;&#x5E55;&#x7684;&#x989C;&#x8272; <code>DstFactor</code>&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x4E24;&#x8005;&#x53E0;&#x52A0;&#x5728;&#x4E00;&#x8D77;&#x5B58;&#x5165;&#x989C;&#x8272;&#x7F13;&#x51B2;&#x3002;</td>
+</tr>
+<tr>
+<td style="text-align:center">Blend SrcFactor DstFactor, SrcFactorA DstFactorA</td>
+<td style="text-align:center">&#x539F;&#x7406;&#x540C;&#x4E0A;&#xFF0C;&#x4E0D;&#x8FC7;&#x4F7F;&#x7528;&#x4E86;&#x4E0D;&#x540C;&#x7684;&#x6DF7;&#x5408;&#x56E0;&#x5B50;</td>
+</tr>
+<tr>
+<td style="text-align:center">BlendOp Op</td>
+<td style="text-align:center">&#x4E0D;&#x540C;&#x4E8E;&#x4E0A;&#x9762;&#x7684;&#x989C;&#x8272;&#x6DF7;&#x5408;&#xFF0C;&#x800C;&#x662F;&#x4F7F;&#x7528;<a href="https://docs.unity3d.com/2019.2/Documentation/Manual/SL-Blend.html">Blend Operation</a>&#x6765;&#x5BF9;&#x5B83;&#x4EEC;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;</td>
+</tr>
+<tr>
+<td style="text-align:center">BlendOp OpColor, OpAlpha</td>
+<td style="text-align:center">&#x539F;&#x7406;&#x540C;&#x4E0A;&#xFF0C;&#x4E0D;&#x8FC7;&#x91C7;&#x7528;&#x4E0D;&#x540C;&#x7684;Blend Operation&#x6765;&#x64CD;&#x4F5C;Color&#x548C;Alpha&#x7684;&#x901A;&#x9053;</td>
+</tr>
+</tbody>
+</table>
+<p>&#x6DF7;&#x5408;&#x56E0;&#x5B50;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">&#x540D;&#x79F0;</th>
+<th style="text-align:center">&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">One</td>
+<td style="text-align:center">&#x56E0;&#x5B50;&#x4E3A;1&#xFF0C;&#x8868;&#x793A;&#x8BA9;&#x6E90;&#x989C;&#x8272;&#x6216;&#x8005;&#x76EE;&#x6807;&#x989C;&#x8272;&#x901A;&#x8FC7;</td>
+</tr>
+<tr>
+<td style="text-align:center">Zero</td>
+<td style="text-align:center">&#x56E0;&#x5B50;&#x4E3A;0&#xFF0C;&#x7528;&#x6765;&#x5220;&#x9664;&#x6E90;&#x989C;&#x8272;&#x6216;&#x8005;&#x76EE;&#x6807;&#x989C;&#x8272;</td>
+</tr>
+<tr>
+<td style="text-align:center">SrcColor</td>
+<td style="text-align:center">&#x56E0;&#x5B50;&#x4E3A;&#x6E90;&#x989C;&#x8272;</td>
+</tr>
+<tr>
+<td style="text-align:center">SrcAlpha</td>
+<td style="text-align:center">&#x56E0;&#x5B50;&#x4E3A;&#x6E90;&#x989C;&#x8272;&#x7684;&#x900F;&#x660E;&#x5EA6;</td>
+</tr>
+<tr>
+<td style="text-align:center">DstColor</td>
+<td style="text-align:center">&#x56E0;&#x5B50;&#x4E3A;&#x76EE;&#x6807;&#x989C;&#x8272;</td>
+</tr>
+<tr>
+<td style="text-align:center">DstAlpha</td>
+<td style="text-align:center">&#x56E0;&#x5B50;&#x4E3A;&#x76EE;&#x6807;&#x989C;&#x8272;&#x7684;&#x900F;&#x660E;&#x5EA6;</td>
+</tr>
+<tr>
+<td style="text-align:center">OneMinusSrcColor</td>
+<td style="text-align:center">&#x56E0;&#x5B50;&#x4E3A; (1 - &#x6E90;&#x989C;&#x8272;) &#x7684;&#x503C;</td>
+</tr>
+<tr>
+<td style="text-align:center">OneMinusSrcAlpha</td>
+<td style="text-align:center">&#x56E0;&#x5B50;&#x4E3A; (1 - &#x6E90;&#x989C;&#x8272;&#x7684;&#x900F;&#x660E;&#x5EA6;) &#x7684;&#x503C;</td>
+</tr>
+<tr>
+<td style="text-align:center">OneMinusDstColor</td>
+<td style="text-align:center">&#x56E0;&#x5B50;&#x4E3A; (1 - &#x76EE;&#x6807;&#x989C;&#x8272;) &#x7684;&#x503C;</td>
+</tr>
+<tr>
+<td style="text-align:center">OneMinusDstAlpha</td>
+<td style="text-align:center">&#x56E0;&#x5B50;&#x4E3A; (1 - &#x76EE;&#x6807;&#x989C;&#x8272;&#x7684;&#x900F;&#x660E;&#x5EA6;) &#x7684;&#x503C;</td>
+</tr>
+</tbody>
+</table>
+<p>&#x6B64;&#x65F6;&#x6211;&#x4EEC;&#x518D;&#x6765;&#x770B;&#x4E0A;&#x9762;&#x8FD9;&#x4E00;&#x5757;&#x4EE3;&#x7801;&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Tags{</span><br><span class="line">        Tags { <span class="string">&quot;Queue&quot;</span> = <span class="string">&quot;Transparent&quot;</span> <span class="string">&quot;RenderType&quot;</span> = <span class="string">&quot;Transparent&quot;</span> <span class="string">&quot;IngoreProject&quot;</span> = <span class="string">&quot;True&quot;</span>}</span><br><span class="line">        LOD <span class="number">200</span></span><br><span class="line">        ZWrite Off</span><br><span class="line">        Blend SrcAlpha OneMinusSrcAlpha</span><br></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x91CC;&#x6709;&#x4E00;&#x4E9B;&#x65B0;&#x7684;&#x77E5;&#x8BC6;&#xFF1A;&#x4E4B;&#x524D;&#x63D0;&#x8FC7;&#x534A;&#x900F;&#x660E;&#x7269;&#x4F53;&#x7684;&#x6E32;&#x67D3;&#x5E8F;&#x5217;&#x8981;&#x8BBE;&#x7F6E;&#x6210; <code>&quot;Queue&quot; = &quot;Transparent&quot;</code> ,&#x800C; <code>&quot;RenderType&quot; = &quot;Transparent&quot;</code> &#x8868;&#x793A;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x4E86;&#x900F;&#x660E;&#x5EA6;&#x6DF7;&#x5408;&#x3002;<code>&quot;IngoreProject&quot; = &quot;True&quot;</code> &#x8868;&#x793A;&#x8FD9;&#x4E2A;Shader&#x4E0D;&#x4F1A;&#x53D7;&#x6295;&#x5C04;&#x5668;&#x7684;&#x5F71;&#x54CD;&#xFF1B;&#x901A;&#x5E38;&#x4F7F;&#x7528;&#x4E86;&#x900F;&#x660E;&#x5EA6;&#x6DF7;&#x5408;&#x7684;Shader Tags&#x90FD;&#x5305;&#x542B;&#x8FD9;&#x4E09;&#x6761;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5728;&#x4E0A;&#x4E00;&#x7BC7;&#x4ECB;&#x7ECD;&#x8FC7;&#x4E3A;&#x4EC0;&#x4E48;&#x900F;&#x660E;&#x5EA6;&#x6DF7;&#x5408;&#x9700;&#x8981;&#x5173;&#x95ED;&#x6DF1;&#x5EA6;&#x5199;&#x5165;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ZWrite Off</span><br></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x5C06;&#x6E90;&#x989C;&#x8272;&#x7684;&#x6DF7;&#x5408;&#x56E0;&#x5B50;&#x8BBE;&#x7F6E;&#x6210;<code>SrcAlpha</code>&#xFF0C;&#x5C06;&#x76EE;&#x6807;&#x989C;&#x8272;&#x7684;&#x6DF7;&#x5408;&#x56E0;&#x5B50;&#x8BBE;&#x7F6E;&#x6210; <code>OneMinusSrcAlpha</code> &#x4EE5;&#x5F97;&#x5230;&#x534A;&#x900F;&#x660E;&#x6548;&#x679C;&#x3002;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Blend SrcAlpha OneMinusSrcAlpha</span><br></pre></td></tr></table></figure>
+<h2><span id="x7ed3x6784x4f53x5b9ax4e49">&#x7ED3;&#x6784;&#x4F53;&#x5B9A;&#x4E49;</span></h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">a2v</span></span><br><span class="line">{</span><br><span class="line">    float4 vertex : POSITION;</span><br><span class="line">    float3 normal : NORMAL;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">v2f</span></span><br><span class="line">{</span><br><span class="line">    float4 pos : SV_POSITION;</span><br><span class="line">    float3 normalDir : TEXCOORD0;</span><br><span class="line">    float3 worldPos : TEXCOORD1;</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+<h3><span id="a2v-xff1ax5305x542bx9876x70b9x7740x8272x5668x8981x7684x6a21x578bx6570x636e">a2v &#xFF1A;&#x5305;&#x542B;&#x9876;&#x70B9;&#x7740;&#x8272;&#x5668;&#x8981;&#x7684;&#x6A21;&#x578B;&#x6570;&#x636E;</span></h3>
+<ul>
+<li>float4 vertex : POSITION; &#x7528;&#x6A21;&#x578B;&#x9876;&#x70B9;&#x7684;&#x5750;&#x6807;&#x586B;&#x5145;vertex&#x53D8;&#x91CF;&#x3002;</li>
+<li>float3 normal : NORMAL; &#x7528;&#x6A21;&#x578B;&#x7A7A;&#x95F4;&#x7684;&#x6CD5;&#x7EBF;&#x65B9;&#x5411;&#x5411;&#x91CF;&#x586B;&#x5145;normal&#x53D8;&#x91CF;</li>
+</ul>
+<h3><span id="v2f-xff1ax7528x4e8ex9876x70b9x7740x8272x5668x548cx7247x5143x7740x8272x5668x4e4bx95f4x4f20x9012x4fe1x606f">v2f &#xFF1A;&#x7528;&#x4E8E;&#x9876;&#x70B9;&#x7740;&#x8272;&#x5668;&#x548C;&#x7247;&#x5143;&#x7740;&#x8272;&#x5668;&#x4E4B;&#x95F4;&#x4F20;&#x9012;&#x4FE1;&#x606F;</span></h3>
+<ul>
+<li>float4 pos : SV_POSITION; &#x7528;&#x88C1;&#x526A;&#x7A7A;&#x95F4;&#x7684;&#x4F4D;&#x7F6E;&#x4FE1;&#x606F;&#x586B;&#x5145;pos&#x53D8;&#x91CF;</li>
+<li>float3 normalDir : TEXCOORD0; &#x7528;&#x6A21;&#x578B;&#x7684;&#x7B2C;&#x4E00;&#x5957;&#x7EB9;&#x7406;&#x5750;&#x6807;&#x586B;&#x5145;normalDir&#x53D8;&#x91CF;</li>
+<li>float3 worldPos : TEXCOORD1; &#x7528;&#x6A21;&#x578B;&#x7684;&#x7B2C;&#x4E8C;&#x5957;&#x7EB9;&#x7406;&#x5750;&#x6807;&#x586B;&#x5145;worldPos&#x53D8;&#x91CF;</li>
+</ul>
+<h2><span id="x9876x70b9x7740x8272x5668">&#x9876;&#x70B9;&#x7740;&#x8272;&#x5668;</span></h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">v2f <span class="title">vert</span> <span class="params">(a2v v)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    v2f o;</span><br><span class="line">    o.pos = <span class="built_in">UnityObjectToClipPos</span>(v.vertex);</span><br><span class="line">    o.normalDir = <span class="built_in">UnityObjectToWorldNormal</span>(v.normal);</span><br><span class="line">    o.worldPos = <span class="built_in">mul</span>(unity_ObjectToWorld,v.vertex).xyz;</span><br><span class="line">    <span class="keyword">return</span> o;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<ul>
+<li>UnityObjectToClipPos(v.vertex); &#x5C06;&#x6A21;&#x578B;&#x7A7A;&#x95F4;&#x7684;&#x9876;&#x70B9;&#x4FE1;&#x606F;&#x8F6C;&#x6362;&#x5230;&#x88C1;&#x526A;&#x7A7A;&#x95F4;&#x4E2D;&#x7684;&#x4F4D;&#x7F6E;&#x4FE1;&#x606F;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x4FE1;&#x606F;&#x5B58;&#x50A8;&#x5728;o.pos&#x4E2D;&#x3002;</li>
+<li>UnityObjectToWorldNormal(v.normal); &#x6CD5;&#x7EBF;&#x4ECE;&#x6A21;&#x578B;&#x7A7A;&#x95F4;&#x53D8;&#x6362;&#x5230;&#x4E16;&#x754C;&#x7A7A;&#x95F4;&#x4E2D;&#x5E76;&#x8BA1;&#x7B97;&#x7269;&#x4F53;&#x5728;&#x4E16;&#x754C;&#x7A7A;&#x95F4;&#x4E2D;&#x7684;&#x6CD5;&#x7EBF;&#x5750;&#x6807;&#x3002;</li>
+<li>mul(unity_ObjectToWorld,v.vertex).xyz; &#x5C06;&#x9876;&#x70B9;&#x4ECE;&#x6A21;&#x578B;&#x7A7A;&#x95F4;&#x8F6C;&#x6362;&#x5230;&#x4E16;&#x754C;&#x7A7A;&#x95F4;&#x7684;&#x4FE1;&#x606F;&#x5B58;&#x50A8;&#x5230;worldPos&#x53D8;&#x91CF;&#x4E2D;&#x3002;</li>
+</ul>
+<h2><span id="x7247x5143x7740x8272x5668">&#x7247;&#x5143;&#x7740;&#x8272;&#x5668;</span></h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">fixed4 <span class="title">frag</span> <span class="params">(v2f v)</span> : COLOR</span></span><br><span class="line"><span class="function">{</span></span><br><span class="line">    float3 viewDir = <span class="built_in">normalize</span>(_WorldSpaceCameraPos - v.worldPos);</span><br><span class="line">    <span class="type">float</span> normalDotViewDir = <span class="built_in">saturate</span>(<span class="built_in">dot</span>(<span class="built_in">normalize</span>(v.normalDir),viewDir));</span><br><span class="line">    fixed3 diffuse = normalDotViewDir *_Color;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">fixed4</span>(diffuse + _RimColor ,(<span class="number">1</span> - normalDotViewDir) * (<span class="number">1</span> - _AlphaRange) + _AlphaRange);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<ul>
+<li>fixed4 frag( v2f v ):COLOR &#x6211;&#x4EEC;&#x6CE8;&#x610F;&#x5230;&#x7247;&#x5143;&#x7740;&#x8272;&#x5668;&#x7684;&#x540E;&#x9762;&#x8DDF;&#x7740; <code>: COLOR</code> &#xFF1A;&#x8FD9;&#x662F;Unity&#x63D0;&#x4F9B;&#x7684;Cg/HLSL&#x8BED;&#x4E49;&#x3002;&#x8BED;&#x4E49;&#x53EF;&#x4EE5;&#x544A;&#x8BC9;shader&#x6570;&#x636E;&#x7684;&#x6765;&#x6E90;&#x4EE5;&#x53CA;&#x6570;&#x636E;&#x7684;&#x8F93;&#x51FA;&#x3002;</li>
+<li>float3 viewDir = normalize(_WorldSpaceCameraPos - v.worldPos); &#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x7528; <code>&#x5BF9;&#x8C61;&#x5728;&#x4E16;&#x754C;&#x5750;&#x6807;&#x7CFB;&#x4E2D;&#x7684;&#x4F4D;&#x7F6E;</code> &#x51CF;&#x53BB; <code>&#x6444;&#x50CF;&#x673A;&#x7684;&#x4E16;&#x754C;&#x7A7A;&#x95F4;&#x4F4D;&#x7F6E;</code> &#xFF0C;&#x5E76;&#x8FDB;&#x884C;&#x9010;&#x9876;&#x70B9;&#x5F52;&#x4E00;&#x5316;&#xFF0C;&#x8D4B;&#x7ED9;&#x89C6;&#x7EBF;&#x7684;&#x65B9;&#x5411;</li>
+<li>float normalDotViewDir = saturate(dot(normal,viewDir)); &#x6211;&#x4EEC;&#x83B7;&#x5F97;&#x6CD5;&#x7EBF;&#x4E0E;&#x89C6;&#x7EBF;&#x7684;&#x5939;&#x89D2;</li>
+<li>fixed3 diffuse = normalDotViewDir *_Color; &#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x89C6;&#x7EBF;&#x4E0E;&#x6CD5;&#x7EBF;&#x7684;&#x5939;&#x89D2;&#x548C;&#x4E3B;&#x989C;&#x8272;&#x76F8;&#x4E58;&#x3002;</li>
+<li>return fixed4(diffuse + _RimColor ,(1 - normalDotViewDir) * (1 - _AlphaRange) + _AlphaRange); &#x6700;&#x540E;&#x5C06;&#x6DF7;&#x5408;&#x540E;&#x7684;&#x989C;&#x8272;&#x8F93;&#x51FA;&#x3002;</li>
+</ul>
+<h2><span id="x7ed3x8bed">&#x7ED3;&#x8BED;</span></h2>
+<p>&#x63CF;&#x8FB9;&#x5E38;&#x7528;&#x4E8E;&#x4E00;&#x4E9B;&#x6F2B;&#x753B;&#x98CE;&#x683C;&#x7684;&#x6E38;&#x620F;&#x573A;&#x666F;&#x4E2D;&#xFF0C;&#x80FD;&#x591F;&#x5728;&#x590D;&#x6742;&#x7684;&#x573A;&#x666F;&#x4E2D;&#x7A81;&#x51FA;&#x88AB;&#x7ED8;&#x5236;&#x7684;&#x7269;&#x4F53;&#xFF0C;&#x4E0B;&#x4E00;&#x7BC7;&#x6211;&#x4EEC;&#x5C31;&#x5199;&#x7269;&#x4F53;&#x63CF;&#x8FB9;&#x7684;shader&#x3002;</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2020/05/05/shader-learning7/" data-toggle="tooltip" data-placement="top" title="Unity Shader 入门（七）：模型描边Shader">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2020/05/03/shader-learning5/" data-toggle="tooltip" data-placement="top" title="Unity Shader 入门（五）：透明效果知识储备">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">效果图</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Shader代码</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">透明度混合</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">结构体定义</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">a2v ：包含顶点着色器要的模型数据</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">v2f ：用于顶点着色器和片元着色器之间传递信息</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">顶点着色器</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">片元着色器</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">结语</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Shader" title="Shader">Shader</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "kurong00";
+    var disqus_identifier = "https://chenwenling.cn/2020/05/04/shader-learning6/";
+    var disqus_url = "https://chenwenling.cn/2020/05/04/shader-learning6/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Kurong 2026 
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://chenwenling.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Live Photo Script: only load when page contains a live photo -->
+
+
+
+
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://chenwenling.cn/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/header.jpg">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Unity Shader 入门（三）：查看Shader - Kurong
+        
+    </title>
+
+    <link rel="canonical" href="https://chenwenling.cn/2020/05/01/shader-learning3/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+<link rel="stylesheet" href="/css/beantech.min.css">
+
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    <!-- 在其他CSS引用之后添加 -->
+    
+<link rel="stylesheet" href="/css/toc.css">
+
+    
+    <!-- 添加custom.css引用 -->
+    
+<link rel="stylesheet" href="/css/custom.css">
+
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('header.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Shader" title="Shader">Shader</a>
+                            
+                        </div>
+                        <h1>Unity Shader 入门（三）：查看Shader</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Kurong on
+                            2020-05-01
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Kurong</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2><span id="x65b0x5efashader">&#x65B0;&#x5EFA;Shader</span></h2>
+<p>&#x9996;&#x5148;&#x6211;&#x4EEC;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;Shader&#xFF0C;&#x8FD9;&#x91CC;&#x4EE5; Standard Surface Shader &#x4E3A;&#x4F8B;&#xFF0C;&#x65B0;&#x5EFA;&#x4E4B;&#x540E;&#x6211;&#x4EEC;&#x6253;&#x5F00;Shader&#x6587;&#x4EF6;&#x5E94;&#x8BE5;&#x4F1A;&#x51FA;&#x73B0;&#x5982;&#x4E0B;&#x4EE3;&#x7801;&#xFF1A;</p>
+<span id="more"></span>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Shader <span class="string">&quot;Custom/NewSurfaceShader&quot;</span></span><br><span class="line">{</span><br><span class="line">    Properties</span><br><span class="line">    {</span><br><span class="line">        _Color (<span class="string">&quot;Color&quot;</span>, Color) = (<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">        _MainTex (<span class="string">&quot;Albedo (RGB)&quot;</span>, <span class="number">2</span>D) = <span class="string">&quot;white&quot;</span> {}</span><br><span class="line">        _Glossiness (<span class="string">&quot;Smoothness&quot;</span>, <span class="built_in">Range</span>(<span class="number">0</span>,<span class="number">1</span>)) = <span class="number">0.5</span></span><br><span class="line">        _Metallic (<span class="string">&quot;Metallic&quot;</span>, <span class="built_in">Range</span>(<span class="number">0</span>,<span class="number">1</span>)) = <span class="number">0.0</span></span><br><span class="line">    }</span><br><span class="line">    SubShader</span><br><span class="line">    {</span><br><span class="line">        Tags { <span class="string">&quot;RenderType&quot;</span>=<span class="string">&quot;Opaque&quot;</span> }</span><br><span class="line">        LOD <span class="number">200</span></span><br><span class="line"></span><br><span class="line">        CGPROGRAM</span><br><span class="line">        <span class="comment">// Physically based Standard lighting model, and enable shadows on all light types</span></span><br><span class="line">        <span class="meta">#<span class="keyword">pragma</span> surface surf Standard fullforwardshadows</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Use shader model 3.0 target, to get nicer looking lighting</span></span><br><span class="line">        <span class="meta">#<span class="keyword">pragma</span> target 3.0</span></span><br><span class="line"></span><br><span class="line">        sampler2D _MainTex;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">struct</span> <span class="title class_">Input</span></span><br><span class="line">        {</span><br><span class="line">            float2 uv_MainTex;</span><br><span class="line">        };</span><br><span class="line"></span><br><span class="line">        half _Glossiness;</span><br><span class="line">        half _Metallic;</span><br><span class="line">        fixed4 _Color;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Add instancing support for this shader. You need to check &apos;Enable Instancing&apos; on materials that use the shader.</span></span><br><span class="line">        <span class="comment">// See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.</span></span><br><span class="line">        <span class="comment">// #pragma instancing_options assumeuniformscaling</span></span><br><span class="line">        <span class="built_in">UNITY_INSTANCING_BUFFER_START</span>(Props)</span><br><span class="line">            <span class="comment">// put more per-instance properties here</span></span><br><span class="line">        <span class="built_in">UNITY_INSTANCING_BUFFER_END</span>(Props)</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">surf</span> <span class="params">(Input IN, inout SurfaceOutputStandard o)</span></span></span><br><span class="line"><span class="function">        </span>{</span><br><span class="line">            <span class="comment">// Albedo comes from a texture tinted by color</span></span><br><span class="line">            fixed4 c = <span class="built_in">tex2D</span> (_MainTex, IN.uv_MainTex) * _Color;</span><br><span class="line">            o.Albedo = c.rgb;</span><br><span class="line">            <span class="comment">// Metallic and smoothness come from slider variables</span></span><br><span class="line">            o.Metallic = _Metallic;</span><br><span class="line">            o.Smoothness = _Glossiness;</span><br><span class="line">            o.Alpha = c.a;</span><br><span class="line">        }</span><br><span class="line">        ENDCG</span><br><span class="line">    }</span><br><span class="line">    FallBack <span class="string">&quot;Diffuse&quot;</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>emmm&#x2026;&#x5373;&#x4F7F;&#x4F60;&#x6709;&#x7F16;&#x7A0B;&#x7684;&#x57FA;&#x7840;&#x4E5F;&#x53EF;&#x80FD;&#x770B;&#x7684;&#x4E00;&#x5934;&#x96FE;&#x6C34;&#xFF0C;&#x73B0;&#x5728;&#x5C31;&#x6765;&#x9010;&#x884C;&#x67E5;&#x770B;&#x4EE3;&#x7801;&#x3002;</p>
+<h2><span id="x9010x884cx67e5x770b">&#x9010;&#x884C;&#x67E5;&#x770B;</span></h2>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x8BB2;&#x9010;&#x53E5;&#x8BB2;&#x89E3;&#x8FD9;&#x4E2A;Shader&#xFF0C;&#x5F04;&#x61C2;&#x6BCF;&#x4E00;&#x4E2A;&#x8BED;&#x53E5;&#x7684;&#x610F;&#x4E49;&#x3002;</p>
+<h3><span id="shaderx540dx79f0x8defx5f84">Shader&#x540D;&#x79F0;&#x8DEF;&#x5F84;</span></h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Shader <span class="string">&quot;Custom/NewSurfaceShader&quot;</span></span><br></pre></td></tr></table></figure>
+<p>&#x9996;&#x5148;&#x8FD9;&#x91CC;&#x6807;&#x6CE8;&#x4E86;Shader&#x7684;&#x540D;&#x5B57;&#x548C;&#x8DEF;&#x5F84;&#xFF0C;&#x7B26;&#x53F7; &#x201C;/&#x201D; &#x8868;&#x793A;&#x7684;&#x662F;&#x521B;&#x5EFA;&#x5B50;&#x5C42;&#x7EA7;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x4FEE;&#x6539;&#xFF0C;&#x4F8B;&#x5982;&#x8FD9;&#x91CC;&#x4FEE;&#x6539;&#x4E3A;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Shader <span class="string">&quot;MyShader/FirstShader&quot;</span></span><br></pre></td></tr></table></figure>
+<p>&#x6211;&#x4EEC;&#x7528;&#x8FD9;&#x4E2A;Shader&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x6750;&#x8D28;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x89C1;Shader&#x7684;&#x5C42;&#x7EA7;&#x5C31;&#x50CF;&#x6211;&#x4EEC;&#x8BBE;&#x7F6E;&#x7684;&#x8FD9;&#x6837;<br>
+<img src="/2020/05/01/shader-learning3/1.png" alt="Figure 1"><br>
+&#x8FD9;&#x91CC;&#x6709;&#x4E00;&#x4E2A;&#x6CE8;&#x610F;&#x70B9;&#xFF1A;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x628A;&#x8DEF;&#x5F84;&#x540D;&#x79F0;&#x653E;&#x5728; Hidden&#x4E0B;&#x9762;&#x7684;&#x8BDD;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Shader <span class="string">&quot;Hidden/MyShader/FirstShader&quot;</span></span><br></pre></td></tr></table></figure>
+<p>&#x5219;&#x8868;&#x793A;&#x5728;&#x6750;&#x8D28;&#x9762;&#x677F;&#x4E2D;&#x9690;&#x85CF;&#x6B64;Shader&#xFF0C;&#x4F60;&#x5C06;&#x65E0;&#x6CD5;&#x901A;&#x8FC7;&#x6750;&#x8D28;&#x4E0B;&#x62C9;&#x5217;&#x8868;&#x4E2D;&#x627E;&#x5230;&#x5B83;&#x3002;&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x4F7F;Shader&#x4E0B;&#x62C9;&#x5217;&#x8868;&#x66F4;&#x7CBE;&#x7B80;&#x6574;&#x6D01;&#xFF0C;&#x6216;&#x8005;&#x505A;&#x4E00;&#x4E9B;&#x4E0D;&#x9700;&#x66B4;&#x9732;&#x7684;Shader&#x65F6;&#x5F88;&#x6709;&#x7528;&#x5904;&#x3002;</p>
+<h3><span id="shaderx5c5ex6027">Shader&#x5C5E;&#x6027;</span></h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Properties</span><br><span class="line">{</span><br><span class="line">    _Color (<span class="string">&quot;Color&quot;</span>, Color) = (<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">    _MainTex (<span class="string">&quot;Albedo (RGB)&quot;</span>, <span class="number">2</span>D) = <span class="string">&quot;white&quot;</span> {}</span><br><span class="line">    _Glossiness (<span class="string">&quot;Smoothness&quot;</span>, <span class="built_in">Range</span>(<span class="number">0</span>,<span class="number">1</span>)) = <span class="number">0.5</span></span><br><span class="line">    _Metallic (<span class="string">&quot;Metallic&quot;</span>, <span class="built_in">Range</span>(<span class="number">0</span>,<span class="number">1</span>)) = <span class="number">0.0</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x91CC;&#x662F;shader&#x7684;&#x5C5E;&#x6027;&#x90E8;&#x5206;&#xFF1A;&#x5C5E;&#x6027;&#x7684;&#x683C;&#x5F0F;&#x5199;&#x4F5C;&#x5982;&#x4E0B;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">[Attribute]_Name (<span class="string">&quot;Display Name&quot;</span>,Type) = Default Value</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Attribute&#xFF1A;&#x5C5E;&#x6027;&#x6807;&#x8BB0;&#xFF0C;&#x7528;&#x4E8E;&#x5BF9;&#x5F53;&#x524D;&#x8FD9;&#x6761;&#x5C5E;&#x6027;&#x8FDB;&#x884C;&#x4E00;&#x4E9B;&#x7279;&#x6B8A;&#x7684;&#x5904;&#x7406;&#xFF0C;&#x6B64;&#x6807;&#x8BB0;&#x4E0D;&#x662F;&#x5FC5;&#x9009;&#x9879;&#xFF0C;&#x53EF;&#x4EE5;&#x4E0D;&#x6DFB;&#x52A0;&#xFF0C;&#x540C;&#x65F6;&#x4E00;&#x6761;&#x5C5E;&#x6027;&#x4E0A;&#x4E5F;&#x53EF;&#x4EE5;&#x6709;&#x591A;&#x6761;&#x5C5E;&#x6027;&#x6807;&#x8BB0;&#x3002;</li>
+<li>_Name&#xFF1A;&#x53D8;&#x91CF;&#x540D;&#xFF0C;&#x5728;&#x4E4B;&#x540E;&#x7684;Shader&#x4EE3;&#x7801;&#x4E2D;&#x90FD;&#x7528;&#x8FD9;&#x4E2A;&#x540D;&#x5B57;&#x6765;&#x83B7;&#x53D6;&#x8BE5;&#x5C5E;&#x6027;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x5728;&#x540D;&#x79F0;&#x524D;&#x4E00;&#x5B9A;&#x8981;&#x52A0;<strong>&#x4E0B;&#x5212;&#x7EBF;</strong>&#x3002;</li>
+<li>Display Name&#xFF1A;&#x5728;Unity Inspector&#x4E0A;&#x663E;&#x793A;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x4E3B;&#x8981;&#x8D77;&#x5230;&#x8BF4;&#x660E;&#x89E3;&#x91CA;&#x7684;&#x4F5C;&#x7528;&#x3002;</li>
+<li>Type&#xFF1A;&#x7C7B;&#x578B;&#xFF0C;&#x53EF;&#x80FD;&#x7684;type&#x6240;&#x8868;&#x793A;&#x7684;&#x5185;&#x5BB9;&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#xFF1A;</li>
+<li>Default Value&#xFF1A;&#x4E0A;&#x9762;&#x7C7B;&#x578B;&#x7684;&#x9ED8;&#x8BA4;&#x503C;</li>
+</ul>
+<h4><span id="x5c5ex6027x5206x7c7b">&#x5C5E;&#x6027;&#x5206;&#x7C7B;</span></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">&#x5C5E;&#x6027;&#x6807;&#x8BB0;</th>
+<th style="text-align:center">&#x9002;&#x7528;&#x7C7B;&#x578B;</th>
+<th style="text-align:center">&#x4E3E;&#x4F8B;</th>
+<th style="text-align:center">&#x4F5C;&#x7528;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">HDR</td>
+<td style="text-align:center">Color</td>
+<td style="text-align:center">[HDR]_Color(&#x201C;Color&#x201D;, Color) = (1,1,0,1)</td>
+<td style="text-align:center">&#x5F53;&#x7ED9;&#x989C;&#x8272;&#x6DFB;&#x52A0;&#x4E86;HDR&#x540E;&#xFF0C;&#x5219;&#x5728;&#x6750;&#x8D28;&#x9762;&#x677F;&#x4E2D;&#x7684;&#x989C;&#x8272;&#x4E0A;&#x4F1A;&#x663E;&#x793A;HDR&#x7684;&#x5B57;&#x6837;&#xFF0C;HDR&#x53EF;&#x4EE5;&#x4F7F;&#x989C;&#x8272;&#x4EAE;&#x5EA6;&#x7684;&#x503C;&#x8D85;&#x8FC7;1&#xFF0C;&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x503C;&#x53EF;&#x4EE5;&#x914D;&#x5408;&#x955C;&#x5934;Bloom&#x6548;&#x679C;&#x505A;&#x51FA;&#x7269;&#x4F53;&#x6CDB;&#x5149;&#x7684;&#x89C6;&#x89C9;&#x6548;&#x679C;&#x3002;</td>
+</tr>
+<tr>
+<td style="text-align:center">PowerSlider</td>
+<td style="text-align:center">Range</td>
+<td style="text-align:center">[PowerSlider(3)]_MyRange(&#x201C;Range&#x201D;,Range(0.0,1.0)) = 0.5</td>
+<td style="text-align:center">&#x65B9;&#x4FBF;&#x7528;&#x6237;&#x8C03;&#x8282;&#x6ED1;&#x6746;&#xFF0C;&#x4F8B;&#x5982;&#x6709;&#x4E2A;&#x5C5E;&#x6027;&#x503C;&#x662F;&#x4ECE;0-1,&#x4F46;&#x5728;&#x5927;&#x90E8;&#x5206;&#x60C5;&#x51B5;&#x4E0B;&#x6240;&#x7528;&#x5230;&#x7684;&#x503C;&#x90FD;&#x662F;0-0.1&#xFF0C;&#x540C;&#x65F6;&#x9700;&#x8981;&#x66F4;&#x7CBE;&#x7EC6;&#x7684;&#x5728;&#x8FD9;&#x533A;&#x95F4;&#x8FDB;&#x884C;&#x5FAE;&#x8C03;&#x3002;&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#x7528;&#x6237;&#x96BE;&#x4EE5;&#x63A7;&#x5236;&#x5FAE;&#x8C03;&#xFF0C;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x5C31;&#x53EF;&#x4EE5;&#x5229;&#x7528;PowerSlider&#x6765;&#x89E3;&#x51B3;&#x6B64;&#x95EE;&#x9898;&#x3002;</td>
+</tr>
+<tr>
+<td style="text-align:center">Toggle</td>
+<td style="text-align:center">Range</td>
+<td style="text-align:center">[Toggle]_MyRange(&#x201C;Range&#x201D;,Range(0.0,1.0)) =0.5</td>
+<td style="text-align:center">&#x8868;&#x793A;&#x5F00;&#x5173;&#xFF0C;0&#x4EE3;&#x8868;&#x5173;&#xFF0C;1&#x4EE3;&#x8868;&#x5F00;</td>
+</tr>
+<tr>
+<td style="text-align:center">Enum</td>
+<td style="text-align:center">Range</td>
+<td style="text-align:center">[Enum(&#xB7;&#xB7;&#xB7;)]_MyRange(&#x201C;Range&#x201D;,Range(0.0,1.0)) =0.5</td>
+<td style="text-align:center">&#x679A;&#x4E3E;&#xFF0C;&#x663E;&#x793A;&#x4E0B;&#x62C9;&#x5217;&#x8868;</td>
+</tr>
+<tr>
+<td style="text-align:center">NoScaleOffset</td>
+<td style="text-align:center">2D</td>
+<td style="text-align:center">[NoScaleOffset]_MainTex(&#x201C;2D&#x201D;, 2D) = &#x201C;white&#x201D; {}</td>
+<td style="text-align:center">&#x7EB9;&#x7406;&#x8D34;&#x56FE;&#x5728;&#x6750;&#x8D28;&#x9762;&#x677F;&#x4E2D;&#x9664;&#x4E86;&#x663E;&#x793A;&#x8D34;&#x56FE;&#x69FD;&#x4EE5;&#x5916;&#x9ED8;&#x8BA4;&#x8FD8;&#x4F1A;&#x663E;&#x793A;&#x4E24;&#x7EC4;Float&#x3002;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x4E0D;&#x5E0C;&#x671B;&#x7528;&#x6237;&#x53BB;&#x8C03;&#x8282;&#x6B64;&#x53C2;&#x6570;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;[NoScaleOffset]&#x5C5E;&#x6027;&#x6807;&#x8BB0;&#x6765;&#x5C06;&#x5B83;&#x4EEC;&#x9690;&#x85CF;&#x6389;&#x3002;</td>
+</tr>
+<tr>
+<td style="text-align:center">Normal</td>
+<td style="text-align:center">2D</td>
+<td style="text-align:center">[Normal]_MainTex(&#x201C;2D&#x201D;, 2D) = &#x201C;white&#x201D; {}</td>
+<td style="text-align:center">&#x6DFB;&#x52A0;[Normal]&#xFF0C;&#x6765;&#x6807;&#x8BB0;&#x6B64;&#x5C5E;&#x6027;&#x662F;&#x7528;&#x6765;&#x63A5;&#x6536;&#x6CD5;&#x7EBF;&#x8D34;&#x56FE;&#x7684;&#xFF0C;&#x5F53;&#x7528;&#x6237;&#x6307;&#x5B9A;&#x4E86;&#x975E;&#x6CD5;&#x7EBF;&#x7684;&#x8D34;&#x56FE;&#x65F6;&#x4F1A;&#x5728;&#x6750;&#x8D28;&#x9762;&#x677F;&#x4E0A;&#x8FDB;&#x884C;&#x8B66;&#x544A;&#x63D0;&#x793A;</td>
+</tr>
+<tr>
+<td style="text-align:center">Header</td>
+<td style="text-align:center">&#x6240;&#x6709;</td>
+<td style="text-align:center">[Header(I am Header)]_MyInt(&#x201C;Int&#x201D;,Int) = 1</td>
+<td style="text-align:center">&#x5728;&#x6750;&#x8D28;&#x9762;&#x677F;&#x4E0A;&#x8FDB;&#x884C;&#x6807;&#x6CE8;&#xFF0C;&#x901A;&#x5E38;&#x7528;&#x4F5C;&#x5206;&#x7C7B;&#x7EC4;&#x522B;&#x7528;</td>
+</tr>
+<tr>
+<td style="text-align:center">HideInInspector</td>
+<td style="text-align:center">&#x6240;&#x6709;</td>
+<td style="text-align:center">[HideInInspector]_MyInt(&#x201C;Int&#x201D;,Int) = 1</td>
+<td style="text-align:center">&#x5728;&#x6750;&#x8D28;&#x9762;&#x677F;&#x4E2D;&#x9690;&#x85CF;&#x6B64;&#x6761;&#x5C5E;&#x6027;&#xFF0C;&#x5728;&#x4E0D;&#x5E0C;&#x671B;&#x66B4;&#x9732;&#x67D0;&#x6761;&#x5C5E;&#x6027;&#x65F6;&#x53EF;&#x4EE5;&#x5FEB;&#x901F;&#x5C06;&#x5176;&#x9690;&#x85CF;&#x3002;</td>
+</tr>
+</tbody>
+</table>
+<h4><span id="x7c7bx578bx5206x7c7b">&#x7C7B;&#x578B;&#x5206;&#x7C7B;</span></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">&#x7C7B;&#x578B;</th>
+<th style="text-align:center">&#x8BF4;&#x660E;</th>
+<th style="text-align:center">&#x8BED;&#x6CD5;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Float</td>
+<td style="text-align:center">&#x6D6E;&#x70B9;&#x6570;&#xFF0C;&#x6CE8;&#x610F;&#x6D6E;&#x70B9;&#x6570;&#x503C;&#x540E;&#x4E0D;&#x9700;&#x8981;&#x52A0;&#x540E;&#x7F00;f</td>
+<td style="text-align:center">_MyFloat(&#x201C;Float&#x201D;,Float) = 3.5</td>
+</tr>
+<tr>
+<td style="text-align:center">Int</td>
+<td style="text-align:center">&#x6574;&#x578B;&#x6570;</td>
+<td style="text-align:center">_MyInt(&#x201C;Int&#x201D;,Int) = 1</td>
+</tr>
+<tr>
+<td style="text-align:center">Range(min,max)</td>
+<td style="text-align:center">&#x4E00;&#x4E2A;&#x4ECB;&#x4E8E;&#x6700;&#x5C0F;&#x503C;&#x548C;&#x6700;&#x5927;&#x503C;&#x4E4B;&#x95F4;&#x7684;&#x6D6E;&#x70B9;&#x6570;</td>
+<td style="text-align:center">_MyRange(&#x201C;Range&#x201D;,Range(0.0,1.0)) = 0.5</td>
+</tr>
+<tr>
+<td style="text-align:center">Color</td>
+<td style="text-align:center">RGBA&#xFF08;&#x7EA2;&#x7EFF;&#x84DD;&#x548C;&#x900F;&#x660E;&#x5EA6;&#xFF09;&#x56DB;&#x4E2A;&#x91CF;&#x6765;&#x5B9A;&#x4E49;&#x7684;&#x989C;&#x8272;</td>
+<td style="text-align:center">_MyColor(&#x201C;Color&#x201D;,Color) = (1,1,1,1)</td>
+</tr>
+<tr>
+<td style="text-align:center">2D</td>
+<td style="text-align:center">&#x8D34;&#x56FE;&#x4FE1;&#x606F;</td>
+<td style="text-align:center">_My2D(&#x201C;2D&#x201D;,2D) = &#x201C;white&#x201D;{}</td>
+</tr>
+<tr>
+<td style="text-align:center">Cube</td>
+<td style="text-align:center">&#x7ACB;&#x65B9;&#x7EB9;&#x7406;&#xFF0C;&#x7531;6&#x5F20;&#x5173;&#x8054;&#x7684;2D&#x8D34;&#x56FE;&#x5408;&#x5728;&#x4E00;&#x8D77;</td>
+<td style="text-align:center">_MyCube(&#x201C;Cube&#x201D;,Cube) = &#x201C;bump&#x201D;{}</td>
+</tr>
+<tr>
+<td style="text-align:center">Vector</td>
+<td style="text-align:center">&#x56DB;&#x7EF4;&#x6570;</td>
+<td style="text-align:center">_MyVector(&#x201C;Vector&#x201D;,Vector) = (1,2,3,1)</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="shader-tags">Shader Tags</span></h3>
+<p>Tags&#x7528;&#x6765;&#x544A;&#x8BC9;&#x6E32;&#x67D3;&#x5668;&#xFF1A;&#x4F55;&#x65F6;&#x4EE5;&#x53CA;&#x600E;&#x6837;&#x6E32;&#x67D3;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x3002;&#x8BE6;&#x7EC6;&#x5185;&#x5BB9;&#x53EF;&#x4EE5;&#x67E5;&#x770B;<a href="https://docs.unity3d.com/Manual/SL-PassTags.html">&#x5B98;&#x65B9;&#x6587;&#x6863;</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Tags { <span class="string">&quot;RenderType&quot;</span>=<span class="string">&quot;Opaque&quot;</span> }</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">&#x6807;&#x7B7E;&#x540D;&#x79F0;</th>
+<th style="text-align:center">&#x6807;&#x7B7E;&#x8BF4;&#x660E;</th>
+<th style="text-align:center">&#x4F8B;&#x5B50;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Queue</td>
+<td style="text-align:center">&#x63A7;&#x5236;&#x6E32;&#x67D3;&#x987A;&#x5E8F;&#xFF0C;&#x4FDD;&#x8BC1;&#x4E0D;&#x900F;&#x660E;&#x7269;&#x4F53;&#x5728;&#x900F;&#x660E;&#x7269;&#x4F53;&#x4E4B;&#x524D;&#x6E32;&#x67D3;</td>
+<td style="text-align:center">Tags {&#x201C;Queue&#x201D;=&#x201C;Transparent&#x201D;}</td>
+</tr>
+<tr>
+<td style="text-align:center">RenderType</td>
+<td style="text-align:center">&#x5BF9;&#x7740;&#x8272;&#x5668;&#x5206;&#x7C7B;&#xFF0C;&#x4F8B;&#x5982;&#x8FD9;&#x662F;&#x6E32;&#x67D3;&#x900F;&#x660E;&#x7684;&#xFF0C;&#x8FD9;&#x662F;&#x6E32;&#x67D3;&#x4E0D;&#x900F;&#x660E;&#x7684;</td>
+<td style="text-align:center">Tags {&#x201C;RenderType&#x201D;=&#x201C;Opaque&#x201D;}</td>
+</tr>
+<tr>
+<td style="text-align:center">DisableBatching</td>
+<td style="text-align:center">&#x662F;&#x5426;&#x5BF9;&#x8BE5;SubShader&#x8FDB;&#x884C;&#x6279;&#x5904;&#x7406;</td>
+<td style="text-align:center">Tags {&#x201C;DisableBatching&#x201D;=&#x201C;True&#x201D;}</td>
+</tr>
+<tr>
+<td style="text-align:center">ForceNoShadowCasting</td>
+<td style="text-align:center">&#x8BE5;SubShader&#x662F;&#x5426;&#x4F1A;&#x6295;&#x5C04;&#x9634;&#x5F71;</td>
+<td style="text-align:center">Tags {&#x201C;ForceNoShadowCasting&#x201D;=&#x201C;True&#x201D;}</td>
+</tr>
+<tr>
+<td style="text-align:center">IgnoreProjector</td>
+<td style="text-align:center">&#x8BE5;SubShader&#x662F;&#x5426;&#x4F1A;Project&#x5F71;&#x54CD;&#xFF0C;&#x5E38;&#x7528;&#x4E8E;&#x534A;&#x900F;&#x660E;&#x7269;&#x4F53;</td>
+<td style="text-align:center">Tags {&#x201C;IgnoreProjector&#x201D;=&#x201C;True&#x201D;}</td>
+</tr>
+<tr>
+<td style="text-align:center">CanUseSpriteAtlas</td>
+<td style="text-align:center">&#x8BE5;SubShader&#x7528;&#x4E8E;Sprites&#x65F6;&#xFF0C;&#x8981;&#x8BBE;&#x7F6E;&#x6210;false</td>
+<td style="text-align:center">Tags {&#x201C;CanUseSpriteAtlas&#x201D;=&#x201C;False&#x201D;}</td>
+</tr>
+<tr>
+<td style="text-align:center">PreviewType</td>
+<td style="text-align:center">Inspector preview&#x4E0A;&#x9ED8;&#x8BA4;&#x662F;&#x5706;&#x5F62;&#x9884;&#x8BBE;&#xFF0C;&#x53EF;&#x4EE5;&#x6539;&#x4E3A;plane&#x6216;&#x8005;skybox</td>
+<td style="text-align:center">Tags {&#x201C;PreviewType&#x201D;=&#x201C;Plane&#x201D;}</td>
+</tr>
+</tbody>
+</table>
+<p>&#x8FD9;&#x91CC;&#x60F3;&#x8981;&#x7740;&#x91CD;&#x8BF4;&#x4E00;&#x4E0B;&#x7684;&#x662F;Queue&#x8FD9;&#x4E2A;&#x6807;&#x7B7E;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x4F7F;&#x7528;Unity&#x505A;&#x8FC7;&#x4E00;&#x4E9B;&#x900F;&#x660E;&#x548C;&#x4E0D;&#x900F;&#x660E;&#x7269;&#x4F53;&#x7684;&#x6DF7;&#x5408;&#x7684;&#x8BDD;&#xFF0C;&#x5F88;&#x53EF;&#x80FD;&#x5DF2;&#x7ECF;&#x9047;&#x5230;&#x8FC7;&#x4E0D;&#x900F;&#x660E;&#x7269;&#x4F53;&#x65E0;&#x6CD5;&#x5448;&#x73B0;&#x5728;&#x900F;&#x660E;&#x7269;&#x4F53;&#x4E4B;&#x540E;&#x7684;&#x60C5;&#x51B5;&#x3002;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x5F88;&#x53EF;&#x80FD;&#x662F;&#x7531;&#x4E8E;Shader&#x7684;&#x6E32;&#x67D3;&#x987A;&#x5E8F;&#x4E0D;&#x6B63;&#x786E;&#x5BFC;&#x81F4;&#x7684;&#x3002;Queue&#x6307;&#x5B9A;&#x4E86;&#x7269;&#x4F53;&#x7684;&#x6E32;&#x67D3;&#x987A;&#x5E8F;&#xFF0C;&#x9884;&#x5B9A;&#x4E49;&#x7684;Queue&#x6709;&#xFF1A;</p>
+<ul>
+<li>Background - &#x6700;&#x65E9;&#x88AB;&#x8C03;&#x7528;&#x7684;&#x6E32;&#x67D3;&#xFF0C;&#x7528;&#x6765;&#x6E32;&#x67D3;&#x5929;&#x7A7A;&#x76D2;&#x6216;&#x8005;&#x80CC;&#x666F;</li>
+<li>Geometry - &#x8FD9;&#x662F;&#x9ED8;&#x8BA4;&#x503C;&#xFF0C;&#x7528;&#x6765;&#x6E32;&#x67D3;&#x975E;&#x900F;&#x660E;&#x7269;&#x4F53;&#xFF08;&#x666E;&#x901A;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x573A;&#x666F;&#x4E2D;&#x7684;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x7269;&#x4F53;&#x5E94;&#x8BE5;&#x662F;&#x975E;&#x900F;&#x660E;&#x7684;&#xFF09;</li>
+<li>AlphaTest - &#x7528;&#x6765;&#x6E32;&#x67D3;&#x7ECF;&#x8FC7;Alpha Test&#x7684;&#x50CF;&#x7D20;&#xFF0C;&#x5355;&#x72EC;&#x4E3A;AlphaTest&#x8BBE;&#x5B9A;&#x4E00;&#x4E2A;Queue&#x662F;&#x51FA;&#x4E8E;&#x5BF9;&#x6548;&#x7387;&#x7684;&#x8003;&#x8651;</li>
+<li>Transparent - &#x4EE5;&#x4ECE;&#x540E;&#x5F80;&#x524D;&#x7684;&#x987A;&#x5E8F;&#x6E32;&#x67D3;&#x900F;&#x660E;&#x7269;&#x4F53;</li>
+<li>Overlay - &#x7528;&#x6765;&#x6E32;&#x67D3;&#x53E0;&#x52A0;&#x7684;&#x6548;&#x679C;&#xFF0C;&#x662F;&#x6E32;&#x67D3;&#x7684;&#x6700;&#x540E;&#x9636;&#x6BB5;&#xFF08;&#x6BD4;&#x5982;&#x955C;&#x5934;&#x5149;&#x6655;&#x7B49;&#x7279;&#x6548;&#xFF09;</li>
+</ul>
+<p>&#x8FD9;&#x4E9B;&#x9884;&#x5B9A;&#x4E49;&#x7684;&#x503C;&#x672C;&#x8D28;&#x4E0A;&#x662F;&#x4E00;&#x7EC4;&#x5B9A;&#x4E49;&#x6574;&#x6570;&#xFF0C;Background = 1000&#xFF0C; Geometry = 2000, AlphaTest = 2450&#xFF0C; Transparent = 3000&#xFF0C;&#x6700;&#x540E;Overlay = 4000&#x3002;&#x5728;&#x6211;&#x4EEC;&#x5B9E;&#x9645;&#x8BBE;&#x7F6E;Queue&#x503C;&#x65F6;&#xFF0C;&#x4E0D;&#x4EC5;&#x80FD;&#x4F7F;&#x7528;&#x4E0A;&#x9762;&#x7684;&#x51E0;&#x4E2A;&#x9884;&#x5B9A;&#x4E49;&#x503C;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x81EA;&#x5DF1;&#x7684;Queue&#x503C;&#xFF0C;&#x5199;&#x6210;&#x7C7B;&#x4F3C;&#x8FD9;&#x6837;&#xFF1A;&#x201C;Queue&#x201D; = &#x201C;Transparent+100&#x201D;&#xFF0C;&#x8868;&#x793A;&#x4E00;&#x4E2A;&#x5728;Transparent&#x4E4B;&#x540E;100&#x7684;Queue&#x4E0A;&#x8FDB;&#x884C;&#x8C03;&#x7528;&#x3002;&#x901A;&#x8FC7;&#x8C03;&#x6574;Queue&#x503C;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x786E;&#x4FDD;&#x67D0;&#x4E9B;&#x7269;&#x4F53;&#x4E00;&#x5B9A;&#x5728;&#x53E6;&#x4E00;&#x4E9B;&#x7269;&#x4F53;&#x4E4B;&#x524D;&#x6216;&#x8005;&#x4E4B;&#x540E;&#x6E32;&#x67D3;&#xFF0C;&#x8FD9;&#x4E2A;&#x6280;&#x5DE7;&#x6709;&#x65F6;&#x5019;&#x5F88;&#x6709;&#x7528;&#x5904;&#x3002;</p>
+<h3><span id="lodxff1alevel-of-detail">LOD&#xFF1A;Level of Detail</span></h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">LOD <span class="number">200</span></span><br></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x4E2A;&#x6570;&#x503C;&#x51B3;&#x5B9A;&#x4E86;&#x6211;&#x4EEC;&#x80FD;&#x7528;&#x4EC0;&#x4E48;&#x6837;&#x7684;Shader&#x3002;&#x5F53;&#x8BBE;&#x5B9A;&#x7684;LOD&#x5C0F;&#x4E8E;SubShader&#x6240;&#x6307;&#x5B9A;&#x7684;LOD&#x65F6;&#xFF0C;&#x8FD9;&#x4E2A;SubShader&#x5C31;&#x4E0D;&#x53EF;&#x4EE5;&#x7528;&#x4E86;&#x3002;Unity&#x81EA;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x7EC4;LOD&#x7684;&#x6570;&#x503C;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x5B9E;&#x73B0;&#x81EA;&#x5DF1;&#x7684;Shader&#x7684;&#x65F6;&#x5019;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x6765;&#x8BBE;&#x5B9A;&#x81EA;&#x5DF1;&#x7684;LOD&#x6570;&#x503C;&#xFF0C;&#x4EE5;&#x4FBF;&#x63A7;&#x5236;&#x6E32;&#x67D3;&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">LOD&#x540D;&#x79F0;</th>
+<th style="text-align:center">&#x6570;&#x503C;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">VertexLit&#x53CA;&#x5176;&#x7CFB;&#x5217;</td>
+<td style="text-align:center">100</td>
+</tr>
+<tr>
+<td style="text-align:center">Decal, Reflective VertexLit</td>
+<td style="text-align:center">150</td>
+</tr>
+<tr>
+<td style="text-align:center">Diffuse</td>
+<td style="text-align:center">200</td>
+</tr>
+<tr>
+<td style="text-align:center">Diffuse Detail, Reflective Bumped Unlit, Reflective Bumped VertexLit</td>
+<td style="text-align:center">250</td>
+</tr>
+<tr>
+<td style="text-align:center">Bumped, Specular</td>
+<td style="text-align:center">300</td>
+</tr>
+<tr>
+<td style="text-align:center">Parallax</td>
+<td style="text-align:center">500</td>
+</tr>
+<tr>
+<td style="text-align:center">Parallax Specular</td>
+<td style="text-align:center">600</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="shaderx4e3bx4f53x4ee3x7801">Shader&#x4E3B;&#x4F53;&#x4EE3;&#x7801;</span></h3>
+<p>&#x7EC8;&#x4E8E;&#x5230;&#x4E86;&#x6700;&#x91CD;&#x8981;&#x7684;&#x90E8;&#x5206;&#xFF0C;&#x9996;&#x5148;<code>CGPROGRAM</code>&#x548C;<code>ENDCG</code>&#x6210;&#x5BF9;&#x51FA;&#x73B0;&#xFF0C;&#x8868;&#x793A;&#x4E2D;&#x95F4;&#x5305;&#x88F9;&#x7684;&#x662F;&#x4E00;&#x6BB5;Cg&#x7A0B;&#x5E8F;&#xFF0C;&#x63A5;&#x7740;&#x662F;&#x4E00;&#x4E2A;&#x7F16;&#x8BD1;&#x6307;&#x4EE4;&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> surface surf Standard fullforwardshadows</span></span><br></pre></td></tr></table></figure>
+<p>&#x610F;&#x5473;&#x7740;&#x6211;&#x4EEC;&#x8981;&#x5199;&#x4E00;&#x4E2A;&#x8868;&#x9762;Shader&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x4E86;&#x5149;&#x7167;&#x6A21;&#x578B;&#xFF0C;&#x5177;&#x4F53;&#x8BED;&#x6CD5;&#x662F;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> surface surfaceFunction lightModel [optionalparams]</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>surface &#xFF1A; &#x58F0;&#x660E;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x8868;&#x9762;&#x7740;&#x8272;&#x5668;</li>
+<li>surfaceFunction &#xFF1A; &#x7740;&#x8272;&#x5668;&#x4EE3;&#x7801;&#x7684;&#x65B9;&#x6CD5;&#x7684;&#x540D;&#x5B57;</li>
+<li>lightModel &#xFF1A; &#x4F7F;&#x7528;&#x7684;&#x5149;&#x7167;&#x6A21;&#x578B;&#x3002;</li>
+</ul>
+<p>&#x5BF9;&#x5E94;&#x4E0A;&#x9762;&#x7684;&#x7F16;&#x8BD1;&#x6307;&#x4EE4;&#xFF1A;&#x6211;&#x4EEC;&#x58F0;&#x660E;&#x4E86;&#x4E00;&#x4E2A;&#x8868;&#x9762;&#x7740;&#x8272;&#x5668;&#xFF0C;&#x5B9E;&#x9645;&#x7684;&#x4EE3;&#x7801;&#x5728; surf &#x51FD;&#x6570;&#x4E2D;&#xFF08;&#x5728;&#x4E0B;&#x9762;&#x7684;Shader&#x4EE3;&#x7801;&#x80FD;&#x627E;&#x5230;&#x8BE5;&#x51FD;&#x6570;&#xFF09;&#xFF0C;&#x4F7F;&#x7528; Standard &#x4F5C;&#x4E3A;&#x5149;&#x7167;&#x6A21;&#x578B;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x662F;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">sampler2D _MainTex;</span><br></pre></td></tr></table></figure>
+<p>&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x5728;CG&#x4E2D;&#xFF0C;Texture&#xFF08;&#x8D34;&#x56FE;&#xFF09;&#x7B80;&#x5355;&#x6765;&#x8BF4;&#x5C31;&#x662F;&#x4E00;&#x5757;&#x5185;&#x5B58;&#x5B58;&#x50A8;&#x7684;&#xFF0C;&#x4F7F;&#x7528;&#x4E86;RGBA&#x901A;&#x9053;&#xFF0C;&#x4E14;&#x6BCF;&#x4E2A;&#x901A;&#x9053;8bits&#x7684;&#x6570;&#x636E;&#x3002;&#x800C;&#x5177;&#x4F53;&#x5730;&#x60F3;&#x77E5;&#x9053;&#x50CF;&#x7D20;&#x4E0E;&#x5750;&#x6807;&#x7684;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;&#xFF0C;&#x4EE5;&#x53CA;&#x83B7;&#x53D6;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#xFF0C;&#x4E00;&#x6B21;&#x4E00;&#x6B21;&#x53BB;&#x8BA1;&#x7B97;&#x5185;&#x5B58;&#x5730;&#x5740;&#x6216;&#x8005;&#x504F;&#x79FB;&#x663E;&#x7136;&#x4E0D;&#x53EF;&#x884C;&#xFF0C;&#x56E0;&#x6B64;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;sampler2D&#x6765;&#x5BF9;&#x8D34;&#x56FE;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x3002;&#x4E00;&#x8A00;&#x4EE5;&#x853D;&#x4E4B;&#x5C31;&#x662F;&#xFF0C;sampler2D&#x662F;GLSL&#x4E2D;&#x7684;2D&#x8D34;&#x56FE;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x76F8;&#x5E94;&#x7684;&#xFF0C;&#x8FD8;&#x6709;sampler1D&#xFF0C;sampler3D&#xFF0C;samplerCube&#x7B49;&#x7B49;&#x683C;&#x5F0F;&#x3002;&#x7136;&#x540E;&#x7684;&#x91CD;&#x70B9;&#x662F;&#xFF1A;&#x4E3A;&#x4EC0;&#x4E48;&#x5728;&#x8FD9;&#x91CC;&#x9700;&#x8981;&#x4E00;&#x53E5;&#x5BF9;_MainTex&#x7684;&#x58F0;&#x660E;&#xFF1F;&#x9996;&#x5148;&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x5728;Properties&#x91CC;&#x58F0;&#x660E;&#x8FC7;&#x5B83;&#x662F;&#x8D34;&#x56FE;&#x4E86;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">_MainTex (<span class="string">&quot;Albedo (RGB)&quot;</span>, <span class="number">2</span>D) = <span class="string">&quot;white&quot;</span> {}</span><br></pre></td></tr></table></figure>
+<p>&#x6211;&#x4EEC;&#x7528;&#x6765;&#x5B9E;&#x4F8B;&#x7684;&#x8FD9;&#x4E2A;shader&#x5176;&#x5B9E;&#x662F;&#x7531;&#x4E24;&#x4E2A;&#x76F8;&#x5BF9;&#x72EC;&#x7ACB;&#x7684;&#x5757;&#x7EC4;&#x6210;&#x7684;&#xFF0C;&#x5916;&#x5C42;&#x7684;&#x5C5E;&#x6027;&#x58F0;&#x660E;&#xFF0C;&#x56DE;&#x6EDA;&#x7B49;&#x7B49;&#x662F;Unity&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x548C;&#x7F16;&#x8BD1;&#x7684;ShaderLab&#xFF1B;&#x800C;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x662F;&#x5728;CGPROGRAM&#x2026;ENDCG&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x4EE3;&#x7801;&#x5757;&#x4E2D;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x6BB5;Cg&#x7A0B;&#x5E8F;&#x3002;&#x5BF9;&#x4E8E;&#x8FD9;&#x6BB5;Cg&#x7A0B;&#x5E8F;&#xFF0C;&#x8981;&#x60F3;&#x8BBF;&#x95EE;&#x5728;Properties&#x4E2D;&#x6240;&#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;&#x7684;&#x8BDD;&#xFF0C;&#x5FC5;&#x987B;&#x4F7F;&#x7528;<strong>&#x548C;&#x4E4B;&#x524D;&#x53D8;&#x91CF;&#x76F8;&#x540C;&#x7684;&#x540D;&#x5B57;&#x8FDB;&#x884C;&#x58F0;&#x660E;</strong>&#x3002;&#x56E0;&#x6B64;&#x8FD9;&#x6837;&#x505A;&#x5C31;&#x662F;&#x518D;&#x6B21;&#x58F0;&#x660E;&#x5E76;&#x94FE;&#x63A5;&#x4E86;_MainTex&#xFF0C;&#x4F7F;&#x5F97;&#x63A5;&#x4E0B;&#x6765;&#x7684;Cg&#x7A0B;&#x5E8F;&#x80FD;&#x591F;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#x3002;&#x540E;&#x9762;&#x7684;&#xFF1A;</p>
+<ul>
+<li>half _Glossiness;</li>
+<li>half _Metallic;</li>
+<li>fixed4 _Color;</li>
+</ul>
+<p>&#x90FD;&#x662F;&#x540C;&#x6837;&#x7684;&#x9053;&#x7406;&#x3002;&#x56DE;&#x5230;&#x539F;&#x6765;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x4E0B;&#x4E00;&#x53E5;&#x662F;:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Input</span> {</span><br><span class="line">    float2 uv_MainTex;</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+<p>&#x5982;&#x679C;&#x4F60;&#x6709;&#x7F16;&#x7A0B;&#x7684;&#x7ECF;&#x5386;&#xFF0C;&#x90A3;&#x4E48;&#x7ED3;&#x6784;&#x4F53;&#x5E94;&#x8BE5;&#x5F88;&#x719F;&#x6089;&#x4E86;&#xFF0C;&#x8FD9;&#x4E00;&#x6BB5;&#x6211;&#x4EEC;&#x7ED3;&#x5408;&#x4E0B;&#x9762;&#x7684;surf&#x4E00;&#x8D77;&#x6765;&#x8BF4;</p>
+<h4><span id="x8868x9762x7740x8272x5668">&#x8868;&#x9762;&#x7740;&#x8272;&#x5668;</span></h4>
+<p>&#x5148;&#x6765;&#x770B; surf &#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">surf</span> <span class="params">(Input IN, inout SurfaceOutputStandard o)</span></span></span><br><span class="line"><span class="function">        </span>{</span><br><span class="line">            <span class="comment">// Albedo comes from a texture tinted by color</span></span><br><span class="line">            fixed4 c = <span class="built_in">tex2D</span> (_MainTex, IN.uv_MainTex) * _Color;</span><br><span class="line">            o.Albedo = c.rgb;</span><br><span class="line">            <span class="comment">// Metallic and smoothness come from slider variables</span></span><br><span class="line">            o.Metallic = _Metallic;</span><br><span class="line">            o.Smoothness = _Glossiness;</span><br><span class="line">            o.Alpha = c.a;</span><br><span class="line">        }</span><br><span class="line">        ENDCG</span><br></pre></td></tr></table></figure>
+<p>&#x4E0A;&#x6587;&#x63D0;&#x5230;&#x7684; surf &#x51FD;&#x6570;&#x5C31;&#x662F;&#x5BF9;&#x5E94;&#x8FD9;&#x4E00;&#x6BB5;&#x3002;&#x6211;&#x4EEC;&#x770B;&#x51FD;&#x6570;&#x5934;&#x8F93;&#x5165;&#x7684;&#x53C2;&#x6570;&#x6709;Input IN&#xFF0C;&#x8FD9;&#x4E2A;Input&#x5C31;&#x5BF9;&#x5E94;&#x4E0A;&#x9762;&#x7684;&#x7ED3;&#x6784;&#x4F53;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x628A;&#x6240;&#x9700;&#x8981;&#x53C2;&#x4E0E;&#x8BA1;&#x7B97;&#x7684;&#x6570;&#x636E;&#x90FD;&#x653E;&#x5230;&#x8FD9;&#x4E2A;Input&#x7ED3;&#x6784;&#x4E2D;&#xFF0C;&#x518D;&#x4F20;&#x5165;surf&#x51FD;&#x6570;&#x4F7F;&#x7528;&#xFF1B;<strong>SurfaceOutputStandard</strong> &#x662F;&#x5DF2;&#x7ECF;&#x5B9A;&#x4E49;&#x597D;&#x4E86;&#x91CC;&#x9762;&#x7C7B;&#x578B;&#x8F93;&#x51FA;&#x7ED3;&#x6784;&#x3002;&#x4F5C;&#x4E3A;&#x8F93;&#x5165;&#x7684;&#x7ED3;&#x6784;&#x4F53;<strong>&#x5FC5;&#x987B;&#x547D;&#x540D;&#x4E3A;Input</strong>&#xFF0C;&#x8FD9;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;&#x4E2D;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;float2&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x4F1A;&#x611F;&#x5230;&#x5947;&#x602A;float&#x540E;&#x9762;&#x8DDF;&#x7740;&#x6570;&#x5B57;&#xFF0C;&#x8FD9;&#x662F;&#x4EC0;&#x4E48;&#x610F;&#x601D;&#x5462;&#xFF1F;&#x5176;&#x5B9E;float&#x548C;vec&#x90FD;&#x53EF;&#x4EE5;&#x5728;&#x4E4B;&#x540E;&#x52A0;&#x5165;&#x4E00;&#x4E2A;2&#x5230;4&#x7684;&#x6570;&#x5B57;&#xFF0C;&#x6765;&#x8868;&#x793A;&#x88AB;&#x6253;&#x5305;&#x5728;&#x4E00;&#x8D77;&#x7684;2&#x5230;4&#x4E2A;&#x540C;&#x7C7B;&#x578B;&#x6570;&#x3002;&#x6BD4;&#x5982;&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">float4 color;</span><br><span class="line">float3 multipliedColor = color.rgb * coordinate.x;</span><br></pre></td></tr></table></figure>
+<p>&#x5728;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x58F0;&#x660E;&#x4E86;&#x4E00;&#x4E2A;&#x53EB;&#x505A; <strong>uv_MainTex</strong> &#x7684;&#x5305;&#x542B;&#x4E24;&#x4E2A;&#x6D6E;&#x70B9;&#x6570;&#x7684;&#x53D8;&#x91CF;&#x3002;UV mapping &#x7684;&#x4F5C;&#x7528;&#x662F;&#x5C06;&#x4E00;&#x4E2A;2D&#x8D34;&#x56FE;&#x4E0A;&#x7684;&#x70B9;&#x6309;&#x7167;&#x4E00;&#x5B9A;&#x89C4;&#x5219;&#x6620;&#x5C04;&#x5230;3D&#x6A21;&#x578B;&#x4E0A;&#xFF0C;&#x5728;Cg&#x7A0B;&#x5E8F;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x6709;&#x8FD9;&#x6837;&#x7684;&#x7EA6;&#x5B9A;&#xFF0C;&#x5728;&#x4E00;&#x4E2A;&#x8D34;&#x56FE;&#x53D8;&#x91CF;&#x4E4B;&#x524D;&#x52A0;&#x4E0A;uv&#x4E24;&#x4E2A;&#x5B57;&#x6BCD;&#xFF0C;&#x5C31;&#x4EE3;&#x8868;&#x63D0;&#x53D6;&#x5B83;&#x7684;uv&#x503C;&#x3002;&#x6211;&#x4EEC;&#x4E4B;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x5728; surf &#x7A0B;&#x5E8F;&#x4E2D;&#x76F4;&#x63A5;&#x901A;&#x8FC7;&#x8BBF;&#x95EE;uv_MainTex &#x6765;&#x53D6;&#x5F97;&#x8FD9;&#x5F20;&#x8D34;&#x56FE;&#x5F53;&#x524D;&#x9700;&#x8981;&#x8BA1;&#x7B97;&#x7684;&#x70B9;&#x7684;&#x5750;&#x6807;&#x503C;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x8BE6;&#x7EC6;&#x770B;surf&#x5185;&#x90E8;&#x7684;&#x64CD;&#x4F5C;&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">fixed4 c = <span class="built_in">tex2D</span> (_MainTex, IN.uv_MainTex) * _Color;</span><br></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x91CC;&#x7528;&#x5230;&#x4E86;&#x4E00;&#x4E2A; tex2D &#x51FD;&#x6570;&#xFF0C;&#x8FD9;&#x662F;Cg&#x7A0B;&#x5E8F;&#x4E2D;&#x7528;&#x6765;&#x5728;&#x4E00;&#x5F20;&#x8D34;&#x56FE;&#x4E2D;&#x5BF9;&#x4E00;&#x4E2A;&#x70B9;&#x8FDB;&#x884C;&#x91C7;&#x6837;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;float4&#x3002;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4E2D;&#x7528;&#x521A;&#x521A;&#x5F97;&#x5230;&#x7684; float4 &#x548C; _Color &#x76F8;&#x4E58;&#xFF0C;&#x4F7F;&#x5F97;&#x8FD9;&#x4E2A;&#x8D34;&#x56FE;&#x7ECF;&#x8FC7;&#x548C;&#x989C;&#x8272;&#x6DF7;&#x5408;&#x3002;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">o.Albedo = c.rgb;</span><br></pre></td></tr></table></figure>
+<p>&#x5C06;&#x5176;&#x989C;&#x8272;&#x7684;rbg&#x503C;&#x8D4B;&#x4E88;&#x4E86;&#x8F93;&#x51FA;&#x7684;&#x50CF;&#x7D20;&#x989C;&#x8272;</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">o.Metallic = _Metallic;</span><br><span class="line">o.Smoothness = _Glossiness;</span><br></pre></td></tr></table></figure>
+<p>&#x90FD;&#x662F;&#x7528;&#x5230;&#x4E0A;&#x5934;Properties&#x4E2D;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;&#x6765;&#x8D4B;&#x503C;&#x6750;&#x8D28;&#x4E2D;&#x7684; Metallic &#x548C; smoothness</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">o.Alpha = c.a;</span><br></pre></td></tr></table></figure>
+<p>&#x5C06;a&#x503C;&#x8D4B;&#x4E88;&#x900F;&#x660E;&#x5EA6;&#x3002;&#x81F3;&#x6B64;surf&#x4ECB;&#x7ECD;&#x5B8C;&#x6BD5;&#xFF0C;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4E2D;shader&#x6700;&#x91CD;&#x8981;&#x7684;&#x90E8;&#x5206;&#x5C31;&#x662F;&#x4EE5;&#x4E0A;&#x8FD9;&#x4E9B;&#x5566;&#xFF01;</p>
+<h4><span id="fallback">FallBack</span></h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">FallBack <span class="string">&quot;Diffuse&quot;</span></span><br></pre></td></tr></table></figure>
+<p>&#x5F53;&#x6240;&#x6709;&#x4E0A;&#x9762;&#x7684;SubShader&#x90FD;&#x4E0D;&#x53EF;&#x4EE5;&#x5728;&#x76EE;&#x6807;&#x5E73;&#x53F0;&#x4E0A;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;Unity&#x5C31;&#x4F1A;&#x8C03;&#x7528;&#x8FD9;&#x4E2A;shader&#xFF0C;&#x5F53;&#x7136;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x5173;&#x95ED;&#x8FD9;&#x4E2A;&#x9009;&#x9879;&#xFF0C;&#x90A3;&#x5C31;&#x610F;&#x5473;&#x7740;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x663E;&#x5361;&#x53EF;&#x4EE5;&#x8FD0;&#x884C;&#x4E0A;&#x9762;&#x7684;shader&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x4E0D;&#x7BA1;&#x5B83;&#x3002;</p>
+<h2><span id="x7ed3x8bed">&#x7ED3;&#x8BED;</span></h2>
+<p>&#x8FD9;&#x662F;&#x6700;&#x7B80;&#x5355;&#x6700;&#x7B80;&#x5355;&#x7684;&#x6A21;&#x677F;shader&#xFF0C;&#x770B;&#x5230;&#x8FD9;&#x91CC;&#x7684;&#x4F60;&#x5E94;&#x8BE5;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x4E00;&#x4E9B;&#x7B80;&#x5355;&#x7684;shader&#x4E86;&#xFF0C;&#x53EF;&#x4EE5;&#x53BB;Unity&#x7684;<a href="https://docs.unity3d.com/Manual/SL-SurfaceShaderExamples.html">Surface Shader Exampless</a>&#x4E0A;&#x67E5;&#x770B;&#x4E00;&#x4E9B;&#x57FA;&#x7840;shader&#x7684;&#x7F16;&#x5199;&#x5185;&#x5BB9;&#xFF0C;&#x4E0B;&#x4E00;&#x7BC7;&#x6211;&#x4EEC;&#x4F1A;&#x5F00;&#x59CB;&#x7B2C;&#x4E00;&#x4E2A;shader&#x7684;&#x7F16;&#x5199;&#x3002;</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2020/05/02/shader-learning4/" data-toggle="tooltip" data-placement="top" title="Unity Shader 入门（四）：边缘发光效果">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2020/04/29/shader-learning2/" data-toggle="tooltip" data-placement="top" title="Unity Shader 入门（二）：Shader介绍">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">新建Shader</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">逐行查看</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Shader名称路径</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Shader属性</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">属性分类</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">类型分类</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Shader Tags</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">LOD：Level of Detail</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">Shader主体代码</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link"><span class="toc-nav-number">2.5.1.</span> <span class="toc-nav-text">表面着色器</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link"><span class="toc-nav-number">2.5.2.</span> <span class="toc-nav-text">FallBack</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">结语</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Shader" title="Shader">Shader</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "kurong00";
+    var disqus_identifier = "https://chenwenling.cn/2020/05/01/shader-learning3/";
+    var disqus_url = "https://chenwenling.cn/2020/05/01/shader-learning3/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Kurong 2026 
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://chenwenling.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Live Photo Script: only load when page contains a live photo -->
+
+
+
+
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://chenwenling.cn/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
