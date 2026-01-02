@@ -52,6 +52,8 @@
 
     $toggle.addEventListener('click', handleMagic)
     function handleMagic(e){
+        var $navCustom = document.querySelector('.navbar-custom'); // 获取顶层 nav 元素
+
         if ($navbar.className.indexOf('in') > 0) {
         // CLOSE
             $navbar.className = " ";
@@ -62,10 +64,14 @@
                     $collapse.style.height = "0px"
                 }
             },400)
+            // 移除 .in 类以去除高斯模糊背景
+            if ($navCustom) $navCustom.classList.remove('in');
         }else{
         // OPEN
             $collapse.style.height = "auto"
             $navbar.className += " in";
+            // 添加 .in 类以显示高斯模糊背景
+            if ($navCustom) $navCustom.classList.add('in');
         }
     }
 </script>

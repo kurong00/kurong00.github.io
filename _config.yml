@@ -7,6 +7,14 @@ lazyload:
   enable: true
   onlypost: false
   loadingImg: # eg ./images/loading.gif
+  isSPA: true
+
+# jsDelivr CDN
+# https://github.com/kurong00/kurong00.github.io/blob/master/source/img/avatar.jpg
+# https://cdn.jsdelivr.net/gh/kurong00/kurong00.github.io@master/source/img/avatar.jpg
+cdn:
+  enable: true
+  prefix: https://cdn.jsdelivr.net/gh/kurong00/kurong00.github.io@master/source
 
 # Site
 title: [Kurong]
@@ -19,6 +27,7 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://chenwenling.cn      # Note: don't forget to modify the CNAME file to your url
 root: /
+# permalink: :year/:month/:day/:title/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
