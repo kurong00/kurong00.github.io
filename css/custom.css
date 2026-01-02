@@ -4,7 +4,7 @@
         background-position: center center;
         background-size: cover;
         height: auto;
-        min-height: 250px;
+        min-height: 270px; /* 增加最小高度，避免主页头图过短 */
         margin-bottom: 10px;
     }
 
@@ -30,6 +30,60 @@
     .intro-header {
         background-size: cover;  /* 修改为 cover */
         background-repeat: no-repeat;
+    }
+}
+
+/* 隐藏导航栏左上角的网站标题 */
+.navbar-custom .navbar-brand {
+    display: none !important;
+}
+
+/* 导航栏样式调整 */
+@media only screen and (max-width: 767px) {
+    /* 默认状态：完全透明，无模糊 */
+    body .navbar-custom {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border: none !important;
+        transition: background-color 0.4s ease-out, backdrop-filter 0.4s ease-out; /* 添加过渡动画 */
+    }
+
+    /* 菜单展开状态 (.in)：深色背景 + 高斯模糊 */
+    body .navbar-custom.in {
+        background-color: rgba(0, 0, 0, 0.8) !important; /* 深色半透明 */
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+    }
+
+    /* 菜单展开时的文字颜色：白色 */
+    body .navbar-custom.in .navbar-brand {
+        color: #FFFFFF !important;
+    }
+
+    /* 菜单项样式：始终右对齐，始终白色（覆盖所有状态） */
+    body .navbar-custom .nav li a,
+    body .navbar-custom .nav li a:hover,
+    body .navbar-custom .nav li a:focus,
+    body .navbar-custom .nav li a:active,
+    body .navbar-custom .nav li a:visited {
+        color: #FFFFFF !important;
+        text-align: right; /* 始终右对齐 */
+    }
+
+    /* 确保菜单项容器占满宽度以便右对齐生效 */
+    body .navbar-custom .nav {
+        width: 100%;
+    }
+
+    /* 菜单按钮颜色 */
+    body .navbar-custom .navbar-toggle .icon-bar {
+        background-color: #FFFFFF !important;
+    }
+    
+    /* 展开时保持白色按钮 */
+    body .navbar-custom.in .navbar-toggle .icon-bar {
+        background-color: #FFFFFF !important;
     }
 }
 

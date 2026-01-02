@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="keyword"  content="">
-    <link rel="shortcut icon" href="/img/header.jpg">
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/kurong00/kurong00.github.io@master/source/img/header.jpg">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
@@ -199,6 +199,8 @@
 
     $toggle.addEventListener('click', handleMagic)
     function handleMagic(e){
+        var $navCustom = document.querySelector('.navbar-custom'); // 获取顶层 nav 元素
+
         if ($navbar.className.indexOf('in') > 0) {
         // CLOSE
             $navbar.className = " ";
@@ -209,10 +211,14 @@
                     $collapse.style.height = "0px"
                 }
             },400)
+            // 移除 .in 类以去除高斯模糊背景
+            if ($navCustom) $navCustom.classList.remove('in');
         }else{
         // OPEN
             $collapse.style.height = "auto"
             $navbar.className += " in";
+            // 添加 .in 类以显示高斯模糊背景
+            if ($navCustom) $navCustom.classList.add('in');
         }
     }
 </script>
@@ -233,7 +239,7 @@
                 post-container">
 
                 
-        <div id="aplayer-wYrtDvQN" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-MzoMtNJo" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content">[00:00.000]&#x4F5C;&#x8BCD; : &#x5C0F;&#x5BD2;
 [00:01.000]&#x4F5C;&#x66F2; : &#x8521;&#x5065;&#x96C5;
 [00:17.500]&#x9ED1;&#x591C;&#x7684;&#x989C;&#x8272;&#x3000;&#x80FD;&#x5426;&#x9ED1;&#x4E00;&#x70B9;
@@ -259,7 +265,7 @@
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-wYrtDvQN"),
+            element: document.getElementById("aplayer-MzoMtNJo"),
             narrow: false,
             autoplay: true,
             showlrc: 2,
@@ -514,7 +520,7 @@
         </style>
         <script>
             window.imageLazyLoadSetting = {
-                isSPA: false,
+                isSPA: true,
                 preloadRatio: 1,
                 processImages: null,
             };

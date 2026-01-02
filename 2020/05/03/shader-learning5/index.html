@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="keyword"  content="">
-    <link rel="shortcut icon" href="/img/header.jpg">
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/kurong00/kurong00.github.io@master/source/img/header.jpg">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
@@ -197,6 +197,8 @@
 
     $toggle.addEventListener('click', handleMagic)
     function handleMagic(e){
+        var $navCustom = document.querySelector('.navbar-custom'); // 获取顶层 nav 元素
+
         if ($navbar.className.indexOf('in') > 0) {
         // CLOSE
             $navbar.className = " ";
@@ -207,10 +209,14 @@
                     $collapse.style.height = "0px"
                 }
             },400)
+            // 移除 .in 类以去除高斯模糊背景
+            if ($navCustom) $navCustom.classList.remove('in');
         }else{
         // OPEN
             $collapse.style.height = "auto"
             $navbar.className += " in";
+            // 添加 .in 类以显示高斯模糊背景
+            if ($navCustom) $navCustom.classList.add('in');
         }
     }
 </script>
@@ -546,7 +552,7 @@ $$c_0 = \alpha_s c_s + (1 - \alpha_s)c_d$$</p>
         </style>
         <script>
             window.imageLazyLoadSetting = {
-                isSPA: false,
+                isSPA: true,
                 preloadRatio: 1,
                 processImages: null,
             };
