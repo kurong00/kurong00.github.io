@@ -3,6 +3,11 @@
 // Enable CDN for images in /img/ directory
 // Matches /img/... and replaces with CDN prefix
 hexo.extend.filter.register('after_render:html', function(html, data){
+  // Skip CDN rewrite if running in server mode (local preview)
+  if (hexo.env.cmd === 'server' || hexo.env.cmd === 's') {
+    return html;
+  }
+
   var config = hexo.config;
   if (!config.cdn || !config.cdn.enable || !config.cdn.prefix) {
     return html;

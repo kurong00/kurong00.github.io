@@ -2,5 +2,5 @@
 layout: "tags"
 title: "Tags"
 description: " "
-header-img: "img/header_img/tags.png"
+header-img: "img/header_img/tags.gif"
 ---
