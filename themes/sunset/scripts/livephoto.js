@@ -1,8 +1,14 @@
 'use strict';
 
 hexo.extend.tag.register('livephoto', function(args) {
-  const photoUrl = '/' + this.path + args[0];
-  const videoUrl = '/' + this.path + args[1];
+  let path = this.path;
+  path = path.replace(/index\.html$/, '');
+  if (!path.endsWith('/')) {
+    path += '/';
+  }
+
+  const photoUrl = '/' + path + args[0];
+  const videoUrl = '/' + path + args[1];
 
   if (!args[0] || !args[1]) {
     return '<p style="color: red;">Live Photo tag requires a photo URL and a video URL.</p>';

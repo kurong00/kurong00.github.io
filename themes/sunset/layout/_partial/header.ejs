@@ -1,17 +1,40 @@
-<!-- Modified by Yu-Hsuan Yen -->
-<!-- Post Header -->
+<% if (!(config.brand && ((config.brand.hide_home_header && is_home()) || (config.brand.hide_tags_header && page && page.layout === 'tags')))) { %>
 <style type="text/css">
     header.intro-header{
-        <% if (is_home()) { %>
-            background-image: url('<%= config.root + config["header-img"] %>') 
-            /*config*/
-        <%} else if (is_post()){%>
-            background-image: url('<%= page["header-img"] %>')
-            /*post*/
-        <%} else {%>
-            background-image: url('<%= config.root + page["header-img"] %>')
-            /*page*/
-        <%} %>
+        <% 
+            function withRoot(p) {
+                return config.root + String(p || '').replace(/^\//, '');
+            }
+
+            var headerImg = "";
+            var headerImgUrl = "";
+
+            if (is_home()) { 
+                headerImg = (config.brand && config.brand.headers && config.brand.headers.home) || config["header-img"];
+                if (headerImg) headerImgUrl = headerImg.startsWith("http") ? headerImg : withRoot(headerImg);
+            } else if (is_post()){
+                headerImg = page["header-img"];
+                if (headerImg) {
+                    if (headerImg.startsWith("http") || headerImg.startsWith("/")) headerImgUrl = headerImg;
+                    else if (headerImg.indexOf("/") >= 0) headerImgUrl = withRoot(headerImg);
+                    else headerImgUrl = '/' + page.path.replace(/index\.html$/, '') + headerImg;
+                } else {
+                    headerImg = config["header-img"];
+                    if (headerImg) headerImgUrl = headerImg.startsWith("http") ? headerImg : withRoot(headerImg);
+                }
+            } else {
+                var pageType = "";
+                if (page.layout === 'about') pageType = 'about';
+                else if (page.layout === 'tags') pageType = 'tags';
+                else if (page.layout === 'archive') pageType = 'archive';
+                
+                headerImg = (pageType && config.brand && config.brand.headers && config.brand.headers[pageType]) || page["header-img"] || config["header-img"];
+                if (headerImg) headerImgUrl = headerImg.startsWith("http") ? headerImg : withRoot(headerImg);
+            }
+        %>
+        <% if (headerImgUrl) { %>
+            background-image: url('<%= headerImgUrl %>')
+        <% } %>
     }
     <% if (config.signature) {%>
     #signature{
@@ -21,36 +44,33 @@
 </style>
 
 <header class="intro-header" >
-    <!-- Signature -->
-    <div id="signature">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <% if (is_post()) { %>
-                    <div class="post-heading">
-                        <div class="tags">
-                            <% page.tags.forEach(function(tag){ %>
-                              <a class="tag" href="<%= config.root %>tags/#<%= tag.name %>" title="<%= tag.name %>"><%= tag.name %></a>
-                            <% }) %>
-                        </div>
-                        <h1><%= page.title %></h1>
-                        <h2 class="subheading"><%= page.subtitle || "" %></h2>
-                        <span class="meta">
-                            Posted by <%- page.author || config.author %> on
-                            <%= page.date.format(config.date_format) %>
-                        </span>
+    <div class="container">
+        <div class="row">
+            <div class="layout-container">
+            <% if (is_post()) { %>
+                <div class="post-heading">
+                    <div class="tags">
+                        <% page.tags.forEach(function(tag){ %>
+                          <a class="capsule-tag" href="<%= config.root %>tags/#<%= tag.name %>" title="<%= tag.name %>"><%= tag.name %></a>
+                        <% }) %>
                     </div>
-                <% } else { %>
-                    <div class="site-heading">
-                        <h1><%= page.title || config.title %></h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading"><%= page.description || config.subtitle || "" %></span>
-                    </div>
-                <% } %>
-
-
+                    <h1><%= page.title %></h1>
+                    <h2 class="subheading"><%= page.subtitle || "" %></h2>
+                    <span class="meta">
+                        Posted by <%- page.author || config.author %> on
+                        <%= page.date.format(config.date_format) %>
+                    </span>
                 </div>
+            <% } else { %>
+                <% if (page.title !== "" || page.description !== "") { %>
+                <div class="site-heading">
+                    <h1><%= page.title || (config.brand && config.brand.title) || config.title %></h1>
+                    <span class="subheading"><%= page.description || config.subtitle || "" %></span>
+                </div>
+                <% } %>
+            <% } %>
             </div>
         </div>
     </div>
 </header>
+<% } %>

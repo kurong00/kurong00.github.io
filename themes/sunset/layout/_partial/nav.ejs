@@ -1,77 +1,40 @@
-<!-- Navigation -->
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="<%= config.root %>"><%= config.title %></a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="<%= config.root %>">Home</a>
-                    </li>
-
-                    <% site.pages.forEach(function(page){ %>
-
-                        <% if(page.title){ %>
-                        <li>
-                            <a href="<%= config.root %><%= page.path.replace('index.html', '') %>"><%= page.title %></a>
-                        </li>
-                        <% } %>
-                    <% }); %>
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
-
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        var $navCustom = document.querySelector('.navbar-custom'); // 获取顶层 nav 元素
-
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-            // 移除 .in 类以去除高斯模糊背景
-            if ($navCustom) $navCustom.classList.remove('in');
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-            // 添加 .in 类以显示高斯模糊背景
-            if ($navCustom) $navCustom.classList.add('in');
+    <%
+        function withRoot(p) {
+            return config.root + String(p || '').replace(/^\//, '');
         }
-    }
-</script>
+        var menu = (config.brand && config.brand.menu) || {};
+        var items = [
+            { key: 'Home', fallbackHref: config.root },
+            { key: 'Tags', fallbackHref: withRoot('tags/') },
+            { key: 'About', fallbackHref: withRoot('about/') }
+        ];
+        var currentPath = (page && page.path) ? String(page.path) : '';
+        function isItemActive(key) {
+            if (key === 'Home') return typeof is_home === 'function' ? is_home() : currentPath === '' || currentPath === 'index.html';
+            if (key === 'Tags') return (page && page.layout === 'tags') || currentPath.indexOf('tags/') === 0;
+            if (key === 'About') return (page && page.layout === 'about') || currentPath.indexOf('about/') === 0;
+            return false;
+        }
+    %>
+    <% if (is_post()) { %>
+    <div class="nav-back-container">
+        <a href="<%= config.root %>" class="nav-back-btn">
+            <i class="fa fa-angle-left"></i>
+        </a>
+    </div>
+    <% } else { %>
+    <div class="container-fluid nav-capsule">
+        <div class="nav-capsule-menu">
+          <ul class="nav navbar-nav nav-capsule-links">
+              <% items.forEach(function(it){ %>
+                  <% var href = menu[it.key] ? withRoot(menu[it.key]) : it.fallbackHref; %>
+                  <li class="<%= isItemActive(it.key) ? 'is-active' : '' %>">
+                      <a href="<%= href %>"><%= it.key %></a>
+                  </li>
+              <% }) %>
+          </ul>
+        </div>
+    </div>
+    <% } %>
+</nav>

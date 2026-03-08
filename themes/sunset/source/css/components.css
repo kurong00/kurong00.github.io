@@ -1,0 +1,98 @@
+.pager {
+  margin-top: 30px !important;
+  margin-bottom: 60px !important;
+}
+
+.pager li > a,
+.pager li > span {
+  border-radius: 999px;
+  padding: 6px 14px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  color: #9a9a9a !important;
+  background: #ffffff !important;
+  border: 1px solid #dcdcdc !important;
+  transition: all 0.2s ease;
+  line-height: 1.4 !important;
+}
+
+.pager li > a:hover,
+.pager li > a:focus {
+  background-color: #f8f8f8 !important;
+  border-color: #c0c0c0 !important;
+  color: #222222 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  text-decoration: none !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .pager li > a,
+  .pager li > span {
+    padding: 5px 12px !important;
+    font-size: 12px !important;
+  }
+}
+
+.livephoto-container {
+    max-width: 100%;
+    width: 100%;
+    min-height: 600px;
+}
+
+@media (max-width: 767px) {
+    .livephoto-container {
+        min-height: 300px;
+        margin: 1em auto;
+    }
+}
+
+.capsule-tag {
+  display: inline-block;
+  background: #ffffff;
+  border: 1px solid #dcdcdc;
+  border-radius: 999px;
+  padding: 6px 16px;
+  margin: 0 10px 10px 0;
+  color: #666666;
+  font-size: 13px;
+  line-height: 1.2;
+  transition: all 0.2s ease;
+  text-decoration: none !important;
+}
+
+@media (max-width: 767px) {
+  .capsule-tag {
+    font-size: 12px;
+    padding: 3px 10px;
+    margin: 0 6px 6px 0;
+  }
+}
+
+.capsule-tag:hover {
+  background: #f8f8f8;
+  border-color: #c0c0c0;
+  color: #444444;
+}
+
+.capsule-tag.is-active {
+  background: #222222;
+  border-color: #222222;
+  color: #ffffff;
+}
+
+@media (max-width: 480px) {
+    .livephoto-container {
+        min-height: 250px;
+        margin: 0.8em auto;
+    }
+}
+
+.livephoto-container[data-live-photo] img,
+.livephoto-container[data-live-photo] video {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+}

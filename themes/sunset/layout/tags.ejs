@@ -1,49 +1,35 @@
 ---
 layout: layout
 ---
-<!-- Main Content -->
 <div class="container">
     <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 标签云 -->
-            <div id='tag_cloud' class="tags">
-                <% site.tags.map(function(tag){  %>
-                    <a href="#<%= tag.name %>" title="<%= tag.name %>" rel="<%= tag.length %>"><%= tag.name %></a>
+        <div class="layout-container">
+            <div class="tag-filter-header">
+                <h1 class="tag-filter-title">Filter by Tags</h1>
+                <button id="tag-clear" class="tag-clear" type="button">Clear all</button>
+            </div>
+
+            <div id="tag_cloud" class="tag-chip-list">
+                <% site.tags.sort('name').forEach(function(tag){ %>
+                    <button type="button" class="tag-chip" data-tag="<%= tag.name %>">
+                        <span class="tag-chip-name"><%= tag.name %></span>
+                        <span class="tag-chip-count"><%= tag.length %></span>
+                    </button>
                 <% }) %>
             </div>
 
-            <!-- 标签列表 -->
+            <h2 id="tag-posts-title" class="tag-posts-title">All Posts (<%= site.posts.length %>)</h2>
 
-            <% site.tags.map(function(tag){  %>
-            <div class="one-tag-list">
-                <span class="listing-seperator" id="<%= tag.name %>">
-                    <span class="tag-text"><%= tag.name %></span>
-                </span>
-                <% var sortedPosts = tag.posts.sort('date').reverse(); %>
-                <% sortedPosts.map(function(post){  %>
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="<%- config.root %><%- post.path %>">
-                        <h2 class="post-title">
-                            <%- post.title || "Untitled" %>
-                        </h2>
-                        <% if (post.subtitle && post.subtitle.length) { %>
-                            <h3 class="post-subtitle">
-                                <%- post.subtitle %>
-                            </h3>
-                        <% } %>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
+            <ul id="tag-posts" class="tag-post-list">
+                <% site.posts.sort('date').reverse().forEach(function(post){ %>
+                    <% var tagNames = post.tags.map(function(t){ return t.name; }).join('|'); %>
+                    <li class="tag-post-row" data-tags="<%= tagNames %>">
+                        <a class="tag-post-title" href="<%- config.root %><%- post.path %>"><%- post.title || "Untitled" %></a>
+                        <span class="tag-post-dots"></span>
+                        <span class="tag-post-date"><%= post.date.format(config.date_format) %></span>
+                    </li>
                 <% }) %>
-            </div>
-            <% }) %>
-
-
+            </ul>
         </div>
     </div>
 </div>

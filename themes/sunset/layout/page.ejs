@@ -15,7 +15,7 @@ layout: layout
     </div>
 
     <!-- Post Container -->
-    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 post-container">
+    <div class="layout-container post-container">
         <%- page.content || body %>
 
         <!-- 如果开启评论功能 -->
@@ -46,7 +46,7 @@ layout: layout
         <%} else { %>
 <!-- NO SIDEBAR -->
     <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+            <div class="layout-container post-container">
                 <%- page.content || body %>
             </div>
         <%} %>

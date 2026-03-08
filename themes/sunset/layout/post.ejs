@@ -9,10 +9,7 @@ layout: layout
         <div class="row">
 
             <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
+            <div class="layout-container post-container">
 
                 <%- page.content %>
                 
@@ -77,40 +74,6 @@ layout: layout
                 <!-- disqus comment end -->
             </div>
             
-            <!-- Tabe of Content -->
-            <%- partial('_partial/toc') %>
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                <% if(config['featured-tags']) { %>
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="<%= config.root %>tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       <% page.tags.forEach(function(tag){ %>
-                          <a class="tag" href="<%= config.root %>tags/#<%= tag.name %>" title="<%= tag.name %>"><%= tag.name %></a>
-                        <% }) %>
-                    </div>
-                </section>
-                <% }%>
-
-                <!-- Friends Blog -->
-                <% if(config.friends) { %>
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-
-                    <% config.friends.forEach(function(friend){ %>
-                        <li><a href="<%= friend.href %>" target="_blank"><%= friend.title %></a></li>
-                    <% }); %>
-                </ul>
-                <% }%>
-            </div>
         </div>
     </div>
 </article>
