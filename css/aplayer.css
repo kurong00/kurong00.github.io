@@ -1,0 +1,15 @@
+.post-container .aplayer,
+body .aplayer,
+.aplayer {  
+    margin: 15px 20px 100px 20px !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 4px !important;
+}
+
+@media only screen and (max-width: 767px) {
+    .post-container .aplayer,
+    body .aplayer,
+    .aplayer {
+        margin: 10px 10px 50px 10px !important;
+    }
+}

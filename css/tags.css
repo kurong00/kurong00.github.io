@@ -1,0 +1,141 @@
+.tag-filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.tag-filter-title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.2;
+  color: #444444;
+}
+
+.tag-clear {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: #888888;
+  font-size: 16px;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.tag-chip-list {
+  margin-top: 22px;
+  margin-bottom: 26px;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.tag-chip {
+  background: #ffffff;
+  border: 1px solid #dcdcdc;
+  border-radius: 999px;
+  padding: 8px 16px;
+  margin: 0 10px 12px 0;
+  color: #666666;
+  font-size: 13px;
+  line-height: 1;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.tag-chip:hover {
+  background: #f8f8f8;
+  border-color: #c0c0c0;
+  color: #444444;
+}
+
+.tag-chip.is-active {
+  background: #222222;
+  border-color: #222222;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.tag-chip .tag-chip-count {
+  margin-left: 6px;
+  color: #999999;
+  font-size: 11px;
+}
+
+.tag-chip.is-active .tag-chip-count {
+  color: #d0d0d0;
+}
+
+.tag-posts-title {
+  margin-top: 52px;
+  margin-bottom: 18px;
+  color: #444444;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.tag-post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.tag-post-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+.tag-post-title {
+  color: #444444;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.tag-post-title:hover {
+  color: #222222;
+}
+
+.tag-post-dots {
+  flex: 1;
+  border-bottom: 2px dotted #d0d0d0;
+  transform: translateY(-3px);
+}
+
+.tag-post-date {
+  color: #b0b0b0;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+@media only screen and (max-width: 767px) {
+  .tag-chip {
+    font-size: 10px;
+    padding: 3px 10px;
+    margin: 0 6px 6px 0;
+  }
+  .tag-post-title {
+    font-size: 13px;
+  }
+  .tag-filter-title {
+    font-size: 20px;
+  }
+  .tag-posts-title {
+    font-size: 16px;
+  }
+  .tag-post-date {
+    font-size: 12px;
+  }
+  .tag-post-list {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .tag-chip-list {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
