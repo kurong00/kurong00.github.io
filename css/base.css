@@ -2,6 +2,10 @@ html {
     overflow-y: scroll;
 }
 
+*:focus {
+    outline: none !important;
+}
+
 @supports (scrollbar-gutter: stable) {
     html {
         overflow-y: auto;
@@ -42,6 +46,7 @@ a:hover, a:focus {
 }
 
 .intro-header {
+    position: relative;
     background: no-repeat center center;
     background-color: #808080;
     background-attachment: scroll;
