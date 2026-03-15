@@ -44,6 +44,13 @@
 </style>
 
 <header class="intro-header" >
+    <% if (is_post()) { %>
+    <div class="nav-back-container">
+        <a href="<%= config.root %>" class="nav-back-btn">
+            <i class="fa fa-angle-left"></i>
+        </a>
+    </div>
+    <% } %>
     <div class="container">
         <div class="row">
             <div class="layout-container">

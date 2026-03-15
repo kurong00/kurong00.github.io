@@ -1,3 +1,4 @@
+<% if (!is_post()) { %>
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <%
         function withRoot(p) {
@@ -17,13 +18,6 @@
             return false;
         }
     %>
-    <% if (is_post()) { %>
-    <div class="nav-back-container">
-        <a href="<%= config.root %>" class="nav-back-btn">
-            <i class="fa fa-angle-left"></i>
-        </a>
-    </div>
-    <% } else { %>
     <div class="container-fluid nav-capsule">
         <div class="nav-capsule-menu">
           <ul class="nav navbar-nav nav-capsule-links">
@@ -36,5 +30,5 @@
           </ul>
         </div>
     </div>
-    <% } %>
 </nav>
+<% } %>
