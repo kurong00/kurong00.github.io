@@ -19,36 +19,23 @@
     <link rel="canonical" href="https://chenwenling.cn/2020/04/29/shader-learning2/">
 
     
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-
-
     
-<link rel="stylesheet" href="/css/highlight.css">
 
+    <link rel="stylesheet" href="/css/bootstrap.min.css?v=20260419084639">
 
-    
-<link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/highlight.css?v=20260419084639">
 
+    <link rel="stylesheet" href="/css/base.css?v=20260419084639">
 
-    
-<link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/navbar.css?v=20260419084639">
 
+    <link rel="stylesheet" href="/css/typography.css?v=20260419084639">
 
-    
-<link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/post-list.css?v=20260419084639">
 
+    <link rel="stylesheet" href="/css/aplayer.css?v=20260419084639">
 
-    
-<link rel="stylesheet" href="/css/post-list.css">
-
-
-    
-<link rel="stylesheet" href="/css/aplayer.css">
-
-
-    
-<link rel="stylesheet" href="/css/components.css">
-
+    <link rel="stylesheet" href="/css/components.css?v=20260419084639">
 
     
 
@@ -305,6 +292,45 @@
 
 
 
+
+
+<script>
+    (function () {
+        function isIOS() {
+            var ua = navigator.userAgent || "";
+            if (/iP(hone|od|ad)/.test(ua)) return true;
+            if (navigator.platform === "MacIntel" && navigator.maxTouchPoints && navigator.maxTouchPoints > 1) return true;
+            return false;
+        }
+
+        if (!isIOS()) return;
+
+        function tryPlayOnce() {
+            var list = window.aplayers || [];
+            for (var i = 0; i < list.length; i++) {
+                var ap = list[i];
+                try {
+                    if (ap && ap.options && ap.options.autoplay) {
+                        ap.play();
+                        return;
+                    }
+                } catch (e) {}
+            }
+        }
+
+        var done = false;
+        function handler() {
+            if (done) return;
+            done = true;
+            tryPlayOnce();
+            document.removeEventListener("touchend", handler, true);
+            document.removeEventListener("click", handler, true);
+        }
+
+        document.addEventListener("touchend", handler, true);
+        document.addEventListener("click", handler, true);
+    })();
+</script>
 
 
 <!-- Migrate from head to bottom, no longer block render and still work -->

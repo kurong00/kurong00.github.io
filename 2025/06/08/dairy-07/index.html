@@ -19,36 +19,23 @@
     <link rel="canonical" href="https://chenwenling.cn/2025/06/08/dairy-07/">
 
     
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-
-
     
-<link rel="stylesheet" href="/css/highlight.css">
 
+    <link rel="stylesheet" href="/css/bootstrap.min.css?v=20260419084639">
 
-    
-<link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/highlight.css?v=20260419084639">
 
+    <link rel="stylesheet" href="/css/base.css?v=20260419084639">
 
-    
-<link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/navbar.css?v=20260419084639">
 
+    <link rel="stylesheet" href="/css/typography.css?v=20260419084639">
 
-    
-<link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/post-list.css?v=20260419084639">
 
+    <link rel="stylesheet" href="/css/aplayer.css?v=20260419084639">
 
-    
-<link rel="stylesheet" href="/css/post-list.css">
-
-
-    
-<link rel="stylesheet" href="/css/aplayer.css">
-
-
-    
-<link rel="stylesheet" href="/css/components.css">
-
+    <link rel="stylesheet" href="/css/components.css?v=20260419084639">
 
     
 
@@ -118,7 +105,7 @@
             <div class="layout-container post-container">
 
                 
-        <div id="aplayer-yEKpkSap" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-wvdacJkc" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content">[00:00.000]&#x4F5C;&#x8BCD; : &#x85E4;&#x5DFB;&#x4EAE;&#x592A;
 [00:01.000]&#x4F5C;&#x66F2; : &#x85E4;&#x5DFB;&#x4EAE;&#x592A;
 [00:24.350]&#x7C89;&#x96EA;&#x821E;&#x3046;&#x5B63;&#x7BC0;&#x306F;&#x3044;&#x3064;&#x3082;&#x3059;&#x308C;&#x9055;&#x3044;
@@ -174,7 +161,7 @@
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-yEKpkSap"),
+            element: document.getElementById("aplayer-wvdacJkc"),
             narrow: false,
             autoplay: true,
             showlrc: 2,
@@ -337,6 +324,45 @@
 
 
 
+
+
+<script>
+    (function () {
+        function isIOS() {
+            var ua = navigator.userAgent || "";
+            if (/iP(hone|od|ad)/.test(ua)) return true;
+            if (navigator.platform === "MacIntel" && navigator.maxTouchPoints && navigator.maxTouchPoints > 1) return true;
+            return false;
+        }
+
+        if (!isIOS()) return;
+
+        function tryPlayOnce() {
+            var list = window.aplayers || [];
+            for (var i = 0; i < list.length; i++) {
+                var ap = list[i];
+                try {
+                    if (ap && ap.options && ap.options.autoplay) {
+                        ap.play();
+                        return;
+                    }
+                } catch (e) {}
+            }
+        }
+
+        var done = false;
+        function handler() {
+            if (done) return;
+            done = true;
+            tryPlayOnce();
+            document.removeEventListener("touchend", handler, true);
+            document.removeEventListener("click", handler, true);
+        }
+
+        document.addEventListener("touchend", handler, true);
+        document.addEventListener("click", handler, true);
+    })();
+</script>
 
 
 <!-- Migrate from head to bottom, no longer block render and still work -->

@@ -19,36 +19,23 @@
     <link rel="canonical" href="https://chenwenling.cn/2024/12/22/dairy-06/">
 
     
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-
-
     
-<link rel="stylesheet" href="/css/highlight.css">
 
+    <link rel="stylesheet" href="/css/bootstrap.min.css?v=20260419084639">
 
-    
-<link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/highlight.css?v=20260419084639">
 
+    <link rel="stylesheet" href="/css/base.css?v=20260419084639">
 
-    
-<link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/navbar.css?v=20260419084639">
 
+    <link rel="stylesheet" href="/css/typography.css?v=20260419084639">
 
-    
-<link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/post-list.css?v=20260419084639">
 
+    <link rel="stylesheet" href="/css/aplayer.css?v=20260419084639">
 
-    
-<link rel="stylesheet" href="/css/post-list.css">
-
-
-    
-<link rel="stylesheet" href="/css/aplayer.css">
-
-
-    
-<link rel="stylesheet" href="/css/components.css">
-
+    <link rel="stylesheet" href="/css/components.css?v=20260419084639">
 
     
 
@@ -118,7 +105,7 @@
             <div class="layout-container post-container">
 
                 
-        <div id="aplayer-AoahpJEw" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-mFkrsvdq" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content">[00:09.960]&#xB124;&#xBAA8;&#xB09C; &#xD654;&#xBA74; &#xD5E4;&#xCE58;&#xBA70;
 [00:09.960]&#x8D70;&#x51FA;&#x56DB;&#x65B9;&#x7684;&#x5C4F;&#x5E55;
 [00:14.520]&#xC0B4;&#xBA70;&#xC2DC; &#xB2E4;&#xAC00;&#xC640;
@@ -174,7 +161,7 @@
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-AoahpJEw"),
+            element: document.getElementById("aplayer-mFkrsvdq"),
             narrow: false,
             autoplay: true,
             showlrc: 2,
@@ -339,6 +326,45 @@
 
 
 
+
+
+<script>
+    (function () {
+        function isIOS() {
+            var ua = navigator.userAgent || "";
+            if (/iP(hone|od|ad)/.test(ua)) return true;
+            if (navigator.platform === "MacIntel" && navigator.maxTouchPoints && navigator.maxTouchPoints > 1) return true;
+            return false;
+        }
+
+        if (!isIOS()) return;
+
+        function tryPlayOnce() {
+            var list = window.aplayers || [];
+            for (var i = 0; i < list.length; i++) {
+                var ap = list[i];
+                try {
+                    if (ap && ap.options && ap.options.autoplay) {
+                        ap.play();
+                        return;
+                    }
+                } catch (e) {}
+            }
+        }
+
+        var done = false;
+        function handler() {
+            if (done) return;
+            done = true;
+            tryPlayOnce();
+            document.removeEventListener("touchend", handler, true);
+            document.removeEventListener("click", handler, true);
+        }
+
+        document.addEventListener("touchend", handler, true);
+        document.addEventListener("click", handler, true);
+    })();
+</script>
 
 
 <!-- Migrate from head to bottom, no longer block render and still work -->
