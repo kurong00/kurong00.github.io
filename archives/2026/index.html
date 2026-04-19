@@ -21,21 +21,21 @@
     
     
 
-    <link rel="stylesheet" href="/css/bootstrap.min.css?v=20260419084639">
+    <link rel="stylesheet" href="/css/bootstrap.min.css?v=20260419090028">
 
-    <link rel="stylesheet" href="/css/highlight.css?v=20260419084639">
+    <link rel="stylesheet" href="/css/highlight.css?v=20260419090028">
 
-    <link rel="stylesheet" href="/css/base.css?v=20260419084639">
+    <link rel="stylesheet" href="/css/base.css?v=20260419090028">
 
-    <link rel="stylesheet" href="/css/navbar.css?v=20260419084639">
+    <link rel="stylesheet" href="/css/navbar.css?v=20260419090028">
 
-    <link rel="stylesheet" href="/css/typography.css?v=20260419084639">
+    <link rel="stylesheet" href="/css/typography.css?v=20260419090028">
 
-    <link rel="stylesheet" href="/css/post-list.css?v=20260419084639">
+    <link rel="stylesheet" href="/css/post-list.css?v=20260419090028">
 
-    <link rel="stylesheet" href="/css/aplayer.css?v=20260419084639">
+    <link rel="stylesheet" href="/css/aplayer.css?v=20260419090028">
 
-    <link rel="stylesheet" href="/css/components.css?v=20260419084639">
+    <link rel="stylesheet" href="/css/components.css?v=20260419090028">
 
     
 
@@ -234,23 +234,38 @@ vibe coding
             for (var i = 0; i < list.length; i++) {
                 var ap = list[i];
                 try {
-                    if (ap && ap.options && ap.options.autoplay) {
-                        ap.play();
-                        return;
+                    if (!ap || typeof ap.play !== "function") continue;
+
+                    var audio = ap.audio;
+                    if (audio && !audio.__aplayerAutoplayHooked) {
+                        audio.__aplayerAutoplayHooked = true;
+                        audio.addEventListener("play", function () {
+                            cleanup();
+                        }, { once: true });
                     }
+
+                    ap.play();
+                    return true;
                 } catch (e) {}
             }
+            return false;
         }
 
         var done = false;
-        function handler() {
+        function cleanup() {
             if (done) return;
             done = true;
-            tryPlayOnce();
+            document.removeEventListener("touchstart", handler, true);
             document.removeEventListener("touchend", handler, true);
             document.removeEventListener("click", handler, true);
         }
 
+        function handler() {
+            if (done) return;
+            tryPlayOnce();
+        }
+
+        document.addEventListener("touchstart", handler, { capture: true, passive: true });
         document.addEventListener("touchend", handler, true);
         document.addEventListener("click", handler, true);
     })();

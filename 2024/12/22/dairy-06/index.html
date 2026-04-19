@@ -21,21 +21,21 @@
     
     
 
-    <link rel="stylesheet" href="/css/bootstrap.min.css?v=20260419084639">
+    <link rel="stylesheet" href="/css/bootstrap.min.css?v=20260419090028">
 
-    <link rel="stylesheet" href="/css/highlight.css?v=20260419084639">
+    <link rel="stylesheet" href="/css/highlight.css?v=20260419090028">
 
-    <link rel="stylesheet" href="/css/base.css?v=20260419084639">
+    <link rel="stylesheet" href="/css/base.css?v=20260419090028">
 
-    <link rel="stylesheet" href="/css/navbar.css?v=20260419084639">
+    <link rel="stylesheet" href="/css/navbar.css?v=20260419090028">
 
-    <link rel="stylesheet" href="/css/typography.css?v=20260419084639">
+    <link rel="stylesheet" href="/css/typography.css?v=20260419090028">
 
-    <link rel="stylesheet" href="/css/post-list.css?v=20260419084639">
+    <link rel="stylesheet" href="/css/post-list.css?v=20260419090028">
 
-    <link rel="stylesheet" href="/css/aplayer.css?v=20260419084639">
+    <link rel="stylesheet" href="/css/aplayer.css?v=20260419090028">
 
-    <link rel="stylesheet" href="/css/components.css?v=20260419084639">
+    <link rel="stylesheet" href="/css/components.css?v=20260419090028">
 
     
 
@@ -105,7 +105,7 @@
             <div class="layout-container post-container">
 
                 
-        <div id="aplayer-mFkrsvdq" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-LllQEfxR" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content">[00:09.960]&#xB124;&#xBAA8;&#xB09C; &#xD654;&#xBA74; &#xD5E4;&#xCE58;&#xBA70;
 [00:09.960]&#x8D70;&#x51FA;&#x56DB;&#x65B9;&#x7684;&#x5C4F;&#x5E55;
 [00:14.520]&#xC0B4;&#xBA70;&#xC2DC; &#xB2E4;&#xAC00;&#xC640;
@@ -161,7 +161,7 @@
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-mFkrsvdq"),
+            element: document.getElementById("aplayer-LllQEfxR"),
             narrow: false,
             autoplay: true,
             showlrc: 2,
@@ -344,23 +344,38 @@
             for (var i = 0; i < list.length; i++) {
                 var ap = list[i];
                 try {
-                    if (ap && ap.options && ap.options.autoplay) {
-                        ap.play();
-                        return;
+                    if (!ap || typeof ap.play !== "function") continue;
+
+                    var audio = ap.audio;
+                    if (audio && !audio.__aplayerAutoplayHooked) {
+                        audio.__aplayerAutoplayHooked = true;
+                        audio.addEventListener("play", function () {
+                            cleanup();
+                        }, { once: true });
                     }
+
+                    ap.play();
+                    return true;
                 } catch (e) {}
             }
+            return false;
         }
 
         var done = false;
-        function handler() {
+        function cleanup() {
             if (done) return;
             done = true;
-            tryPlayOnce();
+            document.removeEventListener("touchstart", handler, true);
             document.removeEventListener("touchend", handler, true);
             document.removeEventListener("click", handler, true);
         }
 
+        function handler() {
+            if (done) return;
+            tryPlayOnce();
+        }
+
+        document.addEventListener("touchstart", handler, { capture: true, passive: true });
         document.addEventListener("touchend", handler, true);
         document.addEventListener("click", handler, true);
     })();
