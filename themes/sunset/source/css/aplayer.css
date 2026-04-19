@@ -2,18 +2,35 @@
 body .aplayer,
 .aplayer {  
     margin: 18px 0 44px 0 !important;
-    border-radius: 999px 10px 10px 999px !important;
+    border-radius: 999px !important;
     overflow: hidden;
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.06) !important;
+    background: transparent;
+    border: 0;
+    box-shadow: none !important;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.05)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.03));
     position: relative;
+}
+
+.post-container .aplayer:before,
+body .aplayer:before,
+.aplayer:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.9));
+    border: 0;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.86), inset 0 0 0 1px rgba(255, 255, 255, 0.52), inset 0 0 0 2px rgba(0, 0, 0, 0.025);
+    pointer-events: none;
 }
 
 .post-container .aplayer .aplayer-body,
 body .aplayer .aplayer-body,
 .aplayer .aplayer-body {
     padding-left: 128px !important;
+    padding-right: 18px !important;
+    position: relative;
+    z-index: 1;
 }
 
 .post-container .aplayer.aplayer-fixed .aplayer-body,
@@ -35,7 +52,7 @@ body .aplayer .aplayer-pic,
     margin: 0 !important;
     float: none !important;
     z-index: 2;
-    box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.38), 0 6px 14px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.16), 0 6px 14px rgba(0, 0, 0, 0.18);
     border: 0px solid rgba(255, 255, 255, 0.98);
     transition: none !important;
 }
@@ -45,8 +62,14 @@ body .aplayer .aplayer-info,
 .aplayer .aplayer-info {
     margin-left: 0 !important;
     height: auto !important;
-    padding: 10px 12px 10px 8px !important;
+    padding: 10px 22px 10px 8px !important;
     border-top: 0 !important;
+}
+
+.post-container .aplayer .aplayer-volume-bar-wrap,
+body .aplayer .aplayer-volume-bar-wrap,
+.aplayer .aplayer-volume-bar-wrap {
+    right: 6px !important;
 }
 
 .post-container .aplayer.aplayer-fixed .aplayer-info,
@@ -244,7 +267,13 @@ body .aplayer .aplayer-lrc p.aplayer-lrc-current,
     body .aplayer,
     .aplayer {
         margin: 10px 0 22px 0 !important;
-        border-radius: 999px 10px 10px 999px !important;
+        border-radius: 999px !important;
+    }
+
+    .post-container .aplayer:before,
+    body .aplayer:before,
+    .aplayer:before {
+        border-radius: 999px;
     }
 
     .post-container .aplayer .aplayer-pic,
@@ -284,13 +313,14 @@ body .aplayer .aplayer-lrc p.aplayer-lrc-current,
     body .aplayer .aplayer-body,
     .aplayer .aplayer-body {
         padding-left: 94px !important;
+        padding-right: 14px !important;
     }
 
     .post-container .aplayer .aplayer-info,
     body .aplayer .aplayer-info,
     .aplayer .aplayer-info {
         margin-left: 0 !important;
-        padding: 7px 8px 7px 6px !important;
+        padding: 7px 16px 7px 6px !important;
     }
 
     .post-container .aplayer .aplayer-lrc,
