@@ -14,6 +14,18 @@ if ([string]::IsNullOrWhiteSpace($userMsg)) {
 }
 
 # 2. Add changes
+$assetVersion = Get-Date -Format "yyyyMMddHHmmss"
+$themeConfigPath = Join-Path $PSScriptRoot "themes\sunset\_config.yml"
+if (Test-Path $themeConfigPath) {
+    $themeConfig = Get-Content -LiteralPath $themeConfigPath -Raw
+    if ($themeConfig -match "(?m)^\s*asset_version\s*:") {
+        $themeConfig = [regex]::Replace($themeConfig, "(?m)^\s*asset_version\s*:\s*.*$", "asset_version: $assetVersion")
+    } else {
+        $themeConfig = $themeConfig.TrimEnd() + "`nasset_version: $assetVersion`n"
+    }
+    Set-Content -LiteralPath $themeConfigPath -Value $themeConfig -NoNewline
+}
+
 Write-Host "`n1. Adding changes..." -ForegroundColor Green
 git add .
 

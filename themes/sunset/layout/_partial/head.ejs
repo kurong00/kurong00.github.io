@@ -17,24 +17,27 @@
 
     <link rel="canonical" href="<%= config.url + config.root + (page.path||'').replace('index.html', '') %>">
 
-    <%- css('css/bootstrap.min.css') %>
+    <% var v = (theme && theme.asset_version) ? theme.asset_version : ''; %>
+    <% var vs = v ? ('?v=' + v) : ''; %>
 
-    <%- css('css/highlight') %>
+    <link rel="stylesheet" href="<%= url_for('css/bootstrap.min.css') %><%= vs %>">
 
-    <%- css('css/base')%>
+    <link rel="stylesheet" href="<%= url_for('css/highlight.css') %><%= vs %>">
 
-    <%- css('css/navbar')%>
+    <link rel="stylesheet" href="<%= url_for('css/base.css') %><%= vs %>">
 
-    <%- css('css/typography')%>
+    <link rel="stylesheet" href="<%= url_for('css/navbar.css') %><%= vs %>">
 
-    <%- css('css/post-list')%>
+    <link rel="stylesheet" href="<%= url_for('css/typography.css') %><%= vs %>">
 
-    <%- css('css/aplayer')%>
+    <link rel="stylesheet" href="<%= url_for('css/post-list.css') %><%= vs %>">
 
-    <%- css('css/components')%>
+    <link rel="stylesheet" href="<%= url_for('css/aplayer.css') %><%= vs %>">
+
+    <link rel="stylesheet" href="<%= url_for('css/components.css') %><%= vs %>">
 
     <% if (page && page.layout === 'tags') { %>
-    <%- css('css/tags')%>
+    <link rel="stylesheet" href="<%= url_for('css/tags.css') %><%= vs %>">
     <% } %>
 
     <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">

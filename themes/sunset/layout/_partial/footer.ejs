@@ -95,8 +95,11 @@
     })
 </script>
 
+<% var v = (theme && theme.asset_version) ? theme.asset_version : ''; %>
+<% var vs = v ? ('?v=' + v) : ''; %>
+
 <% if (page && page.layout === 'tags') { %>
-<%- js('js/tags-filter.js') %>
+<script src="<%= url_for('js/tags-filter.js') %><%= vs %>"></script>
 <% } %>
 
 <% if (config.ga_track_id) { %>
@@ -142,4 +145,40 @@
 <script src="https://cdn.apple-livephotoskit.com/lpk/1/livephotoskit.js"></script>
 <% } %>
 
+<script>
+    (function () {
+        function isIOS() {
+            var ua = navigator.userAgent || "";
+            if (/iP(hone|od|ad)/.test(ua)) return true;
+            if (navigator.platform === "MacIntel" && navigator.maxTouchPoints && navigator.maxTouchPoints > 1) return true;
+            return false;
+        }
 
+        if (!isIOS()) return;
+
+        function tryPlayOnce() {
+            var list = window.aplayers || [];
+            for (var i = 0; i < list.length; i++) {
+                var ap = list[i];
+                try {
+                    if (ap && ap.options && ap.options.autoplay) {
+                        ap.play();
+                        return;
+                    }
+                } catch (e) {}
+            }
+        }
+
+        var done = false;
+        function handler() {
+            if (done) return;
+            done = true;
+            tryPlayOnce();
+            document.removeEventListener("touchend", handler, true);
+            document.removeEventListener("click", handler, true);
+        }
+
+        document.addEventListener("touchend", handler, true);
+        document.addEventListener("click", handler, true);
+    })();
+</script>

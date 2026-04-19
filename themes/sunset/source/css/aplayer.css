@@ -189,7 +189,16 @@ body .aplayer .aplayer-pic:hover .aplayer-button,
     .post-container .aplayer .aplayer-pic .aplayer-button,
     body .aplayer .aplayer-pic .aplayer-button,
     .aplayer .aplayer-pic .aplayer-button {
-        opacity: 0.55 !important;
+        opacity: 0 !important;
+        transform: scale(0.96);
+    }
+}
+
+@media (hover: none) {
+    .post-container .aplayer .aplayer-pic:active .aplayer-button,
+    body .aplayer .aplayer-pic:active .aplayer-button,
+    .aplayer .aplayer-pic:active .aplayer-button {
+        opacity: 0.92 !important;
         transform: scale(1);
     }
 }
