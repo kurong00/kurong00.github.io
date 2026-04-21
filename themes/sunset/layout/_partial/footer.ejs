@@ -15,7 +15,7 @@
                 <% } %>
                 <% if (config.twitter_username) { %>
                     <li>
-                        <a target="_blank" href="https://twitter.com/<%= config.twitter_username %>">
+                        <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/<%= config.twitter_username %>">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
@@ -25,7 +25,7 @@
                 <% } %>
                 <% if (config.zhihu_username) { %>
                     <li>
-                        <a target="_blank" href="https://www.zhihu.com/people/<%= config.zhihu_username %>">
+                        <a target="_blank" rel="noopener noreferrer" href="https://www.zhihu.com/people/<%= config.zhihu_username %>">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa  fa-stack-1x fa-inverse">知</i>
@@ -36,7 +36,7 @@
 
                 <% if (config.weibo_username) { %>
                     <li>
-                        <a target="_blank" href="http://weibo.com/<%= config.weibo_username %>">
+                        <a target="_blank" rel="noopener noreferrer" href="https://weibo.com/<%= config.weibo_username %>">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
@@ -47,7 +47,7 @@
 
                 <% if (config.facebook_username) { %>
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/<%= config.facebook_username %>">
+                        <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/<%= config.facebook_username %>">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -58,7 +58,7 @@
 
                 <% if (config.linkedin_username) { %>
                     <li>
-                        <a target="_blank"  href="https://www.linkedin.com/in/<%= config.linkedin_username %>">
+                        <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/<%= config.linkedin_username %>">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
@@ -77,60 +77,11 @@
     </div>
 </footer>
 
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-
-<script>
-    async("https://cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
 <% var v = (theme && theme.asset_version) ? theme.asset_version : ''; %>
 <% var vs = v ? ('?v=' + v) : ''; %>
 
 <% if (page && page.layout === 'tags') { %>
 <script src="<%= url_for('js/tags-filter.js') %><%= vs %>"></script>
-<% } %>
-
-<% if (config.ga_track_id) { %>
-<script>
-    var _gaId = '<%= config.ga_track_id %>';
-    var _gaDomain = '<%= config.ga_domain %>';
-
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
-</script>
-
-<% } %>
-
-
-<% if (config.ba_track_id) { %>
-<script>
-    var _baId = '<%= config.ba_track_id %>';
-
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?" + _baId;
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
 <% } %>
 
 <% var hasLivePhoto = false; %>
@@ -155,6 +106,7 @@
         }
 
         if (!isIOS()) return;
+        if (!document.querySelector('.aplayer, .meting-tag-marker, .aplayer-tag-marker')) return;
 
         function tryPlayOnce() {
             var list = window.aplayers || [];
@@ -195,5 +147,27 @@
         document.addEventListener("touchstart", handler, { capture: true, passive: true });
         document.addEventListener("touchend", handler, true);
         document.addEventListener("click", handler, true);
+    })();
+</script>
+
+<script>
+    (function () {
+        var shortname = "<%= config['disqus_username'] %>";
+        if (!shortname) return;
+
+        var el = document.getElementById("disqus_thread");
+        if (!el) return;
+
+        window.disqus_shortname = shortname;
+        window.disqus_identifier = el.getAttribute("data-disqus-identifier") || "<%= page && page.permalink ? page.permalink : '' %>";
+        window.disqus_url = el.getAttribute("data-disqus-url") || "<%= page && page.permalink ? page.permalink : '' %>";
+        if (!window.disqus_identifier) window.disqus_identifier = location.href.split("#")[0];
+        if (!window.disqus_url) window.disqus_url = location.href.split("#")[0];
+
+        if (window.DISQUS) return;
+        var dsq = document.createElement("script");
+        dsq.async = true;
+        dsq.src = "https://" + shortname + ".disqus.com/embed.js";
+        (document.head || document.body).appendChild(dsq);
     })();
 </script>

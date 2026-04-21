@@ -3,6 +3,12 @@
 // Enable CDN for images in /img/ directory
 // Matches /img/... and replaces with CDN prefix
 hexo.extend.filter.register('after_render:html', function(html, data){
+  html = html
+    .replace(/\\\\assets\\\\/g, '/assets/')
+    .replace(/\\assets\\/g, '/assets/')
+    .replace(/\/assets\\/g, '/assets/')
+    .replace(/\/assets\/css\\/g, '/assets/css/')
+    .replace(/\/assets\/js\\/g, '/assets/js/');
   // Skip CDN rewrite if running in server mode (local preview)
   if (hexo.env.cmd === 'server' || hexo.env.cmd === 's') {
     return html;

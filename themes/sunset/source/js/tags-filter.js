@@ -8,19 +8,19 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!clearBtn || !titleEl || !listEl) return;
 
   var selected = {};
+  var activeCount = 0;
   var total = rows.length;
 
   listEl.style.minHeight = Math.ceil(listEl.getBoundingClientRect().height) + 'px';
 
-  function selectedCount() {
-    var c = 0;
-    for (var k in selected) if (selected[k]) c++;
-    return c;
-  }
+  var rowTags = rows.map(function (r) {
+    var raw = r.getAttribute('data-tags') || '';
+    if (!raw) return [];
+    return raw.split('|');
+  });
 
   function update() {
-    var active = selectedCount();
-    if (active === 0) {
+    if (activeCount === 0) {
       clearBtn.style.visibility = 'hidden';
       clearBtn.style.pointerEvents = 'none';
       clearBtn.textContent = 'Clear all';
@@ -33,14 +33,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     clearBtn.style.visibility = 'visible';
     clearBtn.style.pointerEvents = 'auto';
-    clearBtn.textContent = 'Clear all (' + active + ')';
+    clearBtn.textContent = 'Clear all (' + activeCount + ')';
 
     var shown = 0;
-    rows.forEach(function (r) {
-      var tags = (r.getAttribute('data-tags') || '').split('|');
+    rows.forEach(function (r, idx) {
+      var tags = rowTags[idx];
       var ok = false;
       for (var i = 0; i < tags.length; i++) {
-        if (selected[tags[i]]) {
+        var tag = tags[i];
+        if (tag && selected[tag]) {
           ok = true;
           break;
         }
@@ -54,16 +55,23 @@ document.addEventListener('DOMContentLoaded', function () {
   chips.forEach(function (btn) {
     btn.addEventListener('click', function () {
       var tag = btn.getAttribute('data-tag');
-      var isOn = !!selected[tag];
-      selected[tag] = !isOn;
-      if (selected[tag]) btn.classList.add('is-active');
-      else btn.classList.remove('is-active');
+      if (!tag) return;
+      if (selected[tag]) {
+        delete selected[tag];
+        activeCount--;
+        btn.classList.remove('is-active');
+      } else {
+        selected[tag] = true;
+        activeCount++;
+        btn.classList.add('is-active');
+      }
       update();
     });
   });
 
   clearBtn.addEventListener('click', function () {
     selected = {};
+    activeCount = 0;
     chips.forEach(function (btn) {
       btn.classList.remove('is-active');
     });

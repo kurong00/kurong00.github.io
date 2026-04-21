@@ -2,8 +2,64 @@ html {
     overflow-y: scroll;
 }
 
+:root {
+    --color-text: #414141;
+    --color-text-strong: #222222;
+    --color-text-mid: #666666;
+    --color-text-muted: #888888;
+    --color-text-subtle: #b0b0b0;
+    --color-bg: #ffffff;
+    --color-header-fallback: #808080;
+    --color-on-image: #ffffff;
+    --color-on-image-muted: #f3f3f3;
+    --color-on-image-surface: rgba(255, 255, 255, 0.2);
+    --color-on-image-border: rgba(255, 255, 255, 0.4);
+    --color-on-image-surface-hover: rgba(255, 255, 255, 0.3);
+    --color-on-image-border-hover: rgba(255, 255, 255, 0.6);
+    --color-count: #999999;
+    --color-count-active: #d0d0d0;
+    --surface-glass: rgba(248, 248, 248, 0.96);
+    --surface-glass-gradient: linear-gradient(90deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.9));
+    --color-border: #dcdcdc;
+    --color-border-strong: #c0c0c0;
+    --border-subtle: rgba(0, 0, 0, 0.03);
+    --color-accent: #db5b00eb;
+    --color-accent-soft: rgba(219, 91, 0, 0.06);
+    --color-focus-ring: rgba(219, 91, 0, 0.55);
+    --radius-pill: 999px;
+    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 6px 14px rgba(0, 0, 0, 0.08);
+    --shadow-pop: 0 4px 10px rgba(0, 0, 0, 0.15);
+    --shadow-float-1: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.05)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.03));
+    --shadow-header-text: 0 2px 15px rgba(0, 0, 0, 0.3);
+    --shadow-header-back: 0 2px 10px rgba(0, 0, 0, 0.4);
+    --shadow-header-back-hover: 0 2px 15px rgba(0, 0, 0, 0.6);
+    --shadow-post-image: 0 5px 25px rgba(0, 0, 0, 0.05);
+    --transition-fast: all 0.2s ease;
+    --transition-slow: all 0.3s ease;
+    --transition-opacity-fast: opacity 0.15s ease;
+    --transition-opacity-medium: opacity 0.18s ease;
+    --transition-transform-medium: transform 0.18s ease;
+    --transition-thumb: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    --radius-sm: 3px;
+    --radius-md: 4px;
+}
+
+@supports (color: color-mix(in srgb, #000 50%, #fff)) {
+    :root {
+        --color-accent-soft: color-mix(in srgb, var(--color-accent) 6%, transparent);
+        --color-focus-ring: color-mix(in srgb, var(--color-accent) 55%, transparent);
+    }
+}
+
 *:focus {
-    outline: none !important;
+    outline: none;
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
 }
 
 @supports (scrollbar-gutter: stable) {
@@ -24,7 +80,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft YaHei", sans-serif;
     font-size: 16px;
     line-height: 2.0;
-    color: #414141;
+    color: var(--color-text);
     overflow-x: hidden;
 }
 
@@ -33,22 +89,22 @@ img, video, iframe {
     height: auto;
     display: block;
     margin: 20px auto;
-    border-radius: 4px;
+    border-radius: var(--radius-md);
 }
 
 a {
-    color: #414141;
+    color: var(--color-text);
     text-decoration: none;
 }
 
 a:hover, a:focus {
-    color: #0085a1;
+    color: var(--color-accent);
 }
 
 .intro-header {
     position: relative;
     background: no-repeat center center;
-    background-color: #808080;
+    background-color: var(--color-header-fallback);
     background-attachment: scroll;
     background-size: cover;
     margin-bottom: 0;
@@ -65,9 +121,9 @@ a:hover, a:focus {
 .intro-header .post-heading,
 .intro-header .page-heading {
     padding: 40px 20px;
-    color: white;
+    color: var(--color-on-image);
     text-align: center;
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+    text-shadow: var(--shadow-header-text);
 }
 
 .post-heading .tags {
@@ -85,20 +141,29 @@ a:hover, a:focus {
 
 .post-heading .meta {
     font-size: 14px;
-    color: #f3f3f3;
+    color: var(--color-on-image-muted);
     text-align: center;
     display: block;
 }
 
 .post-heading .tags .capsule-tag {
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    color: #ffffff;
+    background: var(--color-on-image-surface);
+    border: 1px solid var(--color-on-image-border);
+    color: var(--color-bg);
 }
 
 .post-heading .tags .capsule-tag:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.6);
+    background: var(--color-on-image-surface-hover);
+    border-color: var(--color-on-image-border-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+    }
 }
 
 .intro-header .site-heading h1,
@@ -178,15 +243,11 @@ a:hover, a:focus {
     }
 }
 
-.post-preview > a {
-    color: #414141;
-}
-
 .post-container img {
     max-width: 100%;
     height: auto;
     margin: 30px auto;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    box-shadow: var(--shadow-post-image);
 }
 
 @media (max-width: 767px) {

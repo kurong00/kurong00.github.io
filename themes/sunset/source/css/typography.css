@@ -29,13 +29,32 @@ p {
 }
 
 blockquote {
-    border-left: 4px solid #0085a1;
-    background-color: rgba(0, 133, 161, 0.05);
+    border-left: 4px solid var(--color-accent);
+    background-color: var(--color-accent-soft);
     padding: 15px 20px;
     margin: 20px 0;
-    border-radius: 3px;
+    border-radius: var(--radius-sm);
     font-size: 16px;
-    color: #555;
+    line-height: 1.8;
+    color: var(--color-text-mid, #666666);
+}
+
+blockquote p {
+    margin: 0;
+}
+
+blockquote p + p {
+    margin-top: 12px;
+}
+
+blockquote ul,
+blockquote ol {
+    margin: 12px 0 0;
+    padding-left: 22px;
+}
+
+blockquote li {
+    margin-bottom: 6px;
 }
 
 .post-container ul, 
@@ -49,20 +68,20 @@ blockquote {
 }
 
 .post-container a {
-    color: #464646;
+    color: var(--color-text);
     text-decoration: none;
-    border-bottom: 1px dotted #0085a1;
-    transition: all 0.3s ease;
+    border-bottom: 1px dotted var(--color-accent);
+    transition: var(--transition-slow);
 }
 
 .post-container a:hover {
-    color: #005f73;
-    border-bottom: 1px solid #005f73;
+    color: var(--color-accent);
+    border-bottom: 1px solid var(--color-accent);
 }
 
 .about-page h2 {
     font-size: 26px;
-    color: #0085a1;
+    color: var(--color-accent);
     margin-top: 40px;
 }
 

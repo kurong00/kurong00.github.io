@@ -20,6 +20,11 @@
     <% var v = (theme && theme.asset_version) ? theme.asset_version : ''; %>
     <% var vs = v ? ('?v=' + v) : ''; %>
 
+    <link rel="preconnect" href="https://cdn.staticfile.org" crossorigin>
+    <link rel="dns-prefetch" href="//cdn.staticfile.org">
+    <link rel="preconnect" href="https://buttons.github.io" crossorigin>
+    <link rel="dns-prefetch" href="//buttons.github.io">
+
     <link rel="stylesheet" href="<%= url_for('css/bootstrap.min.css') %><%= vs %>">
 
     <link rel="stylesheet" href="<%= url_for('css/highlight.css') %><%= vs %>">
@@ -41,5 +46,4 @@
     <% } %>
 
     <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <script></script>
 </head>

@@ -9,14 +9,14 @@
   margin: 0;
   font-size: 24px;
   line-height: 1.2;
-  color: #444444;
+  color: var(--color-text);
 }
 
 .tag-clear {
   background: transparent;
   border: 0;
   padding: 0;
-  color: #888888;
+  color: var(--color-text-muted);
   font-size: 16px;
   visibility: hidden;
   pointer-events: none;
@@ -30,45 +30,45 @@
 }
 
 .tag-chip {
-  background: #ffffff;
-  border: 1px solid #dcdcdc;
-  border-radius: 999px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
   padding: 8px 16px;
   margin: 0 10px 12px 0;
-  color: #666666;
+  color: var(--color-text-muted);
   font-size: 13px;
   line-height: 1;
-  transition: all 0.2s ease;
+  transition: var(--transition-fast);
   outline: none;
 }
 
 .tag-chip:hover {
-  background: #f8f8f8;
-  border-color: #c0c0c0;
-  color: #444444;
+  background: var(--color-bg);
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
 }
 
 .tag-chip.is-active {
-  background: #222222;
-  border-color: #222222;
-  color: #ffffff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  background: var(--color-text-strong);
+  border-color: var(--color-text-strong);
+  color: var(--color-bg);
+  box-shadow: var(--shadow-pop);
 }
 
 .tag-chip .tag-chip-count {
   margin-left: 6px;
-  color: #999999;
+  color: var(--color-count, #999999);
   font-size: 11px;
 }
 
 .tag-chip.is-active .tag-chip-count {
-  color: #d0d0d0;
+  color: var(--color-count-active, #d0d0d0);
 }
 
 .tag-posts-title {
   margin-top: 52px;
   margin-bottom: 18px;
-  color: #444444;
+  color: var(--color-text);
   font-size: 18px;
   line-height: 1.2;
 }
@@ -89,7 +89,7 @@
 }
 
 .tag-post-title {
-  color: #444444;
+  color: var(--color-text);
   text-decoration: none;
   font-size: 14px;
   line-height: 1.4;
@@ -97,17 +97,17 @@
 }
 
 .tag-post-title:hover {
-  color: #222222;
+  color: var(--color-text-strong);
 }
 
 .tag-post-dots {
   flex: 1;
-  border-bottom: 2px dotted #d0d0d0;
+  border-bottom: 2px dotted rgba(0, 0, 0, 0.18);
   transform: translateY(-3px);
 }
 
 .tag-post-date {
-  color: #b0b0b0;
+  color: var(--color-text-subtle);
   font-size: 14px;
   letter-spacing: 0.5px;
 }
