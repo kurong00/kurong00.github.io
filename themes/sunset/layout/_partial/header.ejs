@@ -1,4 +1,4 @@
-<% if (!(config.brand && ((config.brand.hide_home_header && is_home()) || (config.brand.hide_tags_header && page && page.layout === 'tags')))) { %>
+<% if (!(page && page.layout === '404') && !(config.brand && ((config.brand.hide_home_header && is_home()) || (config.brand.hide_tags_header && page && page.layout === 'tags')))) { %>
 <style type="text/css">
     header.intro-header{
         <% 

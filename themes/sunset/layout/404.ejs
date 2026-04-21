@@ -2,21 +2,11 @@
 layout: layout
 ---
 
-<!-- Page Header -->
-<header class="intro-header" style="background-image: url('<%= config.root %><%= page["header-img"] || config["header-img"] %>')">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>404</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading"><%= page.description || config.subtitle || "" %></span>
-                </div>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="layout-container about-content page-404">
+            <h1 class="page-404-title">404</h1>
+            <p class="page-404-subtitle"><%= page.description || "页面不存在或已被移动。" %></p>
         </div>
     </div>
-</header>
-
-<script>
-    document.body.classList.add('page-fullscreen');
-</script>
+</div>
