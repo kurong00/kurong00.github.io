@@ -21,27 +21,33 @@
     
     
 
-    <link rel="stylesheet" href="/css/bootstrap.min.css?v=20260419210707">
+    <link rel="preconnect" href="https://cdn.staticfile.org" crossorigin>
+    <link rel="dns-prefetch" href="//cdn.staticfile.org">
+    <link rel="preconnect" href="https://buttons.github.io" crossorigin>
+    <link rel="dns-prefetch" href="//buttons.github.io">
 
-    <link rel="stylesheet" href="/css/highlight.css?v=20260419210707">
+    <link rel="stylesheet" href="/css/bootstrap.min.css?v=20260421221717">
 
-    <link rel="stylesheet" href="/css/base.css?v=20260419210707">
+    <link rel="stylesheet" href="/css/highlight.css?v=20260421221717">
 
-    <link rel="stylesheet" href="/css/navbar.css?v=20260419210707">
+    <link rel="stylesheet" href="/css/base.css?v=20260421221717">
 
-    <link rel="stylesheet" href="/css/typography.css?v=20260419210707">
+    <link rel="stylesheet" href="/css/navbar.css?v=20260421221717">
 
-    <link rel="stylesheet" href="/css/post-list.css?v=20260419210707">
+    <link rel="stylesheet" href="/css/typography.css?v=20260421221717">
 
-    <link rel="stylesheet" href="/css/aplayer.css?v=20260419210707">
+    <link rel="stylesheet" href="/css/post-list.css?v=20260421221717">
 
-    <link rel="stylesheet" href="/css/components.css?v=20260419210707">
+    <link rel="stylesheet" href="/css/aplayer.css?v=20260421221717">
+
+    <link rel="stylesheet" href="/css/components.css?v=20260421221717">
 
     
 
     <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <script></script>
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/assets/css/APlayer.min.css" class="aplayer-style-marker">
+<script src="/assets/js/APlayer.min.js" class="aplayer-script-marker"></script>
+</head>
 
 
 <body ontouchstart="" class="">
@@ -154,12 +160,6 @@ Shader&#xFF08;&#x7740;&#x8272;&#x5668;&#xFF09;&#xFF1A;&#x662F;&#x6E32;&#x67D3;&#
 </div>
 
 
-
-<!-- 在文件末尾，</body>标签之前添加 -->
-
-
-
-
     <footer>
     <div class="container">
         <div class="row">
@@ -185,29 +185,6 @@ Shader&#xFF08;&#x7740;&#x8272;&#x5668;&#xFF09;&#xFF1A;&#x662F;&#x6E32;&#x67D3;&#
     </div>
 </footer>
 
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-
-<script>
-    async("https://cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-
-
-
-
-
 
 
 
@@ -229,6 +206,7 @@ Shader&#xFF08;&#x7740;&#x8272;&#x5668;&#xFF09;&#xFF1A;&#x662F;&#x6E32;&#x67D3;&#
         }
 
         if (!isIOS()) return;
+        if (!document.querySelector('.aplayer, .meting-tag-marker, .aplayer-tag-marker')) return;
 
         function tryPlayOnce() {
             var list = window.aplayers || [];
@@ -272,6 +250,28 @@ Shader&#xFF08;&#x7740;&#x8272;&#x5668;&#xFF09;&#xFF1A;&#x662F;&#x6E32;&#x67D3;&#
     })();
 </script>
 
+<script>
+    (function () {
+        var shortname = "kurong00";
+        if (!shortname) return;
+
+        var el = document.getElementById("disqus_thread");
+        if (!el) return;
+
+        window.disqus_shortname = shortname;
+        window.disqus_identifier = el.getAttribute("data-disqus-identifier") || "";
+        window.disqus_url = el.getAttribute("data-disqus-url") || "";
+        if (!window.disqus_identifier) window.disqus_identifier = location.href.split("#")[0];
+        if (!window.disqus_url) window.disqus_url = location.href.split("#")[0];
+
+        if (window.DISQUS) return;
+        var dsq = document.createElement("script");
+        dsq.async = true;
+        dsq.src = "https://" + shortname + ".disqus.com/embed.js";
+        (document.head || document.body).appendChild(dsq);
+    })();
+</script>
+
 
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
@@ -289,5 +289,4 @@ Shader&#xFF08;&#x7740;&#x8272;&#x5668;&#xFF09;&#xFF1A;&#x662F;&#x6E32;&#x67D3;&#
             };
         </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
 
-</html>
 </html>
