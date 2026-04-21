@@ -26,21 +26,21 @@
     <link rel="preconnect" href="https://buttons.github.io" crossorigin>
     <link rel="dns-prefetch" href="//buttons.github.io">
 
-    <link rel="stylesheet" href="/css/bootstrap.min.css?v=20260421223146">
+    <link rel="stylesheet" href="/css/bootstrap.min.css?v=20260421230749">
 
-    <link rel="stylesheet" href="/css/highlight.css?v=20260421223146">
+    <link rel="stylesheet" href="/css/highlight.css?v=20260421230749">
 
-    <link rel="stylesheet" href="/css/base.css?v=20260421223146">
+    <link rel="stylesheet" href="/css/base.css?v=20260421230749">
 
-    <link rel="stylesheet" href="/css/navbar.css?v=20260421223146">
+    <link rel="stylesheet" href="/css/navbar.css?v=20260421230749">
 
-    <link rel="stylesheet" href="/css/typography.css?v=20260421223146">
+    <link rel="stylesheet" href="/css/typography.css?v=20260421230749">
 
-    <link rel="stylesheet" href="/css/post-list.css?v=20260421223146">
+    <link rel="stylesheet" href="/css/post-list.css?v=20260421230749">
 
-    <link rel="stylesheet" href="/css/aplayer.css?v=20260421223146">
+    <link rel="stylesheet" href="/css/aplayer.css?v=20260421230749">
 
-    <link rel="stylesheet" href="/css/components.css?v=20260421223146">
+    <link rel="stylesheet" href="/css/components.css?v=20260421230749">
 
     
 
@@ -210,6 +210,178 @@
 
 
 
+
+<script>
+    (function () {
+        function isImageHref(href) {
+            if (!href) return false;
+            var clean = href.split("#")[0].split("?")[0];
+            return /\.(png|jpe?g|gif|webp|bmp|svg)$/i.test(clean);
+        }
+
+        function getCaption(img) {
+            if (!img) return "";
+            var caption = img.getAttribute("data-caption") || img.getAttribute("title") || img.getAttribute("alt") || "";
+            return (caption || "").trim();
+        }
+
+        function collectImages(container) {
+            if (!container) return [];
+            var nodes = container.querySelectorAll("img");
+            var list = [];
+            for (var i = 0; i < nodes.length; i++) {
+                var img = nodes[i];
+                if (!img) continue;
+                if (img.closest(".livephoto-container")) continue;
+                if (img.hasAttribute("data-no-lightbox")) continue;
+                if (img.classList && img.classList.contains("no-lightbox")) continue;
+                if (!img.currentSrc && !img.src) continue;
+                list.push(img);
+            }
+            return list;
+        }
+
+        function resolveSrc(img) {
+            if (!img) return "";
+            var a = img.closest("a");
+            if (a && isImageHref(a.getAttribute("href"))) return a.getAttribute("href");
+            return img.currentSrc || img.src || "";
+        }
+
+        function ensureOverlay() {
+            var existing = document.querySelector(".img-lightbox-overlay");
+            if (existing) return existing;
+
+            var overlay = document.createElement("div");
+            overlay.className = "img-lightbox-overlay";
+            overlay.setAttribute("role", "dialog");
+            overlay.setAttribute("aria-modal", "true");
+            overlay.style.display = "none";
+
+            var stage = document.createElement("div");
+            stage.className = "img-lightbox-stage";
+
+            var image = document.createElement("img");
+            image.className = "img-lightbox-image";
+            image.alt = "";
+            image.draggable = false;
+
+            stage.appendChild(image);
+
+            var caption = document.createElement("div");
+            caption.className = "img-lightbox-caption";
+
+            overlay.appendChild(stage);
+            overlay.appendChild(caption);
+
+            document.body.appendChild(overlay);
+            return overlay;
+        }
+
+        function createController() {
+            var overlay = ensureOverlay();
+            var imageEl = overlay.querySelector(".img-lightbox-image");
+            var captionEl = overlay.querySelector(".img-lightbox-caption");
+
+            var state = {
+                open: false,
+                list: [],
+                index: -1
+            };
+
+            function render() {
+                var img = state.list[state.index];
+                var src = resolveSrc(img);
+                imageEl.src = src;
+                captionEl.textContent = getCaption(img);
+            }
+
+            function openAt(list, index) {
+                state.list = list || [];
+                state.index = Math.max(0, Math.min(index || 0, state.list.length - 1));
+                state.open = true;
+                render();
+                overlay.style.display = "";
+                document.body.classList.add("img-lightbox-open");
+            }
+
+            function close() {
+                if (!state.open) return;
+                state.open = false;
+                overlay.style.display = "none";
+                document.body.classList.remove("img-lightbox-open");
+                imageEl.removeAttribute("src");
+                captionEl.textContent = "";
+            }
+
+            function prev() {
+                if (!state.open || state.list.length < 2) return;
+                state.index = (state.index - 1 + state.list.length) % state.list.length;
+                render();
+            }
+
+            function next() {
+                if (!state.open || state.list.length < 2) return;
+                state.index = (state.index + 1) % state.list.length;
+                render();
+            }
+
+            overlay.addEventListener("click", function (e) {
+                if (!e || !e.target) return;
+                if (e.target.closest && e.target.closest(".img-lightbox-image")) return;
+                close();
+            });
+            imageEl.addEventListener("click", close);
+
+            document.addEventListener("keydown", function (e) {
+                if (!state.open) return;
+                var key = e.key;
+                if (key === "Escape") close();
+                if (key === "ArrowLeft") prev();
+                if (key === "ArrowRight") next();
+            });
+
+            return {
+                openAt: openAt,
+                close: close
+            };
+        }
+
+        function init() {
+            var container = document.querySelector(".post-container");
+            if (!container) return;
+
+            var controller = createController();
+            container.addEventListener("click", function (e) {
+                var img = e.target && e.target.closest ? e.target.closest("img") : null;
+                if (!img) return;
+                if (!container.contains(img)) return;
+                if (img.closest(".livephoto-container")) return;
+                if (img.hasAttribute("data-no-lightbox")) return;
+                if (img.classList && img.classList.contains("no-lightbox")) return;
+
+                var a = img.closest("a");
+                if (a) {
+                    var href = a.getAttribute("href") || "";
+                    if (href && !isImageHref(href)) return;
+                }
+
+                var list = collectImages(container);
+                if (!list.length) return;
+                var index = list.indexOf(img);
+                if (index < 0) index = 0;
+                e.preventDefault();
+                controller.openAt(list, index);
+            });
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", init);
+        } else {
+            init();
+        }
+    })();
+</script>
 
 <script>
     (function () {

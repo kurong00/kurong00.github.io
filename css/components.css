@@ -108,3 +108,69 @@ body .pager li > a:focus {
     color: var(--color-text);
     margin-bottom: 1.5em;
 }
+
+body.img-lightbox-open {
+  overflow: hidden;
+}
+
+.post-container img {
+  cursor: zoom-in;
+}
+
+.img-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 2147483000;
+  display: flex;
+  flex-direction: column;
+}
+
+.img-lightbox-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+}
+
+.img-lightbox-image {
+  max-width: min(1200px, 92vw);
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+  cursor: zoom-out;
+}
+
+.img-lightbox-caption {
+  padding: 0 16px 16px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  line-height: 1.6;
+  min-height: 20px;
+}
+
+.page-404 {
+  text-align: center;
+}
+
+.about-content.page-404 {
+  padding-top: 120px;
+}
+
+.page-404-title {
+  margin: 0 0 10px;
+  font-size: 72px;
+  line-height: 1;
+  letter-spacing: 1px;
+  color: var(--color-text-strong);
+}
+
+.page-404-subtitle {
+  margin: 0;
+  font-size: 16px;
+  color: var(--color-text-muted);
+}
