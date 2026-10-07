@@ -128,6 +128,7 @@
 
         function resolveSrc(img) {
             if (!img) return "";
+            if (img.getAttribute("data-full-src")) return img.getAttribute("data-full-src");
             var a = img.closest("a");
             if (a && isImageHref(a.getAttribute("href"))) return a.getAttribute("href");
             return img.currentSrc || img.src || "";

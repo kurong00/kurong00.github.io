@@ -16,7 +16,15 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '22'
+
+      - name: Cache optimized images
+        uses: actions/cache@v4
+        with:
+          path: .image-cache
+          key: webp-v1-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
+          restore-keys: |
+            webp-v1-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
 
       - name: Install Dependencies
         run: npm install

@@ -6,6 +6,7 @@
     "version": "7.3.0"
   },
   "dependencies": {
+    "cheerio": "^0.22.0",
     "hexo": "^7.3.0",
     "hexo-asset-image": "0.0.1",
     "hexo-deployer-git": "^0.1.0",
@@ -21,6 +22,7 @@
     "hexo-renderer-swig": "^2.0.0",
     "hexo-server": "^0.2.2",
     "hexo-tag-aplayer": "^3.0.4",
-    "nvm": "^0.0.4"
+    "nvm": "^0.0.4",
+    "sharp": "^0.33.5"
   }
 }
