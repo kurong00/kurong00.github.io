@@ -20,7 +20,6 @@
     var src = el.getAttribute('data-original');
     if (!src) return;
     el.setAttribute('data-lazy-state', 'loading');
-    var parent = el.parentNode;
     var button = el.__lazyRetry;
     if (button) button.hidden = true;
 
@@ -60,6 +59,8 @@
     el.addEventListener('load', success);
     el.addEventListener('error', failure);
     // Load on the visible element once, avoiding a preload plus second request.
+    var srcset = el.getAttribute('data-lazy-srcset');
+    if (srcset) el.setAttribute('srcset', srcset);
     el.src = src;
     if (el.complete && el.naturalWidth > 0) success();
   }
